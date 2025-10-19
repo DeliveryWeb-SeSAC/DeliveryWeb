@@ -48,7 +48,6 @@ export default function Login() {
             </form>
 
             <button onClick={onClickHandlerJoin}>회원 가입</button>
-            <button type="submit">마이페이지</button>
         </>
     )
 }
