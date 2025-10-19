@@ -14,6 +14,11 @@ export default function Login() {
         console.log("Password:", password);
     };
 
+    const onClickHandlerJoin = (e) => {
+        e.preventDefault();
+        router.push("/login/join");
+    }
+
     return (
         <>
             <p><b>로그인</b> 후 사용하세요</p>
@@ -39,11 +44,11 @@ export default function Login() {
                     />
                 </div>
 
-                <button type="submit">로그인</button><br/>
-
-                <button type="submit">회원 가입</button>
-                <button type="submit">마이페이지</button>
+                <button type="submit">로그인</button><br />
             </form>
+
+            <button onClick={onClickHandlerJoin}>회원 가입</button>
+            <button type="submit">마이페이지</button>
         </>
     )
 }
