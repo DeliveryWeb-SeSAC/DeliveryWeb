@@ -1,0 +1,90 @@
+[
+  {
+    "email": "kimminsu@example.com",
+    "name": "김민수",
+    "password": "ms1234!",
+    "address1": "서울특별시 강남구 테헤란로 123",
+    "phone": "010-2345-6789",
+    "birth": "1994-03-12"
+  },
+  {
+    "email": "parkjiyoon@example.com",
+    "name": "박지윤",
+    "password": "jy5678@",
+    "address1": "부산광역시 해운대구 해운대로 55",
+    "address2": "부산광역시 해운대구 좌동로 21",
+    "phone": "010-8765-4321",
+    "birth": "1996-08-25"
+  },
+  {
+    "email": "choijunho@example.com",
+    "name": "최준호",
+    "password": "jh!2024",
+    "address1": "인천광역시 연수구 송도국제대로 234",
+    "address2": "인천광역시 연수구 컨벤시아대로 11",
+    "address3": "인천광역시 미추홀구 주안로 77",
+    "phone": "010-9999-1111",
+    "birth": "1992-11-05"
+  },
+  {
+    "email": "leehaerin@example.com",
+    "name": "이해린",
+    "password": "hr@5555",
+    "address1": "대전광역시 서구 둔산로 99",
+    "phone": "010-1111-2222",
+    "birth": "1998-01-19"
+  },
+  {
+    "email": "jangyuna@example.com",
+    "name": "장유나",
+    "password": "yn!pass",
+    "address1": "광주광역시 북구 하서로 78",
+    "address2": "광주광역시 동구 충장로 112",
+    "phone": "010-5678-1122",
+    "birth": "2000-04-09"
+  },
+  {
+    "email": "kangdonghyuk@example.com",
+    "name": "강동혁",
+    "password": "dh@7890",
+    "address1": "대구광역시 수성구 동대구로 200",
+    "address2": "대구광역시 중구 달구벌대로 45",
+    "phone": "010-3333-4444",
+    "birth": "1991-12-03"
+  },
+  {
+    "email": "yoojungwoo@example.com",
+    "name": "유정우",
+    "password": "jw2025!",
+    "address1": "서울특별시 마포구 월드컵북로 88",
+    "phone": "010-2222-3333",
+    "birth": "1995-07-14"
+  },
+  {
+    "email": "hanseoyeon@example.com",
+    "name": "한서연",
+    "password": "sy@4321",
+    "address1": "경기도 성남시 분당구 정자일로 77",
+    "address2": "경기도 성남시 중원구 산성대로 51",
+    "address3": "경기도 용인시 수지구 풍덕천로 29",
+    "phone": "010-8888-9999",
+    "birth": "1999-09-27"
+  },
+  {
+    "email": "ohyunwoo@example.com",
+    "name": "오현우",
+    "password": "hw!2468",
+    "address1": "울산광역시 남구 삼산로 32",
+    "phone": "010-4444-5555",
+    "birth": "1997-02-11"
+  },
+  {
+    "email": "simyebin@example.com",
+    "name": "심예빈",
+    "password": "yb@1357",
+    "address1": "강원특별자치도 춘천시 중앙로 25",
+    "address2": "강원특별자치도 원주시 봉화로 103",
+    "phone": "010-6666-7777",
+    "birth": "2001-05-18"
+  }
+]
