@@ -85,7 +85,8 @@
     "address1": "강원특별자치도 춘천시 중앙로 25",
     "address2": "강원특별자치도 원주시 봉화로 103",
     "phone": "010-6666-7777",
-    "birth": "2001-05-18"
+    "birth": "2001-05-18",
+    "address3": "강원도 정선"
   },
   {
     "email": "hoho@naver.com",
@@ -94,5 +95,13 @@
     "birth": "2025-10-14",
     "phone": "010-3157-4456",
     "address1": "서울시 강서구 마곡대로"
+  },
+  {
+    "email": "teabag123@postech.ac.kr",
+    "password": "PASS",
+    "name": "이소이",
+    "birth": "2025-10-16",
+    "phone": "010-3157-4456",
+    "address1": "서울시 강남구 "
   }
 ]

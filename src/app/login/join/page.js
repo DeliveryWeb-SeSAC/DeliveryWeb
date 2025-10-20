@@ -28,17 +28,97 @@ export default function Join() {
     router.push(`/login/success?email=${encodeURIComponent(user.email)}`);
   };
 
-  return (
-    <form onSubmit={onSubmit}>
-      <input name="email" value={form.email} onChange={onChange} placeholder="email" required />
-      <input name="password" type="password" value={form.password} onChange={onChange} placeholder="password" required />
-      <input name="name" value={form.name} onChange={onChange} placeholder="name" required />
-      <input name="birth" type="date" value={form.birth} onChange={onChange} required />
-      <input name="phone" value={form.phone} onChange={onChange} placeholder="010-0000-0000" required />
-      <input name="address1" value={form.address1} onChange={onChange} placeholder="주소1" required />
-      <input name="address2" value={form.address2} onChange={onChange} placeholder="주소2(옵션)" />
-      <input name="address3" value={form.address3} onChange={onChange} placeholder="주소3(옵션)" />
-      <button type="submit">가입</button>
-    </form>
-  );
+return (
+  <form onSubmit={onSubmit}>
+    <label htmlFor="email">이메일</label><br />
+    <input
+      id="email"
+      name="email"
+      type="email"
+      value={form.email}
+      onChange={onChange}
+      placeholder="email"
+      required
+    />
+    <br /><br />
+
+    <label htmlFor="password">비밀번호</label><br />
+    <input
+      id="password"
+      name="password"
+      type="password"
+      value={form.password}
+      onChange={onChange}
+      placeholder="password"
+      required
+    />
+    <br /><br />
+
+    <label htmlFor="name">이름</label><br />
+    <input
+      id="name"
+      name="name"
+      value={form.name}
+      onChange={onChange}
+      placeholder="name"
+      required
+    />
+    <br /><br />
+
+    <label htmlFor="birth">생년월일</label><br />
+    <input
+      id="birth"
+      name="birth"
+      type="date"
+      value={form.birth}
+      onChange={onChange}
+      required
+    />
+    <br /><br />
+
+    <label htmlFor="phone">전화번호</label><br />
+    <input
+      id="phone"
+      name="phone"
+      value={form.phone}
+      onChange={onChange}
+      placeholder="010-0000-0000"
+      required
+    />
+    <br /><br />
+
+    <label htmlFor="address1">주소1</label><br />
+    <input
+      id="address1"
+      name="address1"
+      value={form.address1}
+      onChange={onChange}
+      placeholder="주소1"
+      required
+    />
+    <br /><br />
+
+    <label htmlFor="address2">주소2 (옵션)</label><br />
+    <input
+      id="address2"
+      name="address2"
+      value={form.address2}
+      onChange={onChange}
+      placeholder="주소2(옵션)"
+    />
+    <br /><br />
+
+    <label htmlFor="address3">주소3 (옵션)</label><br />
+    <input
+      id="address3"
+      name="address3"
+      value={form.address3}
+      onChange={onChange}
+      placeholder="주소3(옵션)"
+    />
+    <br /><br />
+
+    <button type="submit">가입</button>
+  </form>
+);
 }
