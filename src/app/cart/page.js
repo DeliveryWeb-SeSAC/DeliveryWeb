@@ -1,14 +1,31 @@
 'use client';
 
-import {useState, useEffect, useRef} from 'react';
-import {useRouter} from 'next/navigation';
-import users from '../../data/users.json';
+import {useState, useEffect, useRef, Suspense} from 'react';
+import {useRouter, useSearchParams} from 'next/navigation';
+import Link from 'next/link';
+import users from '@/data/users.json';
 
-export default function Cart() {
-    const [cart, setCart] = useState(users[0].cart);
-    const [totalPrice, setTotalPrice] = useState(0);
+function CartContent() {
     const router = useRouter();
+    const searchParams = useSearchParams();
+    const [user, setUser] = useState(null);
+    const [cart, setCart] = useState([]);
+    const [totalPrice, setTotalPrice] = useState(0);
     const inputRefs = useRef({});
+
+    useEffect(() => {
+        const userEmail = searchParams.get('userEmail');
+        if (userEmail) {
+            const foundUser = users.find(u => u.email === userEmail);
+            if (foundUser) {
+                setUser(foundUser);
+                setCart(foundUser.cart || []);
+            } else {
+                setUser(null);
+                setCart([]);
+            }
+        }
+    }, [searchParams]);
 
     useEffect(() => {
         const newTotalPrice = cart.reduce((total, restaurant) => {
@@ -26,102 +43,102 @@ export default function Cart() {
             alert('수량을 입력해주세요.');
             return;
         }
-
         const newQuantity = value === '' ? '' : parseInt(value, 10);
-
-        const updatedCart = cart.map(restaurant => {
-            if (restaurant.restaurantName === restaurantName) {
-                const updatedItems = restaurant.items.map(item =>
-                    item.foodId === foodId ? {...item, quantity: newQuantity} : item
-                );
-                return {...restaurant, items: updatedItems};
-            }
-            return restaurant;
-        });
+        const updatedCart = cart.map(r =>
+            r.restaurantName === restaurantName
+                ? {...r, items: r.items.map(i => i.foodId === foodId ? {...i, quantity: newQuantity} : i)}
+                : r
+        );
         setCart(updatedCart);
     };
 
     const handleRemoveItem = (restaurantName, foodId) => {
-        const updatedCart = cart.map(restaurant => {
-            if (restaurant.restaurantName === restaurantName) {
-                const updatedItems = restaurant.items.filter(item => item.foodId !== foodId);
-                // If no items left in the restaurant, return null to filter it out
-                return updatedItems.length > 0 ? {...restaurant, items: updatedItems} : null;
+        const updatedCart = cart.map(r => {
+            if (r.restaurantName === restaurantName) {
+                const updatedItems = r.items.filter(item => item.foodId !== foodId);
+                return updatedItems.length > 0 ? {...r, items: updatedItems} : null;
             }
-            return restaurant;
-        }).filter(Boolean); // Filter out the null entries
-
+            return r;
+        }).filter(Boolean);
         setCart(updatedCart);
     };
 
     const handleGoToPayment = () => {
         let itemWithNoQuantity = null;
-        let restaurantOfItem = null;
-
-        for (const restaurant of cart) {
-            itemWithNoQuantity = restaurant.items.find(item => item.quantity === '' || item.quantity === 0);
-            if (itemWithNoQuantity) {
-                restaurantOfItem = restaurant;
-                break;
-            }
+        for (const r of cart) {
+            itemWithNoQuantity = r.items.find(item => item.quantity === '' || item.quantity === 0);
+            if (itemWithNoQuantity) break;
         }
 
         if (itemWithNoQuantity) {
-            const confirmation = window.confirm(
-                `'${itemWithNoQuantity.foodName}' 상품의 수량이 없습니다. \n\n'확인'을 누르면 해당 상품을 삭제하고 결제를 진행하며, \n'취소'를 누르면 해당 상품의 수량을 수정하실 수 있습니다.`
-            );
-
-            if (confirmation) { // OK -> Delete item and proceed
-                const cartAfterItemRemoval = cart.map(r => {
-                    if (r.restaurantName === restaurantOfItem.restaurantName) {
-                        const updatedItems = r.items.filter(item => item.foodId !== itemWithNoQuantity.foodId);
-                        return updatedItems.length > 0 ? {...r, items: updatedItems} : null;
-                    }
-                    return r;
-                }).filter(Boolean);
-
+            const confirmation = window.confirm(`'${itemWithNoQuantity.foodName}' 상품의 수량이 없습니다. 수량을 수정하시겠습니까?`);
+            if (!confirmation) {
+                const cartAfterItemRemoval = cart.map(r => ({
+                    ...r,
+                    items: r.items.filter(i => i.foodId !== itemWithNoQuantity.foodId)
+                })).filter(r => r.items.length > 0);
                 setCart(cartAfterItemRemoval);
                 const cartQuery = encodeURIComponent(JSON.stringify(cartAfterItemRemoval));
-                router.push(`/payment?cart=${cartQuery}`);
-            } else { // Cancel -> Focus on input
+                router.push(`/payment?userEmail=${user.email}&cart=${cartQuery}`);
+            } else {
                 inputRefs.current[itemWithNoQuantity.foodId]?.focus();
             }
         } else {
             const cartQuery = encodeURIComponent(JSON.stringify(cart));
-            router.push(`/payment?cart=${cartQuery}`);
+            router.push(`/payment?userEmail=${user.email}&cart=${cartQuery}`);
         }
     };
 
+    if (!user) {
+        return (
+            <div>
+                <h1>장바구니</h1>
+                <p>사용자 정보가 올바르지 않습니다. 홈에서 사용자를 다시 선택해주세요.</p>
+                <Link href="/">홈으로 돌아가기</Link>
+            </div>
+        );
+    }
+
     return (
         <div>
-            <h1>{users[0].name}님의 장바구니</h1>
-            {cart.map((restaurant) => (
-                <div key={restaurant.restaurantName}
-                     style={{marginTop: '20px', border: '1px solid #ccc', padding: '10px'}}>
-                    <h3>{restaurant.restaurantName}</h3>
-                    <ul>
-                        {restaurant.items.map((item) => (
-                            <li key={item.foodId} style={{marginBottom: '10px'}}>
-                                {item.foodName} -
-                                <input
-                                    ref={el => inputRefs.current[item.foodId] = el}
-                                    type="number"
-                                    inputMode="numeric"
-                                    pattern="[0-9]*"
-                                    value={item.quantity}
-                                    onChange={(e) => handleQuantityChange(restaurant.restaurantName, item.foodId, e.target.value)}
-                                    style={{width: '50px', margin: '0 10px'}}
-                                />
-                                x {item.price.toLocaleString()}원
-                                <button onClick={() => handleRemoveItem(restaurant.restaurantName, item.foodId)}
-                                        style={{marginLeft: '10px'}}>x</button>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-            ))}
+            <h1>{user.name}님의 장바구니</h1>
+            {cart.length === 0 ? (
+                <p>장바구니가 비어있습니다.</p>
+            ) : (
+                cart.map((restaurant) => (
+                    <div key={restaurant.restaurantName}
+                         style={{marginTop: '20px', border: '1px solid #ccc', padding: '10px'}}>
+                        <h3>{restaurant.restaurantName}</h3>
+                        <ul>
+                            {restaurant.items.map((item) => (
+                                <li key={item.foodId} style={{marginBottom: '10px'}}>
+                                    {item.foodName} -
+                                    <input
+                                        ref={el => inputRefs.current[item.foodId] = el}
+                                        type="number" inputMode="numeric" pattern="[0-9]*"
+                                        value={item.quantity}
+                                        onChange={(e) => handleQuantityChange(restaurant.restaurantName, item.foodId, e.target.value)}
+                                        style={{width: '50px', margin: '0 10px'}}
+                                    />
+                                    x {item.price.toLocaleString()}원
+                                    <button onClick={() => handleRemoveItem(restaurant.restaurantName, item.foodId)}
+                                            style={{marginLeft: '10px'}}>x</button>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                ))
+            )}
             <h2 style={{marginTop: '20px'}}>총 주문 금액: {totalPrice.toLocaleString()}원</h2>
-            <button onClick={handleGoToPayment}>결제하기</button>
+            <button onClick={handleGoToPayment} disabled={cart.length === 0}>결제하기</button>
         </div>
+    );
+}
+
+export default function CartPage() {
+    return (
+        <Suspense fallback={<div>장바구니를 불러오는 중...</div>}>
+            <CartContent/>
+        </Suspense>
     );
 }
