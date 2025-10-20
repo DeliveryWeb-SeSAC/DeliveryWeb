@@ -1,0 +1,93 @@
+/* page.module.css */
+
+.listContainer {
+  position: fixed;
+  left: 20px;
+  top: 20px;
+  width: 200px;
+  height: 60vh;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  z-index: 1000;
+}
+
+.sectionHeader {
+  background: #007bff;
+  color: #fff;
+  padding: 8px;
+  font: bold 14px sans-serif;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+#group-header {
+  border-radius: 10px 10px 0 0;
+}
+
+.sectionItems {
+  padding: 5px;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  padding: 3px;
+  border-bottom: 1px solid #eee;
+  transition: background 0.2s;
+  font-size: 12px;
+}
+
+.item:hover {
+  background: #f8f9fa;
+}
+
+.itemInfo {
+  display: flex;
+  align-items: center;
+}
+
+.itemName {
+  font-weight: bold;
+  margin: 0;
+  flex: 1;
+}
+
+.itemStatus {
+  font-size: 10px;
+  color: #888;
+}
+
+.statusIndicator {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  margin-left: auto;
+}
+
+.online {
+  background: #28a745;
+}
+
+.offline {
+  background: #dc3545;
+}
+
+.membersSub {
+  padding: 5px 0 0 15px;
+  margin-top: 2px;
+  border-left: 2px solid #007bff;
+}
+
+.memberItem {
+  padding: 1px 0;
+  font-size: 11px;
+  color: #666;
+  margin: 0;
+}
