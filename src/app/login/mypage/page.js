@@ -1,48 +1,88 @@
 "use client";
-
+import { useEffect, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
-import users from "../../data/user-info.json";
 
-export default function Mypage() {
-  const router = useRouter();
+export default function MyPage() {
   const searchParams = useSearchParams();
   const email = searchParams.get("email");
+  const [user, setUser] = useState(null);
+  const [saving, setSaving] = useState(false);
+  const router = useRouter();
 
-  const userInfo = users.find((u) => u.email === email);
+  // 초기 로드
+  useEffect(() => {
+    if (!email) return;
+    (async () => {
+      const res = await fetch(`/api/users/${encodeURIComponent(email)}`);
+      if (!res.ok) return alert("유저 정보를 불러올 수 없습니다.");
+      setUser(await res.json());
+    })();
+  }, [email]);
 
-  if (!userInfo) {
-    return <p>유저 정보를 불러올 수 없습니다.</p>;
-  }
+  if (!email) return <p>email 파라미터가 없습니다.</p>;
+  if (!user) return <p>로딩중...</p>;
 
-  const handleEditAddress = () => alert("주소 수정 버튼 클릭됨");
-  const handleAddAddress = () => alert("주소 추가 버튼 클릭됨");
-  const onClickHandlerEditUserInfo = () => {
-    alert("회원정보 수정 완료!");
-    router.push("/login");
+  const updateField = (k, v) => setUser(u => ({ ...u, [k]: v }));
+
+  const save = async () => {
+    setSaving(true);
+    const res = await fetch(`/api/users/${encodeURIComponent(email)}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        // 필요한 필드만 보낼 것
+        name: user.name,
+        phone: user.phone,
+        birth: user.birth,
+        address1: user.address1,
+        address2: user.address2 || undefined,
+        address3: user.address3 || undefined,
+      })
+    });
+    setSaving(false);
+    if (!res.ok) return alert(`저장 실패: ${await res.text()}`);
+    const updated = await res.json();
+    setUser(updated);
+    alert("저장되었습니다.");
+    router.push(`/login/success?email=${encodeURIComponent(user.email)}`);
   };
 
   return (
     <>
       <h1>마이페이지</h1>
+      <p><b>아이디:</b> {user.email}</p>
 
-      <div style={{ marginBottom: 16 }}>
-        <p><b>아이디:</b> {userInfo.email}</p>
-        <p><b>이름:</b> {userInfo.name}</p>
-        <p><b>생년월일:</b> {userInfo.birth}</p>
-        <p>
-          <b>주소:</b> {userInfo.address1}{" "}
-          <button type="button" onClick={handleEditAddress}>수정</button>
-        </p>
-        {userInfo.address2 && <p><b>추가주소1:</b> {userInfo.address2}</p>}
-        {userInfo.address3 && <p><b>추가주소2:</b> {userInfo.address3}</p>}
-        <button type="button" onClick={handleAddAddress}>주소 추가</button>
-        <p><b>전화번호:</b> {userInfo.phone}</p>
-        <p><b>선호 음식:</b> {userInfo.favoriteFoods?.join(", ")}</p>
-      </div>
+      <label>이름
+        <input value={user.name} onChange={e => updateField("name", e.target.value)} />
+      </label>
+      <br />
 
-      <button type="button" onClick={onClickHandlerEditUserInfo}>
-        회원 정보 수정하기
-      </button>
+      <label>생년월일
+        <input type="date" value={user.birth} onChange={e => updateField("birth", e.target.value)} />
+      </label>
+      <br />
+
+      <label>전화번호
+        <input value={user.phone} onChange={e => updateField("phone", e.target.value)} />
+      </label>
+      <br />
+
+      <label>주소1
+        <input value={user.address1} onChange={e => updateField("address1", e.target.value)} />
+      </label>
+      <br />
+
+      <label>주소2(옵션)
+        <input value={user.address2 || ""} onChange={e => updateField("address2", e.target.value)} />
+      </label>
+      <br />
+
+      <label>주소3(옵션)
+        <input value={user.address3 || ""} onChange={e => updateField("address3", e.target.value)} />
+      </label>
+      <br />
+
+      <button onClick={save} disabled={saving}>{saving ? "저장중..." : "회원 정보 수정하기"}</button>
     </>
   );
 }
