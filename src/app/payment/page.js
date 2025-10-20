@@ -1,20 +1,27 @@
 'use client';
+
 import {useEffect, useState, Suspense} from 'react';
 import {useSearchParams} from 'next/navigation';
 import Link from 'next/link';
-import users from '../../data/users.json';
+import users from '@/data/users.json';
 
-// 결제 시도할 경우 ->
 function PaymentContent() {
     const searchParams = useSearchParams();
+    const [user, setUser] = useState(null);
     const [cart, setCart] = useState([]);
     const [totalPrice, setTotalPrice] = useState(0);
     const [isPaid, setIsPaid] = useState(false);
     const [paymentDate, setPaymentDate] = useState(null);
-    const user = users[0]; // For user's name
 
     useEffect(() => {
+        const userEmail = searchParams.get('userEmail');
         const cartQuery = searchParams.get('cart');
+
+        if (userEmail) {
+            const foundUser = users.find(u => u.email === userEmail);
+            setUser(foundUser || null);
+        }
+
         if (cartQuery) {
             try {
                 const decodedCart = JSON.parse(decodeURIComponent(cartQuery));
@@ -39,6 +46,16 @@ function PaymentContent() {
         setPaymentDate(new Date());
         setIsPaid(true);
     };
+
+    if (!user) {
+        return (
+            <div>
+                <h1>결제</h1>
+                <p>사용자 정보가 올바르지 않습니다. 홈에서 사용자를 다시 선택해주세요.</p>
+                <Link href="/">홈으로 돌아가기</Link>
+            </div>
+        );
+    }
 
     if (isPaid) {
         return (
@@ -111,9 +128,9 @@ function PaymentContent() {
     );
 }
 
-export default function Payment() {
+export default function PaymentPage() {
     return (
-        <Suspense fallback={<div>로딩 중...</div>}>
+        <Suspense fallback={<div>결제 정보를 불러오는 중...</div>}>
             <PaymentContent/>
         </Suspense>
     );
