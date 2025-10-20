@@ -76,7 +76,8 @@
     "password": "hw!2468",
     "address1": "울산광역시 남구 삼산로 32",
     "phone": "010-4444-5555",
-    "birth": "1997-02-11"
+    "birth": "1997-02-11",
+    "address2": "울산광역시 북구 "
   },
   {
     "email": "simyebin@example.com",
@@ -103,5 +104,13 @@
     "birth": "2025-10-16",
     "phone": "010-3157-4456",
     "address1": "서울시 강남구 "
+  },
+  {
+    "email": "horoyoii@daum.net",
+    "password": "pass",
+    "name": "이용",
+    "birth": "2025-09-30",
+    "phone": "010-3333-4444",
+    "address1": "경상북도 포항시 북구"
   }
 ]

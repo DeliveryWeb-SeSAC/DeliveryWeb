@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
-import users from '../data/users.json';
+import users from '../../data/users.json';
 
 export default function Cart() {
   const [cart, setCart] = useState(users[0].cart);
