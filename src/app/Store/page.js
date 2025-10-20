@@ -1,8 +1,8 @@
 'use client'
-import StoreDetail from '@/Item/StoreDetail';
+import StoreDetail from '@/app/store/Item/StoreDetail';
 import style from './Store.module.css'
-import StoreItem from "@/Item/storeItem";
-import { getStoreList } from "@/storeAPI/page";
+import StoreItem from "@/app/store/Item/storeItem";
+import { getStoreList } from "@/app/api/storeAPI/page";
 import { useEffect, useState } from "react";
 
 export default function Store(){
