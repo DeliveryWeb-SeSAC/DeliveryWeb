@@ -2,7 +2,7 @@
 import { useEffect, useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
-import users from '../data/users.json';
+import users from '../../data/users.json';
 
 // 결제 시도할 경우 ->
 function PaymentContent() {

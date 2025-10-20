@@ -1,7 +1,7 @@
 import fs from "fs/promises";
 import path from "path";
 
-const DATA_PATH = path.join(process.cwd(), "src", "app", "data", "user-info.json");
+const DATA_PATH = path.join(process.cwd(), "src", "data", "user-info.json");
 
 export async function readUsers() {
   const raw = await fs.readFile(DATA_PATH, "utf-8");
