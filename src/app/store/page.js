@@ -1,6 +1,6 @@
 'use client'
 import style from './Store.module.css'
-import { getStoreList } from "@/app/api/storeAPI/page";
+import { getStoreList } from "@/app/api/storeAPI/route";
 import { useEffect, useState } from "react";
 import StoreDetail from './storeItem/StoreDetail';
 import StoreItem from './storeItem/storeItem';
