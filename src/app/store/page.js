@@ -1,5 +1,5 @@
 'use client'
-import style from './store.module.css'
+import style from './Store.module.css'
 import { getStoreList } from "../api/storeAPI/route";
 import { useEffect, useState } from "react";
 import StoreItem from '@/app/store/storeItem/StoreItem';
