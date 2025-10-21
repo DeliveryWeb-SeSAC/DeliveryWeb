@@ -1,5 +1,5 @@
 "use client";
-
+import style from './login.module.css'
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
@@ -17,7 +17,7 @@ export default function LoginPage() {
       // 이메일로 사용자 조회
       const res = await fetch(`/api/users/${encodeURIComponent(email.trim())}`);
       if (!res.ok) {
-        
+
         setError("이메일을 찾을 수 없습니다.");
         return;
       }
@@ -43,23 +43,23 @@ export default function LoginPage() {
 
   return (
     <>
-      <h1>로그인</h1>
+    <div className={style.sidebar}>
+      <h2 className={style.title}>로그인</h2>
 
-      <form onSubmit={handleSubmit} style={{ marginBottom: 16 }}>
-        <div style={{ marginBottom: 8 }}>
-          <label htmlFor="user-email">아이디(이메일)</label>
+      <form onSubmit={handleSubmit} className={style.form}>
+        <div className={style.field}>
           <input
             id="user-email"
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder="example@domain.com"
+            placeholder="ID(이메일 형식)"
             required
+            className={style.input}
           />
         </div>
 
-        <div style={{ marginBottom: 8 }}>
-          <label htmlFor="user-password">비밀번호</label>
+        <div className={style.field}>
           <input
             id="user-password"
             type="password"
@@ -67,15 +67,20 @@ export default function LoginPage() {
             onChange={(e) => setPassword(e.target.value)}
             placeholder="비밀번호"
             required
+            className={style.input}
           />
         </div>
 
-        <button type="submit">로그인</button>
+        <button type="submit" className={style.button}>로그인</button>
       </form>
+      <div className={style.signup}>
+        <span className={style.signupText}>계정이 없나요?</span>
+        <button type="button" className={style.signupBtn} onClick={onClickHandlerToJoin}>회원가입</button>
+      </div>
+      
 
-      <button type="button" onClick={onClickHandlerToJoin}>회원가입</button>
-
-      {error && <p style={{ color: "crimson" }}>{error}</p>}
+      {error && <p className={style.error}>{error}</p>}
+      </div>
     </>
   );
 }
