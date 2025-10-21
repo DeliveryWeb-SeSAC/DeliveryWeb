@@ -32,7 +32,8 @@ export default function SNSListPage() {
   };
 
   return (
-    <div className={styles.listContainer}>
+    // <div className={styles.listContainer}>
+    <div>
       <div id="group-header" className={styles.sectionHeader}>
         그룹 목록
       </div>
