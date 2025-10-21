@@ -1,4 +1,4 @@
-import style from './StoreItem.module.css'
+import style from './storeItem.module.css'
 
 // 평점(star)을 받아서 별 이모지를 반환하는 개선된 함수
 const StarRating = ({ rating }) => {
