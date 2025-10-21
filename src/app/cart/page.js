@@ -17,7 +17,7 @@ function CartContent() {
         let userEmail = searchParams.get('userEmail');
 
         // Default user for testing
-        if (userEmail.trim() == ''){
+        if (userEmail === null || userEmail.trim() === ''){
             userEmail = users[0].email;
         }
 
