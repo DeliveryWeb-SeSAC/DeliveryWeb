@@ -4,3 +4,7 @@ import stores from '@/data/storeList.json'
 export function getStoreList(){
     return stores;
 };
+
+export function getStoreById(id){
+    return stores.filter((store)=> store.id === parseInt(id))[0];
+};
