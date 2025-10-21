@@ -15,8 +15,7 @@
     position: sticky;
     top: 16px;
     padding: 16px 16px 0 16px;
-    /* background: transparent; */
-    background: white;
+    background: transparent;
 }
 
 .title {
