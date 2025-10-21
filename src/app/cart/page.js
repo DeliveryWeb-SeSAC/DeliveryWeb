@@ -14,7 +14,13 @@ function CartContent() {
     const inputRefs = useRef({});
 
     useEffect(() => {
-        const userEmail = searchParams.get('userEmail');
+        let userEmail = searchParams.get('userEmail');
+
+        // Default user for testing
+        if (userEmail.trim() == ''){
+            userEmail = users[0].email;
+        }
+
         if (userEmail) {
             const foundUser = users.find(u => u.email === userEmail);
             if (foundUser) {

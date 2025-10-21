@@ -1,8 +1,8 @@
 [
   {
     "id": 1,
-    "name": "김철수",
-    "email": "chulsoo.kim@example.com",
+    "name": "김민수",
+    "email": "kimminsu@example.com",
     "cart": [
       {
         "restaurantName": "백채김치찌개",
@@ -21,8 +21,8 @@
   },
   {
     "id": 2,
-    "name": "이영희",
-    "email": "younghee.lee@example.com",
+    "name": "박지윤",
+    "email": "parkjiyoon@example.com",
     "cart": [
       {
         "restaurantName": "교촌치킨",
@@ -34,8 +34,8 @@
   },
   {
     "id": 3,
-    "name": "박지성",
-    "email": "jisung.park@example.com",
+    "name": "최준호",
+    "email": "choijunho@example.com",
     "cart": [
       {
         "restaurantName": "서브웨이",
@@ -54,8 +54,8 @@
   },
   {
     "id": 4,
-    "name": "최수지",
-    "email": "suji.choi@example.com",
+    "name": "이해린",
+    "email": "leehaerin@example.com",
     "cart": [
       {
         "restaurantName": "버거킹",
@@ -67,8 +67,8 @@
   },
   {
     "id": 5,
-    "name": "정대만",
-    "email": "daeman.jung@example.com",
+    "name": "장유나",
+    "email": "jangyuna@example.com",
     "cart": [
       {
         "restaurantName": "본죽",
@@ -80,8 +80,8 @@
   },
   {
     "id": 6,
-    "name": "송태섭",
-    "email": "taesub.song@example.com",
+    "name": "강동혁",
+    "email": "kangdonghyuk@example.com",
     "cart": [
       {
         "restaurantName": "엽기떡볶이",
@@ -95,8 +95,8 @@
   },
   {
     "id": 7,
-    "name": "강백호",
-    "email": "baekho.kang@example.com",
+    "name": "유정우",
+    "email": "yoojungwoo@example.com",
     "cart": [
       {
         "restaurantName": "피자헛",
@@ -114,8 +114,8 @@
   },
   {
     "id": 8,
-    "name": "서태웅",
-    "email": "taewoong.seo@example.com",
+    "name": "한서연",
+    "email": "hanseoyeon@example.com",
     "cart": [
       {
         "restaurantName": "맥도날드",
@@ -127,8 +127,8 @@
   },
   {
     "id": 9,
-    "name": "채치수",
-    "email": "chisoo.chae@example.com",
+    "name": "오현우",
+    "email": "ohyunwoo@example.com",
     "cart": [
       {
         "restaurantName": "한솥도시락",
@@ -141,8 +141,8 @@
   },
   {
     "id": 10,
-    "name": "권준호",
-    "email": "junho.kwon@example.com",
+    "name": "심예빈",
+    "email": "simyebin@example.com",
     "cart": []
   }
 ]
