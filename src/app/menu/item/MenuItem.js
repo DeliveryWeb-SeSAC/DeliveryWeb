@@ -1,7 +1,7 @@
 import Link from "next/link"
 import itemStyle from "./MenuItem.module.css"
 
-export default function MenuItem({menu}) {
+export default function MenuItem({id,menu}) {
     return (
         <Link href={`/menu/${id}/${menu.name}`}>
             <div className={itemStyle.MenuItem}>

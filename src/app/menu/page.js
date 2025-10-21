@@ -4,7 +4,7 @@ import boxStyle from "./Menu.module.css"
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation";
 
-export default function Menu({getMenu}) {
+export default function Menu({id, getMenu}) {
     const [menuList, setMenuList] = useState([])
     // const [searchValue, setSearchValue] = useState('')
 
@@ -35,7 +35,7 @@ export default function Menu({getMenu}) {
                 <button onClick={onClickHandler}>검색</button>
             </div> */}
             <div className={boxStyle.MenuBox}>
-                {menuList.map(menu => <MenuItem key={menu.name} menu={menu}/>)}
+                {menuList.map(menu => <MenuItem key={menu.name} id={id} menu={menu}/>)}
             </div>
         </>
     )
