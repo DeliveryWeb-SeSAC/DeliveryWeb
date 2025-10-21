@@ -2,7 +2,7 @@
 import style from './store.module.css'
 import { getStoreList } from "../api/storeAPI/route";
 import { useEffect, useState } from "react";
-import StoreItem from './storeItem/storeItem';
+import StoreItem from '@/app/store/storeItem/StoreItem';
 import SearchBar from '../searchBar/page';
 
 export default function Store() {
