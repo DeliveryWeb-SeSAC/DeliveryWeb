@@ -17,7 +17,8 @@ export default function StoreDetail(){
     return(
         store && 
         <>
-            <div>{store.logo}{store.name}</div>
+            <img src={store.logo} style={{maxWidth: 500}}/>
+            <div>{store.name}</div>
             <div>{store.address}</div>
             <div>{store.star}</div>
             <div>{store.delivery}</div>
