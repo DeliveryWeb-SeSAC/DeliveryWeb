@@ -1,0 +1,197 @@
+[
+  {
+    "id": 1,
+    "name": "크리스피치킨락 치킨맛집1",
+    "category": "치킨",
+    "address": "서울특별시 강남구 XX길 1",
+    "star": 4.0,
+    "delivery": "20~30분",
+    "logo": "https://naverbooking-phinf.pstatic.net/20250320_277/17424742253403M0t0_JPEG/%C4%C9%C0%CF%2C%C6%C4%C0%CE.jpg?type=f459_345_60_sharpen",
+    "foods": [
+      {
+        "name": "크리스피치킨",
+        "price": 9000,
+        "kcal": 450,
+        "desc": "크리스피치킨락 치킨맛집1의 인기 메뉴 크리스피치킨. 신선한 재료와 특제 소스로 만든 크리스피치킨.",
+        "image": "https://images.unsplash.com/photo-1504674900247-0877df9cc836"
+      },
+      {
+        "name": "양념치킨",
+        "price": 10150,
+        "kcal": 570,
+        "desc": "크리스피치킨락 치킨맛집1의 인기 메뉴 양념치킨. 신선한 재료와 특제 소스로 만든 양념치킨.",
+        "image": "https://images.unsplash.com/photo-1467003909585-2f8a72700288"
+      },
+      {
+        "name": "갈릭치킨",
+        "price": 11300,
+        "kcal": 690,
+        "desc": "크리스피치킨락 치킨맛집1의 인기 메뉴 갈릭치킨. 신선한 재료와 특제 소스로 만든 갈릭치킨.",
+        "image": "https://images.unsplash.com/photo-1519864600265-abb23847ef2c"
+      },
+      {
+        "name": "허니치킨",
+        "price": 12450,
+        "kcal": 810,
+        "desc": "크리스피치킨락 치킨맛집1의 인기 메뉴 허니치킨. 신선한 재료와 특제 소스로 만든 허니치킨.",
+        "image": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "콤비네이션피자락 피자맛집2",
+    "category": "피자",
+    "address": "서울특별시 종로구 XX길 2",
+    "star": 4.1,
+    "delivery": "21~31분",
+    "logo": "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4",
+    "foods": [
+      {
+        "name": "콤비네이션피자",
+        "price": 9055,
+        "kcal": 458,
+        "desc": "콤비네이션피자락 피자맛집2의 인기 메뉴 콤비네이션피자. 신선한 재료와 특제 소스로 만든 콤비네이션피자.",
+        "image": "https://images.unsplash.com/photo-1525755662778-989d0524087e"
+      },
+      {
+        "name": "페퍼로니피자",
+        "price": 11205,
+        "kcal": 578,
+        "desc": "콤비네이션피자락 피자맛집2의 인기 메뉴 페퍼로니피자. 신선한 재료와 특제 소스로 만든 페퍼로니피자.",
+        "image": "https://images.pexels.com/photos/461382/pexels-photo-461382.jpeg"
+      },
+      {
+        "name": "고구마피자",
+        "price": 13355,
+        "kcal": 698,
+        "desc": "콤비네이션피자락 피자맛집2의 인기 메뉴 고구마피자. 신선한 재료와 특제 소스로 만든 고구마피자.",
+        "image": "https://images.pexels.com/photos/357756/pexels-photo-357756.jpeg"
+      },
+      {
+        "name": "불고기피자",
+        "price": 15505,
+        "kcal": 818,
+        "desc": "콤비네이션피자락 피자맛집2의 인기 메뉴 불고기피자. 신선한 재료와 특제 소스로 만든 불고기피자.",
+        "image": "https://images.unsplash.com/photo-1543353071-873f17a7a088"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "name": "비빔밥락 한식맛집3",
+    "category": "한식",
+    "address": "서울특별시 서초구 XX길 3",
+    "star": 4.2,
+    "delivery": "22~32분",
+    "logo": "https://images.unsplash.com/photo-1546069901-5ec6a79120b0",
+    "foods": [
+      {
+        "name": "비빔밥",
+        "price": 9110,
+        "kcal": 466,
+        "desc": "비빔밥락 한식맛집3의 인기 메뉴 비빔밥. 신선한 재료와 특제 소스로 만든 비빔밥.",
+        "image": "https://images.unsplash.com/photo-1542444459-db68c9ad0029"
+      },
+      {
+        "name": "된장찌개",
+        "price": 12260,
+        "kcal": 586,
+        "desc": "비빔밥락 한식맛집3의 인기 메뉴 된장찌개. 신선한 재료와 특제 소스로 만든 된장찌개.",
+        "image": "https://images.unsplash.com/photo-1535140728325-a4d3707eee61"
+      },
+      {
+        "name": "불고기",
+        "price": 15410,
+        "kcal": 706,
+        "desc": "비빔밥락 한식맛집3의 인기 메뉴 불고기. 신선한 재료와 특제 소스로 만든 불고기.",
+        "image": "https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba"
+      },
+      {
+        "name": "제육볶음",
+        "price": 18560,
+        "kcal": 826,
+        "desc": "비빔밥락 한식맛집3의 인기 메뉴 제육볶음. 신선한 재료와 특제 소스로 만든 제육볶음.",
+        "image": "https://images.unsplash.com/photo-1540189549336-e6e99c3679fe"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "name": "연어초밥락 일식맛집4",
+    "category": "일식",
+    "address": "서울특별시 성동구 XX길 4",
+    "star": 4.3,
+    "delivery": "23~33분",
+    "logo": "https://images.unsplash.com/photo-1502741338009-cac2772e18bc",
+    "foods": [
+      {
+        "name": "연어초밥",
+        "price": 9165,
+        "kcal": 474,
+        "desc": "연어초밥락 일식맛집4의 인기 메뉴 연어초밥. 신선한 재료와 특제 소스로 만든 연어초밥.",
+        "image": "https://images.unsplash.com/photo-1579584425555-c3ce17fd4351"
+      },
+      {
+        "name": "모듬초밥",
+        "price": 13315,
+        "kcal": 594,
+        "desc": "연어초밥락 일식맛집4의 인기 메뉴 모듬초밥. 신선한 재료와 특제 소스로 만든 모듬초밥.",
+        "image": "https://images.unsplash.com/photo-1563612116625-3012372fccce"
+      },
+      {
+        "name": "규동",
+        "price": 17465,
+        "kcal": 714,
+        "desc": "연어초밥락 일식맛집4의 인기 메뉴 규동. 신선한 재료와 특제 소스로 만든 규동.",
+        "image": "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38"
+      },
+      {
+        "name": "가츠동",
+        "price": 21615,
+        "kcal": 834,
+        "desc": "연어초밥락 일식맛집4의 인기 메뉴 가츠동. 신선한 재료와 특제 소스로 만든 가츠동.",
+        "image": "https://images.unsplash.com/photo-1555939594-58d7cb561ad1"
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "name": "짜장면락 중식맛집5",
+    "category": "중식",
+    "address": "서울특별시 용산구 XX길 5",
+    "star": 4.4,
+    "delivery": "24~34분",
+    "logo": "https://images.unsplash.com/photo-1481931098730-318b6f776db0",
+    "foods": [
+      {
+        "name": "짜장면",
+        "price": 9220,
+        "kcal": 482,
+        "desc": "짜장면락 중식맛집5의 인기 메뉴 짜장면. 신선한 재료와 특제 소스로 만든 짜장면.",
+        "image": "https://images.unsplash.com/photo-1569718212165-3a8278d5f624"
+      },
+      {
+        "name": "짬뽕",
+        "price": 14370,
+        "kcal": 602,
+        "desc": "짜장면락 중식맛집5의 인기 메뉴 짬뽕. 신선한 재료와 특제 소스로 만든 짬뽕.",
+        "image": "https://images.unsplash.com/photo-1552611052-33e04de081de"
+      },
+      {
+        "name": "탕수육",
+        "price": 19520,
+        "kcal": 722,
+        "desc": "짜장면락 중식맛집5의 인기 메뉴 탕수육. 신선한 재료와 특제 소스로 만든 탕수육.",
+        "image": "https://images.unsplash.com/photo-1541014741259-de529411b96a"
+      },
+      {
+        "name": "팔보채",
+        "price": 24670,
+        "kcal": 842,
+        "desc": "짜장면락 중식맛집5의 인기 메뉴 팔보채. 신선한 재료와 특제 소스로 만든 팔보채.",
+        "image": "https://images.unsplash.com/photo-1516684732162-798a0062be99"
+      }
+    ]
+  }
+]
