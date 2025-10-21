@@ -10,12 +10,10 @@ export default function Store(){
     const [selectedStore, setSelectedStore] = useState(null);
 
     useEffect(()=>{
-        // 별점순 정렬
-        const fetchedStore = getStoreList()
-        const sortStore = [...fetchedStore].sort((a,b)=>{
-            return b.star - a.star})
 
-        setStores(sortStore);
+        const fetchedStore = getStoreList()
+
+        setStores(fetchedStore);
     },[]);
     
     const handleStoreSelect = (store) => {

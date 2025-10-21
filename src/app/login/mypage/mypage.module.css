@@ -1,0 +1,139 @@
+:root {
+  --primary: #ee6a2c;
+  --text: #0f172a;
+  --muted: #6b7280;
+  --border: #e5e7eb;
+  --input-bg: #f8fafc;
+  --shadow: 0 1px 2px rgba(0,0,0,.05), 0 8px 24px rgba(0,0,0,.04);
+  --radius-xl: 14px;
+  --radius-2xl: 18px;
+}
+
+/* 페이지 래퍼: 가운데 정렬(메인 영역) */
+.page {
+  min-height: 100vh;
+  display: grid;
+  place-items: start center;
+  padding: 32px 16px 56px;
+  background: #fff;
+  color: var(--text);
+  font-family: ui-sans-serif, system-ui, -apple-system, "Noto Sans KR",
+    "Apple SD Gothic Neo", "Malgun Gothic", Segoe UI, Roboto, Arial, sans-serif;
+}
+
+/* 카드 */
+.card {
+  width: 100%;
+  max-width: 680px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  padding: 20px;
+}
+
+/* 제목 */
+.title {
+  margin: 0 0 18px 0;
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.2px;
+}
+
+/* 신상 정보 텍스트 */
+.meta {
+  margin: 0 0 10px 0;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+/* 폼 그리드: 라벨/인풋 수직 정렬 + 간격 통일 */
+.form {
+  display: grid;
+  gap: 14px;
+}
+
+/* 각 필드(공통): label을 블록으로 쓰되 내부에서 그리드 */
+.form label {
+  display: grid;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* 인풋 공통 */
+.input {
+  width: 100%;
+  height: 48px;
+  padding: 0 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-2xl);
+  background: var(--input-bg);
+  font-size: 15px;
+  color: var(--text);
+  outline: none;
+  transition: border-color .15s ease, box-shadow .15s ease, background-color .15s;
+}
+.input::placeholder { color: #9aa3af; }
+.input:focus {
+  border-color: color-mix(in srgb, var(--primary) 65%, #ffffff);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 14%, transparent);
+  background: #fff;
+}
+
+/* 날짜 입력도 높이 맞추기 */
+.input[type="date"] {
+  padding: 0 12px;
+}
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(50%) sepia(90%) saturate(3000%) hue-rotate(330deg);
+}
+
+/* 액션 영역 */
+.actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 6px;
+  justify-content: center;
+}
+
+/* 기본 버튼(오렌지, pill) */
+.button {
+  min-width: 180px;
+  height: 50px;
+  border: 0;
+  border-radius: 9999px;
+  background: var(--primary);
+  color: #fff;
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: .2px;
+  cursor: pointer;
+  transition: transform .02s ease, filter .15s ease, opacity .15s ease;
+}
+.button:hover { filter: brightness(1.02); }
+.button:active { transform: translateY(1px); }
+.button:disabled {
+  opacity: .5;
+  cursor: not-allowed;
+}
+
+/* 보조 텍스트(에러/알림 등 필요 시) */
+.helper { font-size: 12px; color: var(--muted); }
+
+/* 큰 화면에서 2열 배치(주소 파트가 길면 유용) */
+@media (min-width: 720px) {
+  .form {
+    grid-template-columns: 1fr 1fr;
+  }
+  /* 라벨 블록을 2열에서도 자연스럽게 보이게 */
+  .form label {
+    /* 그대로 1칸 차지 */
+  }
+  /* 긴 필드는 2칸 확장하고 싶을 때 이 클래스를 추가해서 사용 */
+  .span2 {
+    grid-column: 1 / -1;
+  }
+  .actions { grid-column: 1 / -1; }
+  .title { font-size: 24px; }
+}

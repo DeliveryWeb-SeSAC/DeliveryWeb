@@ -1,4 +1,5 @@
 "use client";
+import style from "./join.module.css"
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
@@ -27,98 +28,75 @@ export default function Join() {
     alert("회원가입이 완료되었습니다!");
     router.push(`/login/success?email=${encodeURIComponent(user.email)}`);
   };
+  
 
-return (
-  <form onSubmit={onSubmit}>
-    <label htmlFor="email">이메일</label><br />
-    <input
-      id="email"
-      name="email"
-      type="email"
-      value={form.email}
-      onChange={onChange}
-      placeholder="email"
-      required
-    />
-    <br /><br />
+  return (
+    <div className={style.page}>
+      <form onSubmit={onSubmit} className={style.card}>
+        <h1 className={style.title}>회원가입</h1>
 
-    <label htmlFor="password">비밀번호</label><br />
-    <input
-      id="password"
-      name="password"
-      type="password"
-      value={form.password}
-      onChange={onChange}
-      placeholder="password"
-      required
-    />
-    <br /><br />
+        <div className={style.form}>
+          <label className={style.span2}>
+            이메일
+            <input id="email" name="email" type="email"
+              value={form.email} onChange={onChange}
+              placeholder="email" required className={style.input} />
+          </label>
 
-    <label htmlFor="name">이름</label><br />
-    <input
-      id="name"
-      name="name"
-      value={form.name}
-      onChange={onChange}
-      placeholder="name"
-      required
-    />
-    <br /><br />
+          <label className={style.span2}>
+            비밀번호
+            <input id="password" name="password" type="password"
+              value={form.password} onChange={onChange}
+              placeholder="password" required className={style.input} />
+          </label>
 
-    <label htmlFor="birth">생년월일</label><br />
-    <input
-      id="birth"
-      name="birth"
-      type="date"
-      value={form.birth}
-      onChange={onChange}
-      required
-    />
-    <br /><br />
+          <label>
+            이름
+            <input id="name" name="name" value={form.name}
+              onChange={onChange} placeholder="name" required
+              className={style.input} />
+          </label>
 
-    <label htmlFor="phone">전화번호</label><br />
-    <input
-      id="phone"
-      name="phone"
-      value={form.phone}
-      onChange={onChange}
-      placeholder="010-0000-0000"
-      required
-    />
-    <br /><br />
+          <label>
+            생년월일
+            <input id="birth" name="birth" type="date"
+              value={form.birth} onChange={onChange} required
+              className={style.input} />
+          </label>
 
-    <label htmlFor="address1">주소1</label><br />
-    <input
-      id="address1"
-      name="address1"
-      value={form.address1}
-      onChange={onChange}
-      placeholder="주소1"
-      required
-    />
-    <br /><br />
+          <label className={style.span2}>
+            전화번호
+            <input id="phone" name="phone" value={form.phone}
+              onChange={onChange} placeholder="010-0000-0000" required
+              className={style.input} />
+          </label>
 
-    <label htmlFor="address2">주소2 (옵션)</label><br />
-    <input
-      id="address2"
-      name="address2"
-      value={form.address2}
-      onChange={onChange}
-      placeholder="주소2(옵션)"
-    />
-    <br /><br />
+          <label className={style.span2}>
+            주소1
+            <input id="address1" name="address1" value={form.address1}
+              onChange={onChange} placeholder="주소1" required
+              className={style.input} />
+          </label>
 
-    <label htmlFor="address3">주소3 (옵션)</label><br />
-    <input
-      id="address3"
-      name="address3"
-      value={form.address3}
-      onChange={onChange}
-      placeholder="주소3(옵션)"
-    />
-    <br /><br />
+          <label className={style.span2}>
+            주소2 (옵션)
+            <input id="address2" name="address2" value={form.address2}
+              onChange={onChange} placeholder="주소2(옵션)"
+              className={style.input} />
+          </label>
 
-    <button type="submit">가입</button>
-  </form>
-);
+          <label className={style.span2}>
+            주소3 (옵션)
+            <input id="address3" name="address3" value={form.address3}
+              onChange={onChange} placeholder="주소3(옵션)"
+              className={style.input} />
+          </label>
+
+          <div className={style.actions}>
+            <button type="submit" className={style.button}>가입</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  );
 }

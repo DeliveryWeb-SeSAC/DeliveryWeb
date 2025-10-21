@@ -1,4 +1,5 @@
 "use client";
+import style from "./mypage.module.css"
 import { useEffect, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 
@@ -49,40 +50,56 @@ export default function MyPage() {
 
   return (
     <>
-      <h1>마이페이지</h1>
-      <p><b>아이디:</b> {user.email}</p>
+      <div className={style.page}>
+        <div className={style.card}>
+          <h1 className={style.title}>마이페이지</h1>
+          <p className={style.meta}><b>아이디</b> {user.email}</p>
 
-      <label>이름
-        <input value={user.name} onChange={e => updateField("name", e.target.value)} />
-      </label>
-      <br />
+          <div className={style.form}>
+            <label className={style.span2}>
+              이름
+              <input className={style.input} value={user.name}
+                onChange={e => updateField("name", e.target.value)} />
+            </label>
 
-      <label>생년월일
-        <input type="date" value={user.birth} onChange={e => updateField("birth", e.target.value)} />
-      </label>
-      <br />
+            <label>
+              생년월일
+              <input className={style.input} type="date" value={user.birth}
+                onChange={e => updateField("birth", e.target.value)} />
+            </label>
 
-      <label>전화번호
-        <input value={user.phone} onChange={e => updateField("phone", e.target.value)} />
-      </label>
-      <br />
+            <label>
+              전화번호
+              <input className={style.input} value={user.phone}
+                onChange={e => updateField("phone", e.target.value)} />
+            </label>
 
-      <label>주소1
-        <input value={user.address1} onChange={e => updateField("address1", e.target.value)} />
-      </label>
-      <br />
+            <label className={style.span2}>
+              주소1
+              <input className={style.input} value={user.address1}
+                onChange={e => updateField("address1", e.target.value)} />
+            </label>
 
-      <label>주소2(옵션)
-        <input value={user.address2 || ""} onChange={e => updateField("address2", e.target.value)} />
-      </label>
-      <br />
+            <label className={style.span2}>
+              주소2(옵션)
+              <input className={style.input} value={user.address2 || ""}
+                onChange={e => updateField("address2", e.target.value)} />
+            </label>
 
-      <label>주소3(옵션)
-        <input value={user.address3 || ""} onChange={e => updateField("address3", e.target.value)} />
-      </label>
-      <br />
+            <label className={style.span2}>
+              주소3(옵션)
+              <input className={style.input} value={user.address3 || ""}
+                onChange={e => updateField("address3", e.target.value)} />
+            </label>
 
-      <button onClick={save} disabled={saving}>{saving ? "저장중..." : "회원 정보 수정하기"}</button>
+            <div className={style.actions}>
+              <button className={style.button} onClick={save} disabled={saving}>
+                {saving ? "저장중..." : "회원 정보 수정하기"}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   );
 }
