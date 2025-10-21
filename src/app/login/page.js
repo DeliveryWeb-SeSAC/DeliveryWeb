@@ -17,6 +17,7 @@ export default function LoginPage() {
       // 이메일로 사용자 조회
       const res = await fetch(`/api/users/${encodeURIComponent(email.trim())}`);
       if (!res.ok) {
+        
         setError("이메일을 찾을 수 없습니다.");
         return;
       }
