@@ -1,6 +1,6 @@
 'use client';
-import MenuItem from "@/item/MenuItem";
-import boxStyle from "./Menu.module.css"
+import MenuItem from "@/app/menu/item/MenuItem";
+import boxStyle from "./item/MenuItem.module.css"
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation";
 

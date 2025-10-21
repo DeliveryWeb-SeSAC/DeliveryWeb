@@ -1,6 +1,6 @@
 'use client'
 import { getStoreById } from "@/app/api/storeAPI/route"
-import MenuDetail from "@/app/menu/[id]/[name]/page"
+import Menu from "@/app/menu/page"
 import { useParams } from "next/navigation"
 import { useEffect, useState } from "react"
 
@@ -22,7 +22,7 @@ export default function StoreDetail(){
             <div>{store.star}</div>
             <div>{store.delivery}</div>
             <hr/>
-            <MenuDetail/>
+            <Menu id={store.id} getMenu={store.foods}/>
         </>  
     )
 }
