@@ -52,7 +52,7 @@ export default function LoginSuccessPage() {
             </select>
           )}
         </div>
-        <button onClick={() => router.push(`/login/mypage?email=${encodeURIComponent(user.email)}`)} className={style.button}>
+        <button onClick={() => window.open(`/login/mypage?email=${encodeURIComponent(user.email)}`, "_blank")} className={style.button}>
           마이페이지
         </button>
       </div>

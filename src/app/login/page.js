@@ -38,7 +38,7 @@ export default function LoginPage() {
   };
 
   const onClickHandlerToJoin = () => {
-    router.push("/login/join");
+    window.open("/login/join", "_blank");
   };
 
   return (

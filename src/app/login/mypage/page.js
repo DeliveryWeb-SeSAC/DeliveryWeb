@@ -53,7 +53,7 @@ export default function MyPage() {
       <div className={style.page}>
         <div className={style.card}>
           <h1 className={style.title}>마이페이지</h1>
-          <p className={style.meta}><b>아이디:</b> {user.email}</p>
+          <p className={style.meta}><b>아이디</b> {user.email}</p>
 
           <div className={style.form}>
             <label className={style.span2}>
