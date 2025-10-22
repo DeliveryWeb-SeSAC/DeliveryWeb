@@ -69,12 +69,35 @@ function CartContent() {
         setCart(updatedCart);
     };
 
-    const handleGoToPayment = () => {
+    const handleGoToPayment = async () => {
         let itemWithNoQuantity = null;
         for (const r of cart) {
             itemWithNoQuantity = r.items.find(item => item.quantity === '' || item.quantity === 0);
             if (itemWithNoQuantity) break;
         }
+
+        const proceedToPayment = async (currentCart) => {
+            try {
+                const response = await fetch('/api/update-cart', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ userEmail: user.email, cart: currentCart }),
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to update cart.');
+                }
+
+                const cartQuery = encodeURIComponent(JSON.stringify(currentCart));
+                router.push(`/payment?userEmail=${user.email}&cart=${cartQuery}`);
+
+            } catch (error) {
+                console.error('Error updating cart:', error);
+                alert('장바구니 업데이트 중 오류가 발생했습니다. 다시 시도해주세요.');
+            }
+        };
 
         if (itemWithNoQuantity) {
             const confirmation = window.confirm(`'${itemWithNoQuantity.foodName}' 상품의 수량이 없습니다. 수량을 수정하시겠습니까?`);
@@ -84,14 +107,12 @@ function CartContent() {
                     items: r.items.filter(i => i.foodId !== itemWithNoQuantity.foodId)
                 })).filter(r => r.items.length > 0);
                 setCart(cartAfterItemRemoval);
-                const cartQuery = encodeURIComponent(JSON.stringify(cartAfterItemRemoval));
-                router.push(`/payment?userEmail=${user.email}&cart=${cartQuery}`);
+                await proceedToPayment(cartAfterItemRemoval);
             } else {
                 inputRefs.current[itemWithNoQuantity.foodId]?.focus();
             }
         } else {
-            const cartQuery = encodeURIComponent(JSON.stringify(cart));
-            router.push(`/payment?userEmail=${user.email}&cart=${cartQuery}`);
+            await proceedToPayment(cart);
         }
     };
 
