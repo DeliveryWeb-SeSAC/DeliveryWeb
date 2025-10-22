@@ -3,7 +3,19 @@
     "id": 1,
     "name": "김민수",
     "email": "kimminsu@example.com",
-    "cart": []
+    "cart": [
+      {
+        "restaurantName": "교촌치킨",
+        "items": [
+          {
+            "foodId": "food-004",
+            "foodName": "허니콤보",
+            "price": 23000,
+            "quantity": 1
+          }
+        ]
+      }
+    ]
   },
   {
     "id": 2,
