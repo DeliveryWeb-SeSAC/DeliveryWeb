@@ -1,5 +1,5 @@
 "use client";
-import styles from './success.module.css';  // 하위 폴더 내 CSS import (이제  파일 생성으로 OK)
+import styles from './success.module.css';  // 하위 폴더 내 CSS import (이제    파일 생성으로 OK)
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
