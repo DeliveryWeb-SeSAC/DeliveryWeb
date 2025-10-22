@@ -1,9 +1,7 @@
 'use client';
-
-import {useEffect, useState, Suspense} from 'react';
-import {useSearchParams} from 'next/navigation';
+import { useEffect, useState, Suspense } from 'react';
+import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
-import users from '@/data/users.json';
 
 function PaymentContent() {
     const searchParams = useSearchParams();
@@ -17,11 +15,26 @@ function PaymentContent() {
         const userEmail = searchParams.get('userEmail');
         const cartQuery = searchParams.get('cart');
 
-        if (userEmail) {
-            const foundUser = users.find(u => u.email === userEmail);
-            setUser(foundUser || null);
-        }
+        // 사용자 정보 설정
+        const fetchUser = async () => {
+            if (userEmail) {
+                try {
+                    const response = await fetch('/api/cartAPI'); // 경로 수정
+                    if (!response.ok) {
+                        throw new Error('Failed to fetch users');
+                    }
+                    const users = await response.json();
+                    const foundUser = users.find(u => u.email === userEmail);
+                    setUser(foundUser || null);
+                } catch (error) {
+                    console.error("Error fetching user data:", error);
+                    setUser(null);
+                }
+            }
+        };
+        fetchUser();
 
+        // 장바구니 정보 설정
         if (cartQuery) {
             try {
                 const decodedCart = JSON.parse(decodeURIComponent(cartQuery));
@@ -40,6 +53,24 @@ function PaymentContent() {
             }
         }
     }, [searchParams]);
+    
+    const saveOrderHistory = async (order) => {
+        try {
+            const response = await fetch('/api/orderHistoryAPI', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(order),
+            });
+            if (!response.ok) {
+                const errorData = await response.json().catch(() => ({ message: 'Failed to save order history.' }));
+                throw new Error(errorData.message);
+            }
+        } catch (error) {
+            console.error('Error saving order history:', error);
+        }
+    };
 
     const handleConfirmPayment = async () => {
         if (!user) {
@@ -47,13 +78,33 @@ function PaymentContent() {
             return;
         }
 
+        const currentPaymentDate = new Date();
+        setPaymentDate(currentPaymentDate);
+
+        const orderDetails = {
+            userEmail: user.email,
+            userName: user.name,
+            paymentDate: currentPaymentDate.toISOString(),
+            restaurants: cart.map(restaurant => ({
+                restaurantName: restaurant.restaurantName,
+                items: restaurant.items.map(item => ({
+                    foodName: item.foodName,
+                    quantity: item.quantity,
+                    itemPaymentAmount: item.price * item.quantity,
+                })),
+            })),
+            totalPaymentAmount: totalPrice,
+        };
+
+        saveOrderHistory(orderDetails);
+
         try {
-            const response = await fetch('/api/update-cart', {
+            const response = await fetch('/api/cartAPI', { // 경로 수정
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ userEmail: user.email, cart: [] }), // Clear the cart
+                body: JSON.stringify({ userEmail: user.email, cart: [] }),
             });
 
             if (!response.ok) {
@@ -62,15 +113,11 @@ function PaymentContent() {
             }
 
             alert(`${user.name}님의 장바구니에 담긴 음식들의 주문 결제가 완료되었습니다.`);
-            setPaymentDate(new Date());
             setIsPaid(true);
 
         } catch (error) {
             console.error('Error clearing cart:', error);
             alert(`결제 처리 중 장바구니를 비우는 데 실패했습니다: ${error.message}`);
-            // Even if clearing cart fails, we can proceed to show the receipt
-            // because the main point is that payment is "confirmed" on the client.
-            setPaymentDate(new Date());
             setIsPaid(true);
         }
     };

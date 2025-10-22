@@ -1,8 +1,7 @@
 'use client';
-import {useState, useEffect, useRef, Suspense} from 'react';
-import {useRouter, useSearchParams} from 'next/navigation';
+import { useState, useEffect, useRef, Suspense } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
-import users from '@/data/users.json';
 
 function CartContent() {
     const router = useRouter();
@@ -13,23 +12,39 @@ function CartContent() {
     const inputRefs = useRef({});
 
     useEffect(() => {
-        let userEmail = searchParams.get('userEmail');
+        const fetchUsersAndSetCart = async () => {
+            try {
+                const response = await fetch('/api/cartAPI'); // 경로 수정
+                if (!response.ok) {
+                    throw new Error('Failed to fetch users');
+                }
+                const users = await response.json();
 
-        // Default user for testing
-        if (userEmail === null || userEmail.trim() === ''){
-            userEmail = users[0].email;
-        }
+                let userEmail = searchParams.get('userEmail');
 
-        if (userEmail) {
-            const foundUser = users.find(u => u.email === userEmail);
-            if (foundUser) {
-                setUser(foundUser);
-                setCart(foundUser.cart || []);
-            } else {
+                // Default user for testing
+                if (userEmail === null || userEmail.trim() === '') {
+                    userEmail = users[0]?.email;
+                }
+
+                if (userEmail) {
+                    const foundUser = users.find(u => u.email === userEmail);
+                    if (foundUser) {
+                        setUser(foundUser);
+                        setCart(foundUser.cart || []);
+                    } else {
+                        setUser(null);
+                        setCart([]);
+                    }
+                }
+            } catch (error) {
+                console.error("Error fetching user data:", error);
                 setUser(null);
                 setCart([]);
             }
-        }
+        };
+
+        fetchUsersAndSetCart();
     }, [searchParams]);
 
     useEffect(() => {
@@ -43,11 +58,10 @@ function CartContent() {
         setTotalPrice(newTotalPrice);
     }, [cart]);
 
-    // Helper function to update user cart in users.json
     const updateUserCart = async (cartToUpdate) => {
         if (!user) return false;
         try {
-            const response = await fetch('/api/update-cart', {
+            const response = await fetch('/api/cartAPI', { // 경로 수정
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -75,7 +89,7 @@ function CartContent() {
         const newQuantity = value === '' ? '' : parseInt(value, 10);
         const updatedCart = cart.map(r =>
             r.restaurantName === restaurantName
-                ? {...r, items: r.items.map(i => i.foodId === foodId ? {...i, quantity: newQuantity} : i)}
+                ? { ...r, items: r.items.map(i => i.foodId === foodId ? { ...i, quantity: newQuantity } : i) }
                 : r
         );
         setCart(updatedCart);
@@ -85,13 +99,12 @@ function CartContent() {
         const updatedCart = cart.map(r => {
             if (r.restaurantName === restaurantName) {
                 const updatedItems = r.items.filter(item => item.foodId !== foodId);
-                return updatedItems.length > 0 ? {...r, items: updatedItems} : null;
+                return updatedItems.length > 0 ? { ...r, items: updatedItems } : null;
             }
             return r;
         }).filter(Boolean);
         setCart(updatedCart);
 
-        // If cart becomes empty, update the json
         if (updatedCart.length === 0) {
             await updateUserCart(updatedCart);
         }
