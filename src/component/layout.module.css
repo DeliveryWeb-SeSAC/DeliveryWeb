@@ -21,6 +21,7 @@
   min-width: 0; /* 자식이 부모 너비 초과 방지 */
   z-index: 10;
   gap: 2px; /* 여백 줄임: 기존 4px → 2px (컴팩트하게) */
+
 }
 
 .mainContent {
