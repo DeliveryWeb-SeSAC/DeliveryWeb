@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect, useRef, Suspense } from 'react';
+import { useState, useEffect, useRef, Suspense, useCallback } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 
@@ -10,43 +10,75 @@ function CartContent() {
     const [cart, setCart] = useState([]);
     const [totalPrice, setTotalPrice] = useState(0);
     const inputRefs = useRef({});
+    // localStorage 변경 이벤트를 감지하고 리렌더링을 트리거하기 위한 상태
+    const [localStorageUpdated, setLocalStorageUpdated] = useState(0);
 
-    useEffect(() => {
-        const fetchUsersAndSetCart = async () => {
-            try {
-                const response = await fetch('/api/cartAPI'); // 경로 수정
-                if (!response.ok) {
-                    throw new Error('Failed to fetch users');
+    // 사용자 및 장바구니 데이터를 가져오는 함수를 useCallback으로 래핑
+    const fetchUsersAndSetCart = useCallback(async () => {
+        try {
+            const response = await fetch('/api/cartAPI'); // 경로 수정
+            if (!response.ok) {
+                throw new Error('Failed to fetch users');
+            }
+            const users = await response.json();
+
+            let userEmail = searchParams.get('userEmail');
+
+            // searchParams에 userEmail이 없으면 localStorage에서 시도
+            if (!userEmail || userEmail.trim() === '') {
+                userEmail = localStorage.getItem('userEmail');
+            }
+
+            // 테스트를 위한 기본 사용자 (여전히 userEmail이 없는 경우)
+            // if (!userEmail || userEmail.trim() === '') {
+            //     userEmail = users[0]?.email; // 첫 번째 사용자를 기본값으로 사용
+            // }
+
+            if (userEmail) {
+                const foundUser = users.find(u => u.email === userEmail);
+                if (foundUser) {
+                    setUser(foundUser);
+                    setCart(foundUser.cart || []);
+                } else {
+                    // localStorage나 searchParams의 userEmail이 유효하지 않은 경우
+                    console.warn(`User with email ${userEmail} not found. Clearing cart.`);
+                    setUser(null);
+                    setCart([]);
+                    localStorage.removeItem('userEmail'); // 유효하지 않은 이메일 제거
                 }
-                const users = await response.json();
-
-                let userEmail = searchParams.get('userEmail');
-
-                // Default user for testing
-                if (userEmail === null || userEmail.trim() === '') {
-                    userEmail = users[0]?.email;
-                }
-
-                if (userEmail) {
-                    const foundUser = users.find(u => u.email === userEmail);
-                    if (foundUser) {
-                        setUser(foundUser);
-                        setCart(foundUser.cart || []);
-                    } else {
-                        setUser(null);
-                        setCart([]);
-                    }
-                }
-            } catch (error) {
-                console.error("Error fetching user data:", error);
+            } else {
+                // userEmail을 어디에서도 찾을 수 없는 경우
                 setUser(null);
                 setCart([]);
             }
+        } catch (error) {
+            console.error("Error fetching user data:", error);
+            setUser(null);
+            setCart([]);
+        }
+    }, [searchParams, localStorageUpdated]); // searchParams 또는 localStorageUpdated가 변경될 때 함수 재생성
+
+    // 초기 로드 및 searchParams 또는 localStorageUpdated 변경 시 데이터 가져오기
+    useEffect(() => {
+        fetchUsersAndSetCart();
+    }, [fetchUsersAndSetCart]); // memoized된 fetchUsersAndSetCart 함수에 의존
+
+    // 'storage-update' 이벤트를 수신하는 useEffect
+    useEffect(() => {
+        const handleStorageUpdate = () => {
+            console.log('storage-update event received in CartContent');
+            // 상태를 업데이트하여 fetchUsersAndSetCart를 다시 실행하도록 트리거
+            setLocalStorageUpdated(prev => prev + 1);
         };
 
-        fetchUsersAndSetCart();
-    }, [searchParams]);
+        window.addEventListener('storage-update', handleStorageUpdate);
 
+        return () => {
+            window.removeEventListener('storage-update', handleStorageUpdate);
+        };
+    }, []); // 컴포넌트 마운트 시 한 번만 실행하여 이벤트 리스너 설정
+
+    // 장바구니 내용 변경 시 총 가격 업데이트
     useEffect(() => {
         const newTotalPrice = cart.reduce((total, restaurant) => {
             const restaurantTotal = restaurant.items.reduce((subTotal, item) => {
