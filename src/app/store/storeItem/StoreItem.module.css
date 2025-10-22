@@ -1,19 +1,18 @@
 /* StoreItem.module.css */
 
-/* 1. 전체 카드 컨테이너: 가로/세로 크기 고정 및 Flex 세로 배치 */
+/* 1. 전체 카드 컨테이너: 크기 유지 */
 .card {
-    /* ⭐️ 고정 크기 */
-    width: 280px; 
-    height: 400px; 
+    /* ⭐️ 고정 크기 수정 ⭐️ */
+    width: 230px; 
+    height: 270px; 
     
     border: 2px solid #7c4c0596;
-    border-radius: 8px;      
-    overflow: hidden;        
+    border-radius: 8px;
+    overflow: hidden;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
     cursor: pointer;
-    text-decoration: none;   
-    color: inherit;          
-    
+    text-decoration: none;
+    color: inherit; 
     
     /* ⭐️ Flex 구조로 세로 배치 */
     display: flex;
@@ -23,8 +22,8 @@
 /* 2. 이미지 컨테이너 */
 .imageWrapper {
     width: 100%;
-    /* 높이를 Flex-Grow 대신 고정값(400px의 50%)으로 지정 */
-    height: 200px; 
+    /* ⭐️ 새로운 높이 설정: 162px (270px의 60% 비율 유지) ⭐️ */
+    height: 162px; 
     position: relative;
     flex-shrink: 0; /* 크기 고정 */
 }
@@ -38,12 +37,13 @@
     object-fit: cover; 
 }
 
-/* 3. 정보/설명 컨테이너: 크기 고정 및 중앙 정렬 */
+/* 3. 정보/설명 컨테이너 */
 .infoWrapper {
-    /* ⭐️ 고정 크기 (120px) */
-    height: 120px; 
+    /* ⭐️ flex-grow: 3 (남은 공간 108px 중 약 65px 차지) ⭐️ */
+    flex-grow: 3; /* 24% 비율을 3으로 설정 */
+    height: auto; /* 고정 높이 제거, flex-grow 사용 */
     width: 100%; 
-    padding: 10px;
+    padding: 3px 5px; 
     background-color: #ffe0b2; 
     flex-shrink: 0;
     
@@ -53,7 +53,9 @@
 
 .infoWrapper h3 {
     margin-top: 0;
-    margin-bottom: 5px;
+    margin-bottom: 0px;
+    /* ⭐️ 글꼴 크기 재조정: 13px 유지 (필요에 따라 14px로 조정 가능) ⭐️ */
+    font-size: 13px; 
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -62,24 +64,41 @@
 .infoWrapper hr {
     border: none;
     border-top: 1px solid #ffcc80; 
-    margin: 5px auto; 
+    margin: 1px auto; 
     width: 80%;
 }
 
-/* 4. 평점 컨테이너: 남은 공간 차지 및 Flex 중앙 정렬 */
+.infoWrapper p {
+    /* ⭐️ 글꼴 크기 재조정: 11px 유지 ⭐️ */
+    font-size: 11px; 
+    margin: 1px 0;
+    line-height: 1.2;
+}
+
+/* 4. 평점 컨테이너 */
 .ratingWrapper {
-    padding: 10px;
+    /* ⭐️ flex-grow: 2 (남은 공간 108px 중 약 43px 차지) ⭐️ */
+    flex-grow: 2; /* 16% 비율을 2로 설정 (3:2 비율 유지) */
+    height: auto; /* 고정 높이 제거, flex-grow 사용 */
+    padding: 3px 5px; 
     background-color: #fff3e0; 
+    margin: 0px;
     
-    /* ⭐️ 남은 공간(80px)을 채우도록 설정 */
-    flex-grow: 1; 
     flex-shrink: 0;
     
-    /* ⭐️ Flexbox를 사용하여 내부 요소를 수직/수평 중앙 정렬 */
+    /* Flexbox를 사용하여 내부 요소를 수직/수평 중앙 정렬 */
     display: flex;
-    align-items: center; /* 수직 중앙 정렬 */
-    justify-content: center; /* 수평 중앙 정렬 */
+    align-items: center; 
+    justify-content: center; 
+    /* ⭐️ 평점 텍스트 크기 유지: 11px ⭐️ */
+    font-size: 11px; 
     text-align: center;
+}
+
+.fullStar, .emptyStar {
+    /* ⭐️ 별 크기 유지: 14px ⭐️ */
+    font-size: 14px; 
+    margin-right: 1px;
 }
 
 .fullStar {
