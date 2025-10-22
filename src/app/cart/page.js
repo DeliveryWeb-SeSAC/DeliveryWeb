@@ -3,7 +3,6 @@ import {useState, useEffect, useRef, Suspense} from 'react';
 import {useRouter, useSearchParams} from 'next/navigation';
 import Link from 'next/link';
 import users from '@/data/users.json';
-import styles from './cart.module.css';
 
 function CartContent() {
     const router = useRouter();
@@ -44,6 +43,30 @@ function CartContent() {
         setTotalPrice(newTotalPrice);
     }, [cart]);
 
+    // Helper function to update user cart in users.json
+    const updateUserCart = async (cartToUpdate) => {
+        if (!user) return false;
+        try {
+            const response = await fetch('/api/update-cart', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ userEmail: user.email, cart: cartToUpdate }),
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json().catch(() => ({ message: 'Failed to update cart.' }));
+                throw new Error(errorData.message);
+            }
+            return true;
+        } catch (error) {
+            console.error('Error updating cart:', error);
+            alert(`장바구니 업데이트 중 오류가 발생했습니다: ${error.message}`);
+            return false;
+        }
+    };
+
     const handleQuantityChange = (restaurantName, foodId, value) => {
         if (value !== '' && !/^\d+$/.test(value)) {
             alert('수량을 입력해주세요.');
@@ -58,7 +81,7 @@ function CartContent() {
         setCart(updatedCart);
     };
 
-    const handleRemoveItem = (restaurantName, foodId) => {
+    const handleRemoveItem = async (restaurantName, foodId) => {
         const updatedCart = cart.map(r => {
             if (r.restaurantName === restaurantName) {
                 const updatedItems = r.items.filter(item => item.foodId !== foodId);
@@ -67,6 +90,11 @@ function CartContent() {
             return r;
         }).filter(Boolean);
         setCart(updatedCart);
+
+        // If cart becomes empty, update the json
+        if (updatedCart.length === 0) {
+            await updateUserCart(updatedCart);
+        }
     };
 
     const handleGoToPayment = async () => {
@@ -77,25 +105,10 @@ function CartContent() {
         }
 
         const proceedToPayment = async (currentCart) => {
-            try {
-                const response = await fetch('/api/update-cart', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ userEmail: user.email, cart: currentCart }),
-                });
-
-                if (!response.ok) {
-                    throw new Error('Failed to update cart.');
-                }
-
+            const success = await updateUserCart(currentCart);
+            if (success) {
                 const cartQuery = encodeURIComponent(JSON.stringify(currentCart));
                 router.push(`/payment?userEmail=${user.email}&cart=${cartQuery}`);
-
-            } catch (error) {
-                console.error('Error updating cart:', error);
-                alert('장바구니 업데이트 중 오류가 발생했습니다. 다시 시도해주세요.');
             }
         };
 

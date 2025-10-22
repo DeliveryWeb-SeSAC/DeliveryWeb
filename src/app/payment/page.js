@@ -41,10 +41,38 @@ function PaymentContent() {
         }
     }, [searchParams]);
 
-    const handleConfirmPayment = () => {
-        alert(`${user.name}님의 장바구니에 담긴 음식들의 주문 결제가 완료되었습니다.`)
-        setPaymentDate(new Date());
-        setIsPaid(true);
+    const handleConfirmPayment = async () => {
+        if (!user) {
+            alert("사용자 정보가 없습니다.");
+            return;
+        }
+
+        try {
+            const response = await fetch('/api/update-cart', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ userEmail: user.email, cart: [] }), // Clear the cart
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json().catch(() => ({ message: 'Failed to clear cart.' }));
+                throw new Error(errorData.message);
+            }
+
+            alert(`${user.name}님의 장바구니에 담긴 음식들의 주문 결제가 완료되었습니다.`);
+            setPaymentDate(new Date());
+            setIsPaid(true);
+
+        } catch (error) {
+            console.error('Error clearing cart:', error);
+            alert(`결제 처리 중 장바구니를 비우는 데 실패했습니다: ${error.message}`);
+            // Even if clearing cart fails, we can proceed to show the receipt
+            // because the main point is that payment is "confirmed" on the client.
+            setPaymentDate(new Date());
+            setIsPaid(true);
+        }
     };
 
     if (!user) {
