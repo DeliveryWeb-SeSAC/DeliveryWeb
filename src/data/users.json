@@ -3,7 +3,21 @@
     "id": 1,
     "name": "김민수",
     "email": "kimminsu@example.com",
-    "cart": []
+    "cart": [
+      {
+        "restaurantName": "백채김치찌개",
+        "items": [
+          { "foodId": "food-001", "foodName": "김치찌개 (1인분)", "price": 8000, "quantity": 2 },
+          { "foodId": "food-002", "foodName": "계란말이", "price": 7000, "quantity": 1 }
+        ]
+      },
+      {
+        "restaurantName": "BHC",
+        "items": [
+          { "foodId": "food-003", "foodName": "뿌링클", "price": 21000, "quantity": 1 }
+        ]
+      }
+    ]
   },
   {
     "id": 2,
@@ -13,12 +27,7 @@
       {
         "restaurantName": "교촌치킨",
         "items": [
-          {
-            "foodId": "food-004",
-            "foodName": "허니콤보",
-            "price": 23000,
-            "quantity": 1
-          }
+          { "foodId": "food-004", "foodName": "허니콤보", "price": 23000, "quantity": 1 }
         ]
       }
     ]
@@ -31,29 +40,14 @@
       {
         "restaurantName": "서브웨이",
         "items": [
-          {
-            "foodId": "food-005",
-            "foodName": "이탈리안 비엠티",
-            "price": 6500,
-            "quantity": 1
-          },
-          {
-            "foodId": "food-006",
-            "foodName": "쿠키",
-            "price": 1500,
-            "quantity": 3
-          }
+          { "foodId": "food-005", "foodName": "이탈리안 비엠티", "price": 6500, "quantity": 1 },
+          { "foodId": "food-006", "foodName": "쿠키", "price": 1500, "quantity": 3 }
         ]
       },
       {
         "restaurantName": "스타벅스",
         "items": [
-          {
-            "foodId": "food-007",
-            "foodName": "아이스 아메리카노",
-            "price": 4500,
-            "quantity": 2
-          }
+          { "foodId": "food-007", "foodName": "아이스 아메리카노", "price": 4500, "quantity": 2 }
         ]
       }
     ]
@@ -66,12 +60,7 @@
       {
         "restaurantName": "버거킹",
         "items": [
-          {
-            "foodId": "food-008",
-            "foodName": "와퍼 세트",
-            "price": 9500,
-            "quantity": 2
-          }
+          { "foodId": "food-008", "foodName": "와퍼 세트", "price": 9500, "quantity": 2 }
         ]
       }
     ]
@@ -84,12 +73,7 @@
       {
         "restaurantName": "본죽",
         "items": [
-          {
-            "foodId": "food-009",
-            "foodName": "전복죽",
-            "price": 12000,
-            "quantity": 1
-          }
+          { "foodId": "food-009", "foodName": "전복죽", "price": 12000, "quantity": 1 }
         ]
       }
     ]
@@ -102,24 +86,9 @@
       {
         "restaurantName": "엽기떡볶이",
         "items": [
-          {
-            "foodId": "food-010",
-            "foodName": "엽기오뎅",
-            "price": 14000,
-            "quantity": 1
-          },
-          {
-            "foodId": "food-011",
-            "foodName": "주먹김밥",
-            "price": 2000,
-            "quantity": 1
-          },
-          {
-            "foodId": "food-012",
-            "foodName": "중국당면 추가",
-            "price": 2500,
-            "quantity": 1
-          }
+          { "foodId": "food-010", "foodName": "엽기오뎅", "price": 14000, "quantity": 1 },
+          { "foodId": "food-011", "foodName": "주먹김밥", "price": 2000, "quantity": 1 },
+          { "foodId": "food-012", "foodName": "중국당면 추가", "price": 2500, "quantity": 1 }
         ]
       }
     ]
@@ -132,23 +101,13 @@
       {
         "restaurantName": "피자헛",
         "items": [
-          {
-            "foodId": "food-013",
-            "foodName": "페퍼로니피자 L",
-            "price": 25900,
-            "quantity": 1
-          }
+          { "foodId": "food-013", "foodName": "페퍼로니피자 L", "price": 25900, "quantity": 1 }
         ]
       },
       {
         "restaurantName": "도미노피자",
         "items": [
-          {
-            "foodId": "food-014",
-            "foodName": "포테이토피자 L",
-            "price": 27900,
-            "quantity": 1
-          }
+          { "foodId": "food-014", "foodName": "포테이토피자 L", "price": 27900, "quantity": 1 }
         ]
       }
     ]
@@ -161,12 +120,7 @@
       {
         "restaurantName": "맥도날드",
         "items": [
-          {
-            "foodId": "food-015",
-            "foodName": "빅맥 세트",
-            "price": 7200,
-            "quantity": 1
-          }
+          { "foodId": "food-015", "foodName": "빅맥 세트", "price": 7200, "quantity": 1 }
         ]
       }
     ]
@@ -179,18 +133,8 @@
       {
         "restaurantName": "한솥도시락",
         "items": [
-          {
-            "foodId": "food-016",
-            "foodName": "치킨마요",
-            "price": 3500,
-            "quantity": 2
-          },
-          {
-            "foodId": "food-017",
-            "foodName": "도련님도시락",
-            "price": 4500,
-            "quantity": 1
-          }
+          { "foodId": "food-016", "foodName": "치킨마요", "price": 3500, "quantity": 2 },
+          { "foodId": "food-017", "foodName": "도련님도시락", "price": 4500, "quantity": 1 }
         ]
       }
     ]

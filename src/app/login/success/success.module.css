@@ -1,84 +1,126 @@
 :root {
-  --primary: #ee6a2c;
+  --primary: #ee6a2c;        /* 오렌지 주색 (로그인  버튼과 일치) */
+  --bg: #ffffff;
   --text: #0f172a;
   --muted: #6b7280;
   --border: #e5e7eb;
   --input-bg: #f8fafc;
-  --shadow: 0 1px 2px rgba(0,0,0,.05), 0 8px 24px rgba(0,0,0,.04);
+  --radius-xl: 14px;
+  --radius-2xl: 18px;
 }
 
-/* 사이드바 컨테이너 */
 .sidebar {
-  position: sticky;
-  top: 16px;
-  display: grid;
-  gap: 12px;
-  padding: 16px;
-  background: #fff;
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  box-shadow: var(--shadow);
-  color: var(--text);
-  font-family: ui-sans-serif, system-ui, -apple-system, "Noto Sans KR",
-    "Apple SD Gothic Neo", "Malgun Gothic", Segoe UI, Roboto, Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 12px;
+  width: 100%;
+  min-width: 0; /* 오버플로우 방지: 사이드바(15%) 너비 자동 조정 */
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
-/* 사용자 환영 문구 */
 .user {
+  font-size: 14px;
+  color: var(--text);
   margin: 0;
-  font-size: 15px;
-  line-height: 1.4;
+  white-space: nowrap; /* 한 줄 유지 */
+  overflow: hidden;
+  text-overflow: ellipsis; /* 긴 이름 ellipsis (e.g., "김철수 님...") */
+  text-align: center;
+  padding: 8px;
+  background: var(--input-bg);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--border);
 }
-.user b {
-  font-weight: 800;
-}
-
 
 .addressContainer {
-  display: grid;
-  gap: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
 }
 
-/* 주소 섹션 라벨 */
 .label {
-  font-size: 14px;
+  font-size: 12px;
   color: var(--muted);
-  gap: 4px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.selected {
+  font-size: 13px;
+  color: var(--text);
+  padding: 8px 12px;
+  background: var(--input-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; /* 긴 주소 ellipsis */
+  cursor: default;
 }
 
 .dropdown {
-  width: 100%;
   height: 40px;
   padding: 0 12px;
   border: 1px solid var(--border);
-  border-radius: 10px;
-  background: #fff;
+  border-radius: var(--radius-xl);
+  background: var(--input-bg);
   font-size: 14px;
   color: var(--text);
-  cursor: pointer;
-  transition: border-color .15s ease, box-shadow .15s ease, background-color .15s;
-}
-
-.dropdown:hover,
-.dropdown:focus {
-  border-color: color-mix(in srgb, var(--primary) 65%, #ffffff);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 14%, transparent);
   outline: none;
+  min-width: 0; /* 드롭다운 자동 너비 조정 */
+  transition: border-color 0.2s ease;
+}
+.dropdown:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 14%, transparent);
 }
 
 .button {
-  width: 100%;
-  height: 40px;
+  height: 44px;
   border: 0;
-  border-radius: 9999px;
+  border-radius: 9999px; /* 둥근 버튼 (로그인 버튼과 일치) */
   background: var(--primary);
   color: #fff;
   font-weight: 700;
-  font-size: 16px;
-  letter-spacing: .2px;
+  font-size: 14px;
   cursor: pointer;
-  transition: transform .02s ease, filter .15s ease;
+  transition: filter 0.2s ease, transform 0.1s ease;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; /* 긴 텍스트 ellipsis */
 }
-.button:hover { filter: brightness(1.02); }
-.button:active { transform: translateY(1px); }
+.button:hover {
+  filter: brightness(1.02);
+}
+.button:active {
+  transform: translateY(1px);
+}
 
+/* 로딩/에러 (기존 login.module.css와 유사) */
+.loading,
+.error {
+  text-align: center;
+  font-size: 12px;
+  color: var(--muted);
+  padding: 8px;
+  border-radius: var(--radius-xl);
+}
+
+/* 모바일/좁은 화면 조정 */
+@media (max-width: 767px) {
+  .sidebar {
+    padding: 8px;
+    gap: 12px;
+  }
+  .user,
+  .selected,
+  .dropdown {
+    font-size: 12px;
+  }
+}

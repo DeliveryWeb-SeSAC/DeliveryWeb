@@ -1,49 +1,49 @@
 /* 기본 스타일: 데스크톱 기준 */
 .container {
   display: flex;
-  height: 100vh;
-  margin: 0 auto;
-  padding: 0 24px;
-  overflow: auto;
+  height: 100vh; /* 전체 높이로 맞춤 */
+  margin: 0 auto; /* 중앙 정렬 */
+  padding: 0 24px; /* 미세 좌우 여백: YouTube 1 스타일 */
+  overflow: auto; /* 컨테이너 스크롤 허용 */ 
 }
 
 .leftSidebar,
 .rightSidebar {
   width: 15%;
   flex-shrink: 0;
-  background-color: #f0f0f0;
+  background-color: #f0f0f0; /* 예시: 배경색 추가 */
   display: flex;
   flex-direction: column;
-  position: sticky;
+  position: sticky; /* sticky 고정: 상단에 붙음 */
   top: 0;
   height: 100vh;
-  overflow: auto;
-  min-width: 0;
+  overflow: auto; /* 세로 오버플로우 시 스크롤 */
+  min-width: 0; /* 자식이 부모 너비 초과 방지 */
   z-index: 10;
-  gap: 4px; /* 탭 간 여백 추가: 겹침 방지 */
+  gap: 2px; /* 여백 줄임: 기존 4px → 2px (컴팩트하게) */
 }
 
 .mainContent {
   width: 70%;
   flex-shrink: 0;
-  background-color: #ffffff;
-  overflow: auto;
-  flex: 1;
+  background-color: #ffffff; /* 예시: 메인 배경 */
+  overflow: auto; /* 메인 스크롤 허용 */
+  flex: 1; /* 남은 공간 채우기 */
 }
 
 /* 자식 컴포넌트 (LoginPage, ChatPage 등) */
 .sidebarChild {
-  flex: 1;
-  min-width: 0;
-  max-width: 100%;
-  overflow: hidden; /* 잘림 시 숨김 */
-  word-break: break-word;
-  white-space: normal;
+  flex: 1; /* 공간 균등 분배 */
+  min-width: 0; /* 핵심: 오버플로우 방지 */
+  max-width: 100%; /* 너비 100% 제한 */
+  overflow: auto; /* 내부 콘텐츠 넘침 시 스크롤 */
+  word-break: break-word; /* 긴 단어 줄바꿈 (ChatPage 메시지용) */
+  white-space: normal; /* 줄바꿈 허용 */
   box-sizing: border-box;
-  padding: 8px;
+  padding: 4px; /* 내부 여백 줄임: 기존 8px → 4px (밀착) */
 }
 
-/* 새 클래스: 카테고리 탭 전용 (왼쪽 사이드바 탭에 적용) */
+/* 카테고리 탭 전용 (왼쪽 사이드바 탭에 적용, 이전 수정 유지) */
 .categoryTab {
   width: auto; /* 자동 너비 조정 */
   flex-shrink: 1; /* 압축 허용 */
@@ -61,54 +61,7 @@
   display: inline-block; /* 인라인으로 자동 크기 */
 }
 
-/* 호버 효과 (선택적) */
+/* 호버 효과 */
 .categoryTab:hover {
   background-color: #0056b3;
-}
-
-/* 태블릿: 768px ~ 1023px */
-@media (max-width: 1023px) and (min-width: 768px) {
-  .container {
-    padding: 0 20px;
-  }
-  .leftSidebar,
-  .rightSidebar {
-    width: 20%;
-    gap: 3px; /* 약간 줄임 */
-  }
-  .mainContent {
-    width: 60%;
-  }
-  .categoryTab {
-    font-size: 13px; /* 더 좁은 화면에서 폰트 축소 */
-  }
-}
-
-/* 모바일: 767px 이하 */
-@media (max-width: 767px) {
-  .container {
-    flex-direction: column;
-    padding: 0 16px;
-    overflow: auto;
-    height: auto;
-  }
-  .leftSidebar,
-  .rightSidebar {
-    width: 100%;
-    position: static;
-    height: auto;
-    order: 3;
-    min-height: 200px;
-    gap: 8px; /* 모바일에서 여백 늘림 */
-  }
-  .mainContent {
-    width: 100%;
-    order: 2;
-  }
-  .categoryTab {
-    width: 100%; /* 모바일 풀 너비 */
-    white-space: normal; /* 줄바꿈 허용 */
-    text-overflow: clip; /* ellipsis 해제 */
-    font-size: 16px; /* 읽기 쉽게 */
-  }
 }
