@@ -1,5 +1,4 @@
 'use client'
-import style from './store.module.css'
 import { getStoreList } from "../api/storeAPI/route";
 import { useEffect, useState } from "react";
 import StoreItem from '@/app/store/storeItem/StoreItem';
@@ -55,7 +54,7 @@ export default function Store() {
   return (
     <>
       <SearchBar onSearch={handleSearch} onFilter={handleFilter} />
-      <div className={style.store}>
+      <div>
         {newList.length > 0 ? (
           newList.map((store) => (
             <StoreItem key={store.id} store={store} onClick={()=>goDetailPage(store.id)}/>
