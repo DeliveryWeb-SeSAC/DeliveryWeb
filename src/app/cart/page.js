@@ -1,8 +1,7 @@
 'use client';
-import {useState, useEffect, useRef, Suspense} from 'react';
-import {useRouter, useSearchParams} from 'next/navigation';
+import { useState, useEffect, useRef, Suspense } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
-import users from '@/data/users.json';
 
 function CartContent() {
     const router = useRouter();
@@ -13,23 +12,39 @@ function CartContent() {
     const inputRefs = useRef({});
 
     useEffect(() => {
-        let userEmail = searchParams.get('userEmail');
+        const fetchUsersAndSetCart = async () => {
+            try {
+                const response = await fetch('/api/cartAPI'); // 경로 수정
+                if (!response.ok) {
+                    throw new Error('Failed to fetch users');
+                }
+                const users = await response.json();
 
-        // Default user for testing
-        if (userEmail === null || userEmail.trim() === ''){
-            userEmail = users[0].email;
-        }
+                let userEmail = searchParams.get('userEmail');
 
-        if (userEmail) {
-            const foundUser = users.find(u => u.email === userEmail);
-            if (foundUser) {
-                setUser(foundUser);
-                setCart(foundUser.cart || []);
-            } else {
+                // Default user for testing
+                if (userEmail === null || userEmail.trim() === '') {
+                    userEmail = users[0]?.email;
+                }
+
+                if (userEmail) {
+                    const foundUser = users.find(u => u.email === userEmail);
+                    if (foundUser) {
+                        setUser(foundUser);
+                        setCart(foundUser.cart || []);
+                    } else {
+                        setUser(null);
+                        setCart([]);
+                    }
+                }
+            } catch (error) {
+                console.error("Error fetching user data:", error);
                 setUser(null);
                 setCart([]);
             }
-        }
+        };
+
+        fetchUsersAndSetCart();
     }, [searchParams]);
 
     useEffect(() => {
@@ -43,6 +58,29 @@ function CartContent() {
         setTotalPrice(newTotalPrice);
     }, [cart]);
 
+    const updateUserCart = async (cartToUpdate) => {
+        if (!user) return false;
+        try {
+            const response = await fetch('/api/cartAPI', { // 경로 수정
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ userEmail: user.email, cart: cartToUpdate }),
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json().catch(() => ({ message: 'Failed to update cart.' }));
+                throw new Error(errorData.message);
+            }
+            return true;
+        } catch (error) {
+            console.error('Error updating cart:', error);
+            alert(`장바구니 업데이트 중 오류가 발생했습니다: ${error.message}`);
+            return false;
+        }
+    };
+
     const handleQuantityChange = (restaurantName, foodId, value) => {
         if (value !== '' && !/^\d+$/.test(value)) {
             alert('수량을 입력해주세요.');
@@ -51,29 +89,41 @@ function CartContent() {
         const newQuantity = value === '' ? '' : parseInt(value, 10);
         const updatedCart = cart.map(r =>
             r.restaurantName === restaurantName
-                ? {...r, items: r.items.map(i => i.foodId === foodId ? {...i, quantity: newQuantity} : i)}
+                ? { ...r, items: r.items.map(i => i.foodId === foodId ? { ...i, quantity: newQuantity } : i) }
                 : r
         );
         setCart(updatedCart);
     };
 
-    const handleRemoveItem = (restaurantName, foodId) => {
+    const handleRemoveItem = async (restaurantName, foodId) => {
         const updatedCart = cart.map(r => {
             if (r.restaurantName === restaurantName) {
                 const updatedItems = r.items.filter(item => item.foodId !== foodId);
-                return updatedItems.length > 0 ? {...r, items: updatedItems} : null;
+                return updatedItems.length > 0 ? { ...r, items: updatedItems } : null;
             }
             return r;
         }).filter(Boolean);
         setCart(updatedCart);
+
+        if (updatedCart.length === 0) {
+            await updateUserCart(updatedCart);
+        }
     };
 
-    const handleGoToPayment = () => {
+    const handleGoToPayment = async () => {
         let itemWithNoQuantity = null;
         for (const r of cart) {
             itemWithNoQuantity = r.items.find(item => item.quantity === '' || item.quantity === 0);
             if (itemWithNoQuantity) break;
         }
+
+        const proceedToPayment = async (currentCart) => {
+            const success = await updateUserCart(currentCart);
+            if (success) {
+                const cartQuery = encodeURIComponent(JSON.stringify(currentCart));
+                router.push(`/payment?userEmail=${user.email}&cart=${cartQuery}`);
+            }
+        };
 
         if (itemWithNoQuantity) {
             const confirmation = window.confirm(`'${itemWithNoQuantity.foodName}' 상품의 수량이 없습니다. 수량을 수정하시겠습니까?`);
@@ -83,14 +133,12 @@ function CartContent() {
                     items: r.items.filter(i => i.foodId !== itemWithNoQuantity.foodId)
                 })).filter(r => r.items.length > 0);
                 setCart(cartAfterItemRemoval);
-                const cartQuery = encodeURIComponent(JSON.stringify(cartAfterItemRemoval));
-                router.push(`/payment?userEmail=${user.email}&cart=${cartQuery}`);
+                await proceedToPayment(cartAfterItemRemoval);
             } else {
                 inputRefs.current[itemWithNoQuantity.foodId]?.focus();
             }
         } else {
-            const cartQuery = encodeURIComponent(JSON.stringify(cart));
-            router.push(`/payment?userEmail=${user.email}&cart=${cartQuery}`);
+            await proceedToPayment(cart);
         }
     };
 
