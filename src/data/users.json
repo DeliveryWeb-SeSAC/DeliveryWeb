@@ -3,7 +3,25 @@
     "id": 1,
     "name": "김민수",
     "email": "kimminsu@example.com",
-    "cart": []
+    "cart": [
+      {
+        "restaurantName": "서브웨이",
+        "items": [
+          {
+            "foodId": "food-005",
+            "foodName": "이탈리안 비엠티",
+            "price": 6500,
+            "quantity": 1
+          },
+          {
+            "foodId": "food-006",
+            "foodName": "쿠키",
+            "price": 1500,
+            "quantity": 3
+          }
+        ]
+      }
+    ]
   },
   {
     "id": 2,
@@ -11,12 +29,12 @@
     "email": "parkjiyoon@example.com",
     "cart": [
       {
-        "restaurantName": "교촌치킨",
+        "restaurantName": "본죽",
         "items": [
           {
-            "foodId": "food-004",
-            "foodName": "허니콤보",
-            "price": 23000,
+            "foodId": "food-009",
+            "foodName": "전복죽",
+            "price": 12000,
             "quantity": 1
           }
         ]
@@ -42,17 +60,6 @@
             "foodName": "쿠키",
             "price": 1500,
             "quantity": 3
-          }
-        ]
-      },
-      {
-        "restaurantName": "스타벅스",
-        "items": [
-          {
-            "foodId": "food-007",
-            "foodName": "아이스 아메리카노",
-            "price": 4500,
-            "quantity": 2
           }
         ]
       }

@@ -213,5 +213,79 @@
       }
     ],
     "totalPaymentAmount": 23000
+  },
+  {
+    "userEmail": "parkjiyoon@example.com",
+    "userName": "박지윤",
+    "paymentDate": "2025-10-22T12:35:12.504Z",
+    "restaurants": [
+      {
+        "restaurantName": "교촌치킨",
+        "items": [
+          {
+            "foodName": "허니콤보",
+            "quantity": 1,
+            "itemPaymentAmount": 23000
+          }
+        ]
+      }
+    ],
+    "totalPaymentAmount": 23000
+  },
+  {
+    "userEmail": "kimminsu@example.com",
+    "userName": "김민수",
+    "paymentDate": "2025-10-22T12:36:21.657Z",
+    "restaurants": [
+      {
+        "restaurantName": "서브웨이",
+        "items": [
+          {
+            "foodName": "쿠키",
+            "quantity": 3,
+            "itemPaymentAmount": 4500
+          }
+        ]
+      },
+      {
+        "restaurantName": "스타벅스",
+        "items": [
+          {
+            "foodName": "아이스 아메리카노",
+            "quantity": 2,
+            "itemPaymentAmount": 9000
+          }
+        ]
+      }
+    ],
+    "totalPaymentAmount": 13500
+  },
+  {
+    "userEmail": "kimminsu@example.com",
+    "userName": "김민수",
+    "paymentDate": "2025-10-22T12:36:57.178Z",
+    "restaurants": [
+      {
+        "restaurantName": "서브웨이",
+        "items": [
+          {
+            "foodName": "쿠키",
+            "quantity": 3,
+            "itemPaymentAmount": 4500
+          }
+        ]
+      },
+      {
+        "restaurantName": "스타벅스",
+        "items": [
+          {
+            "foodName": "아이스 아메리카노",
+            "quantity": 2,
+            "itemPaymentAmount": 9000
+          }
+        ]
+      }
+    ],
+    "totalPaymentAmount": 13500
   }
 ]
