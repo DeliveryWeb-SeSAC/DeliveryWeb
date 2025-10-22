@@ -177,5 +177,41 @@
       }
     ],
     "totalPaymentAmount": 7000
+  },
+  {
+    "userEmail": "kimminsu@example.com",
+    "userName": "김민수",
+    "paymentDate": "2025-10-22T09:07:20.730Z",
+    "restaurants": [
+      {
+        "restaurantName": "서브웨이",
+        "items": [
+          {
+            "foodName": "이탈리안 비엠티",
+            "quantity": 1,
+            "itemPaymentAmount": 6500
+          }
+        ]
+      }
+    ],
+    "totalPaymentAmount": 6500
+  },
+  {
+    "userEmail": "kimminsu@example.com",
+    "userName": "김민수",
+    "paymentDate": "2025-10-22T09:08:31.861Z",
+    "restaurants": [
+      {
+        "restaurantName": "교촌치킨",
+        "items": [
+          {
+            "foodName": "허니콤보",
+            "quantity": 1,
+            "itemPaymentAmount": 23000
+          }
+        ]
+      }
+    ],
+    "totalPaymentAmount": 23000
   }
 ]

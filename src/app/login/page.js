@@ -39,6 +39,12 @@ export default function LoginPage() {
 
       setIsSuccess(true);
       setUser(userData);
+
+      // --- [추가된 코드] 로그인 성공 시 로컬스토리지 저장 및 이벤트 발생 ---
+      localStorage.setItem('userEmail', userData.email);
+      window.dispatchEvent(new Event('storage-update'));
+      // --- [추가된 코드 끝] ---
+
       setSelectedAddress(userData.address1 || "");
       alert("로그인이 성공했습니다!");
     } catch (err) {
@@ -55,6 +61,12 @@ export default function LoginPage() {
           if (res.ok) {
             const userData = await res.json();
             setUser(userData);
+
+            // --- [추가된 코드] 자동 로그인 성공 시 로컬스토리지 저장 및 이벤트 발생 ---
+            localStorage.setItem('userEmail', userData.email);
+            window.dispatchEvent(new Event('storage-update'));
+            // --- [추가된 코드 끝] ---
+
             setSelectedAddress(userData.address1 || "");
             setIsSuccess(true);
           } else {
