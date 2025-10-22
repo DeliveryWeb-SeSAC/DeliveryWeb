@@ -3,6 +3,7 @@ import {useState, useEffect, useRef, Suspense} from 'react';
 import {useRouter, useSearchParams} from 'next/navigation';
 import Link from 'next/link';
 import users from '@/data/users.json';
+import styles from './cart.module.css';
 
 function CartContent() {
     const router = useRouter();
