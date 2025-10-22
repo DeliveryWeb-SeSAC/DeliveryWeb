@@ -1,3 +1,4 @@
+"use client"
 import Header from './Header'
 import LoginPage from '@/app/login/page'  // 이 컴포넌트에서 login.module.css import
 import ChatPage from '@/app/chat/page'    // 이 컴포넌트에서 chat.module.css import
