@@ -1,6 +1,6 @@
 'use client';
-import { useState, useEffect, useRef, Suspense, useCallback } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import {useState, useEffect, useRef, Suspense, useCallback} from 'react';
+import {useRouter, useSearchParams} from 'next/navigation';
 import Link from 'next/link';
 
 function CartContent() {
@@ -10,6 +10,7 @@ function CartContent() {
     const [cart, setCart] = useState([]);
     const [totalPrice, setTotalPrice] = useState(0);
     const inputRefs = useRef({});
+
     // localStorage 변경 이벤트를 감지하고 리렌더링을 트리거하기 위한 상태
     const [localStorageUpdated, setLocalStorageUpdated] = useState(0);
 
@@ -98,11 +99,11 @@ function CartContent() {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ userEmail: user.email, cart: cartToUpdate }),
+                body: JSON.stringify({userEmail: user.email, cart: cartToUpdate}),
             });
 
             if (!response.ok) {
-                const errorData = await response.json().catch(() => ({ message: 'Failed to update cart.' }));
+                const errorData = await response.json().catch(() => ({message: 'Failed to update cart.'}));
                 throw new Error(errorData.message);
             }
             return true;
@@ -121,7 +122,7 @@ function CartContent() {
         const newQuantity = value === '' ? '' : parseInt(value, 10);
         const updatedCart = cart.map(r =>
             r.restaurantName === restaurantName
-                ? { ...r, items: r.items.map(i => i.foodId === foodId ? { ...i, quantity: newQuantity } : i) }
+                ? {...r, items: r.items.map(i => i.foodId === foodId ? {...i, quantity: newQuantity} : i)}
                 : r
         );
         setCart(updatedCart);
@@ -131,7 +132,7 @@ function CartContent() {
         const updatedCart = cart.map(r => {
             if (r.restaurantName === restaurantName) {
                 const updatedItems = r.items.filter(item => item.foodId !== foodId);
-                return updatedItems.length > 0 ? { ...r, items: updatedItems } : null;
+                return updatedItems.length > 0 ? {...r, items: updatedItems} : null;
             }
             return r;
         }).filter(Boolean);

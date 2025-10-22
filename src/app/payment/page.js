@@ -1,6 +1,6 @@
 'use client';
-import { useEffect, useState, Suspense } from 'react';
-import { useSearchParams } from 'next/navigation';
+import {useEffect, useState, Suspense} from 'react';
+import {useSearchParams} from 'next/navigation';
 import Link from 'next/link';
 
 function PaymentContent() {
@@ -19,7 +19,7 @@ function PaymentContent() {
         const fetchUser = async () => {
             if (userEmail) {
                 try {
-                    const response = await fetch('/api/cartAPI'); // 경로 수정
+                    const response = await fetch('/api/cartAPI');
                     if (!response.ok) {
                         throw new Error('Failed to fetch users');
                     }
@@ -64,7 +64,7 @@ function PaymentContent() {
                 body: JSON.stringify(order),
             });
             if (!response.ok) {
-                const errorData = await response.json().catch(() => ({ message: 'Failed to save order history.' }));
+                const errorData = await response.json().catch(() => ({message: 'Failed to save order history.'}));
                 throw new Error(errorData.message);
             }
         } catch (error) {
@@ -99,20 +99,25 @@ function PaymentContent() {
         saveOrderHistory(orderDetails);
 
         try {
-            const response = await fetch('/api/cartAPI', { // 경로 수정
+            const response = await fetch('/api/cartAPI', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ userEmail: user.email, cart: [] }),
+                body: JSON.stringify({userEmail: user.email, cart: []}),
             });
 
             if (!response.ok) {
-                const errorData = await response.json().catch(() => ({ message: 'Failed to clear cart.' }));
+                const errorData = await response.json().catch(() => ({message: 'Failed to clear cart.'}));
                 throw new Error(errorData.message);
             }
 
             alert(`${user.name}님의 장바구니에 담긴 음식들의 주문 결제가 완료되었습니다.`);
+
+            // 장바구니 비우기 성공 시 로컬스토리지 갱신 및 이벤트 발생
+            localStorage.setItem('userEmail', user.email); // 현재 로그인된 사용자 이메일로 로컬스토리지 갱신
+            window.dispatchEvent(new Event('storage-update')); // 장바구니 페이지 리렌더링을 위한 이벤트 발생
+
             setIsPaid(true);
 
         } catch (error) {
