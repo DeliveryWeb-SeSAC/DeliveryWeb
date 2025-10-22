@@ -1,4 +1,5 @@
-import style from './storeItem.module.css'
+import Link from 'next/link';
+import style from './StoreItem.module.css'
 
 // 평점(star)을 받아서 별 이모지를 반환하는 개선된 함수
 const StarRating = ({ rating }) => {
@@ -30,19 +31,21 @@ const StarRating = ({ rating }) => {
 
 export default function StoreItem({store, onClick}){
     return (
-        <div 
-            className={style.card}
-            onClick={onClick}
-            >
-            <img src={store.logo} className={style.logo} alt={store.name + " 로고"}/>
-            <hr className={style.divider}/>
-            <h2>{store.name}</h2>
-            <hr className={style.divider}/>
-            <p>{store.address}</p>
-            <p>배달시간 : {store.delivery}</p>
-            <p>
-                평점: <StarRating rating={store.star} /> ({store.star})
-            </p>
-        </div>
+        <Link href={`/store/${store.id}`}>
+            <div 
+                className={style.card}
+                onClick={onClick}
+                >
+                <img src={store.logo} className={style.logo} alt={store.name + " 로고"}/>
+                <hr className={style.divider}/>
+                <h2>{store.name}</h2>
+                <hr className={style.divider}/>
+                <p>{store.address}</p>
+                <p>배달시간 : {store.delivery}</p>
+                <p>
+                    평점: <StarRating rating={store.star} /> ({store.star})
+                </p>
+            </div>
+        </Link>
     )
 };
