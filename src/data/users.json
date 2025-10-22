@@ -3,29 +3,7 @@
     "id": 1,
     "name": "김민수",
     "email": "kimminsu@example.com",
-    "cart": [
-      {
-<<<<<<< Updated upstream
-        "restaurantName": "교촌치킨",
-        "items": [
-          {
-            "foodId": "food-004",
-            "foodName": "허니콤보",
-            "price": 23000,
-            "quantity": 1
-=======
-        "restaurantName": "스타벅스",
-        "items": [
-          {
-            "foodId": "food-007",
-            "foodName": "아이스 아메리카노",
-            "price": 4500,
-            "quantity": 2
->>>>>>> Stashed changes
-          }
-        ]
-      }
-    ]
+    "cart": []
   },
   {
     "id": 2,
