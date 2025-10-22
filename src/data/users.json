@@ -5,29 +5,18 @@
     "email": "kimminsu@example.com",
     "cart": [
       {
-        "restaurantName": "백채김치찌개",
+        "restaurantName": "한솥도시락",
         "items": [
           {
-            "foodId": "food-001",
-            "foodName": "김치찌개 (1인분)",
-            "price": 8000,
-            "quantity": 1
+            "foodId": "food-020",
+            "foodName": "치킨마요",
+            "price": 3500,
+            "quantity": 2
           },
           {
-            "foodId": "food-002",
-            "foodName": "계란말이",
-            "price": 7000,
-            "quantity": 1
-          }
-        ]
-      },
-      {
-        "restaurantName": "BHC",
-        "items": [
-          {
-            "foodId": "food-003",
-            "foodName": "뿌링클",
-            "price": 21000,
+            "foodId": "food-021",
+            "foodName": "도련님도시락",
+            "price": 4500,
             "quantity": 1
           }
         ]
