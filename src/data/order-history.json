@@ -141,5 +141,41 @@
       }
     ],
     "totalPaymentAmount": 24500
+  },
+  {
+    "userEmail": "kimminsu@example.com",
+    "userName": "김민수",
+    "paymentDate": "2025-10-22T08:21:46.353Z",
+    "restaurants": [
+      {
+        "restaurantName": "스타벅스",
+        "items": [
+          {
+            "foodName": "아이스 아메리카노",
+            "quantity": 2,
+            "itemPaymentAmount": 9000
+          }
+        ]
+      }
+    ],
+    "totalPaymentAmount": 9000
+  },
+  {
+    "userEmail": "kimminsu@example.com",
+    "userName": "김민수",
+    "paymentDate": "2025-10-22T08:23:12.682Z",
+    "restaurants": [
+      {
+        "restaurantName": "한솥도시락",
+        "items": [
+          {
+            "foodName": "치킨마요",
+            "quantity": 2,
+            "itemPaymentAmount": 7000
+          }
+        ]
+      }
+    ],
+    "totalPaymentAmount": 7000
   }
 ]

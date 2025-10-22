@@ -6,7 +6,7 @@ export async function GET() {
     try {
         const usersFilePath = path.join(process.cwd(), 'src', 'data', 'users.json');
         const usersData = fs.readFileSync(usersFilePath, 'utf-8');
-        
+
         return new Response(usersData, {
             status: 200,
             headers: { 'Content-Type': 'application/json' },
