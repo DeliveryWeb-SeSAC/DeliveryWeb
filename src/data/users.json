@@ -3,25 +3,7 @@
     "id": 1,
     "name": "김민수",
     "email": "kimminsu@example.com",
-    "cart": [
-      {
-        "restaurantName": "한솥도시락",
-        "items": [
-          {
-            "foodId": "food-020",
-            "foodName": "치킨마요",
-            "price": 3500,
-            "quantity": 2
-          },
-          {
-            "foodId": "food-021",
-            "foodName": "도련님도시락",
-            "price": 4500,
-            "quantity": 1
-          }
-        ]
-      }
-    ]
+    "cart": []
   },
   {
     "id": 2,
