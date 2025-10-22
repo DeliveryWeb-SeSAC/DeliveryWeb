@@ -4,6 +4,7 @@ import { getStoreList } from "../api/storeAPI/route";
 import { useEffect, useState } from "react";
 import StoreItem from '@/app/store/storeItem/StoreItem';
 import SearchBar from '../searchBar/page';
+import { useRouter } from 'next/navigation';
 
 export default function Store() {
   const [stores, setStores] = useState([]);
@@ -14,6 +15,11 @@ export default function Store() {
     setStores(fetched);
     setNewList(fetched);
   }, []);
+
+  const router = useRouter();
+  const goDetailPage = (storeId) => {
+    router.push(`/store/${storeId}`)
+  }
 
   const handleSearch = (keyword) => {
     const initKeyword = keyword.trim().toLowerCase();
@@ -48,16 +54,15 @@ export default function Store() {
 
   return (
     <>
-      <div className={style.storeContainer}>
+      <SearchBar onSearch={handleSearch} onFilter={handleFilter} />
+      <div className={style.store}>
         {newList.length > 0 ? (
           newList.map((store) => (
-            <StoreItem key={store.id} store={store} />
+            <StoreItem key={store.id} store={store} onClick={()=>goDetailPage(store.id)}/>
           ))
         ) : (<p>결과 없음</p>)
         }
       </div>
-
-      <SearchBar onSearch={handleSearch} onFilter={handleFilter} />
     </>
   );
 }

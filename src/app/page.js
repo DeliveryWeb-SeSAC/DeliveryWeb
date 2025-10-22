@@ -10,7 +10,7 @@ import Login from "./login/page";
 export default function Home() {
 
     return (
-        <div style={{padding: '20px', maxWidth: '400px', margin: '50px auto', textAlign: 'center'}}>
+        <div>
             <Store/>
         </div>
     );
