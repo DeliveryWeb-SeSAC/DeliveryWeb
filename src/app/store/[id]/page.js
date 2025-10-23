@@ -21,15 +21,13 @@ export default function StoreDetail(){
             {/* ⭐️ 가게 정보가 세로로 정렬됩니다: 로고 -> 이름 -> 상세정보 */}
             <div className={styles.infoContainer}>  
                 <h2 className={styles.storeName}>{store.name}</h2>              
-                <img src={store.logo} alt={`${store.name} 로고`} className={styles.logo}/>               
-                
-                
                 <div className={styles.details}>
                     <p>주소: {store.address}</p>
                     <p>평점: {store.star}</p>
                     <p>배달시간: {store.delivery}</p>
                     <p>카테고리: {store.category}</p>
                 </div>
+                <img src={store.logo} alt={`${store.name} 로고`} className={styles.logo}/>               
             </div>
             <div className={styles.menuContainer}>
                 <Menu id={store.id} getMenu={store.foods}/>
