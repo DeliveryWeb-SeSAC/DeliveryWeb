@@ -51,6 +51,7 @@
   white-space: normal; /* 줄바꿈 허용 */
   box-sizing: border-box;
   padding: 4px; /* 내부 여백 줄임: 기존 8px → 4px (밀착) */
+  /* background-color: #ff0000; */
 }
 
 /* 카테고리 탭 전용 (왼쪽 사이드바 탭에 적용, 이전 수정 유지) */
