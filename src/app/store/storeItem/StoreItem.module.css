@@ -131,8 +131,9 @@
   align-items: center;
   gap: 20px;
   padding: 20px;
-  max-width: 800px;
+  max-width: 1000px;
   margin: 0 auto;
+  background-color: #333333;
 }
 
 .storeLogo {
@@ -152,6 +153,7 @@
 }
 
 .menuSection {
+    text-align: left;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -161,6 +163,6 @@
 .menuSection h2 {
   font-size: 1.5rem;
   color: #333333;
-  text-align: center;
+  text-align: left;
   margin-bottom: 16px;
 }

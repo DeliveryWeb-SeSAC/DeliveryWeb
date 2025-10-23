@@ -12,7 +12,7 @@ export default function Menu({id, getMenu}) {
 
     return (
         <>
-            <h1>메뉴 페이지 입니다.</h1>
+            <h1>메뉴</h1>
             <div className={boxStyle.MenuBox}>
                 {menuList.map(menu => <MenuItem key={menu.name} id={id} menu={menu}/>)}
             </div>
