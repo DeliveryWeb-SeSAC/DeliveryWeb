@@ -8,3 +8,8 @@ export function getStoreList(){
 export function getStoreById(id){
     return stores.filter((store)=> store.id === parseInt(id))[0];
 };
+
+export function getStoreName(id){
+    const store = stores.find(store => store.id === parseInt(id))
+    return store.name
+}

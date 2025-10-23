@@ -1,7 +1,7 @@
 'use client'
 import { getStoreList } from "../api/storeAPI/route";
 import { useEffect, useState } from "react";
-import StoreItem from '@/app/store/storeItem/storeItem';
+import StoreItem from '@/app/store/storeItem/StoreItem';
 import SearchBar from '../searchBar/page';
 import { useRouter } from 'next/navigation';
 import styles from '@/app/store/store.module.css'; // CSS 모듈 import
