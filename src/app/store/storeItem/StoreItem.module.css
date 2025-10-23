@@ -51,7 +51,7 @@
     text-align: center; 
 }
 
-.infoWrapper h3 {
+.infoWrapper h3 {   
     margin-top: 0;
     margin-bottom: 0px;
     /* ⭐️ 글꼴 크기 재조정: 13px 유지 (필요에 따라 14px로 조정 가능) ⭐️ */
