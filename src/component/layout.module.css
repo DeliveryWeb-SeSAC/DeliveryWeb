@@ -2,9 +2,9 @@
 .container {
   display: flex;
   height: 100vh; /* 전체 높이로 맞춤 */
-  margin: 0 auto; /* 중앙 정렬 */
+  margin: 24px auto 0; /* 상단 여백 추가 및 중앙 정렬 */
   padding: 0 24px; /* 미세 좌우 여백: YouTube 1 스타일 */
-  overflow: auto; /* 컨테이너 스크롤 허용 */ 
+  overflow: auto; /* 컨테이너 스크롤 허용 */
 }
 
 .leftSidebar {
