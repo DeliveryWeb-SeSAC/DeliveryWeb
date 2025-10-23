@@ -7,10 +7,8 @@
   overflow: auto; /* 컨테이너 스크롤 허용 */ 
 }
 
-.leftSidebar,
-.rightSidebar {
-  width: 15%;
-  flex-shrink: 0;
+.leftSidebar {
+  flex: 0 0 15%; /* width: 15% → flex로 변경: 고정 15% */
   background-color: #f0f0f0; /* 예시: 배경색 추가 */
   display: flex;
   flex-direction: column;
@@ -21,15 +19,26 @@
   min-width: 0; /* 자식이 부모 너비 초과 방지 */
   z-index: 10;
   gap: 2px; /* 여백 줄임: 기존 4px → 2px (컴팩트하게) */
+}
 
+.rightSidebar {
+  flex: 0 0 20%; /* width: 15% → flex로 변경: 고정 20% (변경) */
+  background-color: #f0f0f0; /* 예시: 배경색 추가 */
+  display: flex;
+  flex-direction: column;
+  position: sticky; /* sticky 고정: 상단에 붙음 */
+  top: 0;
+  height: 100vh;
+  overflow: auto; /* 세로 오버플로우 시 스크롤 */
+  min-width: 0; /* 자식이 부모 너비 초과 방지 */
+  z-index: 10;
+  gap: 2px; /* 여백 줄임: 기존 4px → 2px (컴팩트하게) */
 }
 
 .mainContent {
-  width: 70%;
-  flex-shrink: 0;
+  flex: 1; /* width: 70% → flex: 1로 변경: 남은 공간 채우기 (동적 65%) */
   background-color: #ffffff; /* 예시: 메인 배경 */
-  overflow: auto; /* 메인 스크롤 허용 */
-  flex: 1; /* 남은 공간 채우기 */
+  /*overflow: auto;  메인 스크롤 허용 */
 }
 
 /* 자식 컴포넌트 (LoginPage, ChatPage 등) */
@@ -42,6 +51,7 @@
   white-space: normal; /* 줄바꿈 허용 */
   box-sizing: border-box;
   padding: 4px; /* 내부 여백 줄임: 기존 8px → 4px (밀착) */
+  /* background-color: #ff0000; */
 }
 
 /* 카테고리 탭 전용 (왼쪽 사이드바 탭에 적용, 이전 수정 유지) */
