@@ -1,9 +1,7 @@
 'use client';
-
 import {useEffect, useState, Suspense} from 'react';
 import {useSearchParams} from 'next/navigation';
 import Link from 'next/link';
-import users from '@/data/users.json';
 
 function PaymentContent() {
     const searchParams = useSearchParams();
@@ -17,11 +15,26 @@ function PaymentContent() {
         const userEmail = searchParams.get('userEmail');
         const cartQuery = searchParams.get('cart');
 
-        if (userEmail) {
-            const foundUser = users.find(u => u.email === userEmail);
-            setUser(foundUser || null);
-        }
+        // 사용자 정보 설정
+        const fetchUser = async () => {
+            if (userEmail) {
+                try {
+                    const response = await fetch('/api/cartAPI');
+                    if (!response.ok) {
+                        throw new Error('Failed to fetch users');
+                    }
+                    const users = await response.json();
+                    const foundUser = users.find(u => u.email === userEmail);
+                    setUser(foundUser || null);
+                } catch (error) {
+                    console.error("Error fetching user data:", error);
+                    setUser(null);
+                }
+            }
+        };
+        fetchUser();
 
+        // 장바구니 정보 설정
         if (cartQuery) {
             try {
                 const decodedCart = JSON.parse(decodeURIComponent(cartQuery));
@@ -41,10 +54,77 @@ function PaymentContent() {
         }
     }, [searchParams]);
 
-    const handleConfirmPayment = () => {
-        alert(`${user.name}님의 장바구니에 담긴 음식들의 주문 결제가 완료되었습니다.`)
-        setPaymentDate(new Date());
-        setIsPaid(true);
+    const saveOrderHistory = async (order) => {
+        try {
+            const response = await fetch('/api/orderHistoryAPI', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(order),
+            });
+            if (!response.ok) {
+                const errorData = await response.json().catch(() => ({message: 'Failed to save order history.'}));
+                throw new Error(errorData.message);
+            }
+        } catch (error) {
+            console.error('Error saving order history:', error);
+        }
+    };
+
+    const handleConfirmPayment = async () => {
+        if (!user) {
+            alert("사용자 정보가 없습니다.");
+            return;
+        }
+
+        const currentPaymentDate = new Date();
+        setPaymentDate(currentPaymentDate);
+
+        const orderDetails = {
+            userEmail: user.email,
+            userName: user.name,
+            paymentDate: currentPaymentDate.toISOString(),
+            restaurants: cart.map(restaurant => ({
+                restaurantName: restaurant.restaurantName,
+                items: restaurant.items.map(item => ({
+                    foodName: item.foodName,
+                    quantity: item.quantity,
+                    itemPaymentAmount: item.price * item.quantity,
+                })),
+            })),
+            totalPaymentAmount: totalPrice,
+        };
+
+        saveOrderHistory(orderDetails);
+
+        try {
+            const response = await fetch('/api/cartAPI', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({userEmail: user.email, cart: []}),
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json().catch(() => ({message: 'Failed to clear cart.'}));
+                throw new Error(errorData.message);
+            }
+
+            alert(`${user.name}님의 장바구니에 담긴 음식들의 주문 결제가 완료되었습니다.`);
+
+            // 장바구니 비우기 성공 시 로컬스토리지 갱신 및 이벤트 발생
+            localStorage.setItem('userEmail', user.email); // 현재 로그인된 사용자 이메일로 로컬스토리지 갱신
+            window.dispatchEvent(new Event('storage-update')); // 장바구니 페이지 리렌더링을 위한 이벤트 발생
+
+            setIsPaid(true);
+
+        } catch (error) {
+            console.error('Error clearing cart:', error);
+            alert(`결제 처리 중 장바구니를 비우는 데 실패했습니다: ${error.message}`);
+            setIsPaid(true);
+        }
     };
 
     if (!user) {

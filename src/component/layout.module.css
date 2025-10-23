@@ -1,0 +1,68 @@
+/* 기본 스타일: 데스크톱 기준 */
+.container {
+  display: flex;
+  height: 100vh; /* 전체 높이로 맞춤 */
+  margin: 0 auto; /* 중앙 정렬 */
+  padding: 0 24px; /* 미세 좌우 여백: YouTube 1 스타일 */
+  overflow: auto; /* 컨테이너 스크롤 허용 */ 
+}
+
+.leftSidebar,
+.rightSidebar {
+  width: 15%;
+  flex-shrink: 0;
+  background-color: #f0f0f0; /* 예시: 배경색 추가 */
+  display: flex;
+  flex-direction: column;
+  position: sticky; /* sticky 고정: 상단에 붙음 */
+  top: 0;
+  height: 100vh;
+  overflow: auto; /* 세로 오버플로우 시 스크롤 */
+  min-width: 0; /* 자식이 부모 너비 초과 방지 */
+  z-index: 10;
+  gap: 2px; /* 여백 줄임: 기존 4px → 2px (컴팩트하게) */
+
+}
+
+.mainContent {
+  width: 70%;
+  flex-shrink: 0;
+  background-color: #ffffff; /* 예시: 메인 배경 */
+  overflow: auto; /* 메인 스크롤 허용 */
+  flex: 1; /* 남은 공간 채우기 */
+}
+
+/* 자식 컴포넌트 (LoginPage, ChatPage 등) */
+.sidebarChild {
+  flex: 1; /* 공간 균등 분배 */
+  min-width: 0; /* 핵심: 오버플로우 방지 */
+  max-width: 100%; /* 너비 100% 제한 */
+  overflow: auto; /* 내부 콘텐츠 넘침 시 스크롤 */
+  word-break: break-word; /* 긴 단어 줄바꿈 (ChatPage 메시지용) */
+  white-space: normal; /* 줄바꿈 허용 */
+  box-sizing: border-box;
+  padding: 4px; /* 내부 여백 줄임: 기존 8px → 4px (밀착) */
+}
+
+/* 카테고리 탭 전용 (왼쪽 사이드바 탭에 적용, 이전 수정 유지) */
+.categoryTab {
+  width: auto; /* 자동 너비 조정 */
+  flex-shrink: 1; /* 압축 허용 */
+  min-width: 0; /* 부모 너비 초과 방지 */
+  white-space: nowrap; /* 한 줄 유지 */
+  overflow: hidden; /* 숨김 */
+  text-overflow: ellipsis; /* 긴 텍스트에 ... 표시 */
+  padding: 6px 8px; /* 내부 여백으로 컴팩트 */
+  border-radius: 4px; /* 예시: 둥근 모서리 */
+  background-color: #007bff; /* 푸른 배경 예시 */
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 14px; /* 작은 폰트로 공간 절약 */
+  display: inline-block; /* 인라인으로 자동 크기 */
+}
+
+/* 호버 효과 */
+.categoryTab:hover {
+  background-color: #0056b3;
+}

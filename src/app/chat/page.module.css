@@ -1,34 +1,130 @@
-/* page.module.css */
-.chatSection {
-  width: 300px;
-  border: 1px solid #ccc;
-  padding: 15px;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+:root {
+  --primary: #ee6a2c;        /* 오렌지 주색 */
+  --bg: #ffffff;
+  --text: #0f172a;
+  --muted: #6b7280;
+  --border: #e5e7eb;
+  --input-bg: #f8fafc;
+  --radius-xl: 14px;
+  --radius-2xl: 18px;
 }
 
-.chatWindow {
-  height: 200px;
-  overflow-y: auto;
-  border: 1px solid #ddd;
-  padding: 10px;
-  margin-bottom: 10px;
-  background-color: #f0f0f0;
+.title {
+  margin: 0 0 12px 0;
+  font-weight: 800;
+  letter-spacing: -0.2px;
+  font-size: 22px;    
+  line-height: 1.2;
+  color: var(--text);
 }
 
-.chatWindow p {
-  margin: 5px 0;
-  padding: 8px;
-  border-radius: 5px;
+/* 채팅 컨테이너 */
+.chatContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  max-height: 100vh;
+  overflow: hidden;
+}
+.chatMessages {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 12px;
+  overflow: auto; /* 세로 스크롤 */
+  background: var(--input-bg);
+  border-radius: var(--radius-xl);
+  margin-bottom: 12px;
 }
 
-.userMsg {
-  background-color: #d1e7dd;
+/* 메시지 버블 */
+.messageBubble {
+  max-width: 80%; /* 자동 너비: 80% 초과 방지 */
+  min-width: 0;
+  padding: 10px 14px;
+  border-radius: var(--radius-2xl);
+  font-size: 14px;
+  line-height: 1.4;
+  word-break: break-word; /* 긴 단어 줄바꿈 */
+  white-space: pre-wrap; /* 줄바꿈 유지 */
+  overflow: hidden; /* 오버플로우 숨김 */
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+.messageBubble.sent {
+  align-self: flex-end;
+  background: var(--primary);
+  color: #fff;
+  border-bottom-right-radius: 6px;
+}
+.messageBubble.received {
+  align-self: flex-start;
+  background: var(--bg);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-bottom-left-radius: 6px;
+}
+.messageTime {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 4px;
   text-align: right;
+  opacity: 0.7;
 }
 
-.botMsg {
-  background-color: #e2e3e5;
-  text-align: left;
+/* 입력 영역 */
+.chatInputArea {
+  display: flex;
+  gap: 8px;
+  padding: 0 12px 12px;
+  border-top: 1px solid var(--border);
+  background: var(--bg);
+}
+.chatInput {
+  flex: 1;
+  height: 44px;
+  padding: 0 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-2xl);
+  background: var(--input-bg);
+  font-size: 14px;
+  color: var(--text);
+  outline: none;
+  transition: border-color 0.2s ease;
+  min-width: 0;
+  resize: none; /* 텍스트 영역 크기 고정 */
+}
+.chatInput:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 14%, transparent);
+}
+.sendBtn {
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--primary);
+  color: #fff;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+.sendBtn:hover { filter: brightness(1.02); }
+.sendBtn:active { transform: scale(0.98); }
+
+/* 로딩/에러 */
+.loading { text-align: center; color: var(--muted); font-size: 12px; padding: 20px; }
+.error {
+  margin: 8px 0;
+  color: #b91c1c; 
+  font-size: 12px; 
+  padding: 8px;
+  background: #fef2f2;
+  border-radius: var(--radius-xl);
+  border-left: 3px solid #b91c1c;
+  text-align: center;
 }

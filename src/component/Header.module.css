@@ -1,0 +1,18 @@
+.header {
+    width: 100%;
+    margin: 10px;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logoLink {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem; /* 이미지와 텍스트 사이    간격 */
+    text-decoration: none;
+    color: white; /* 텍스트 색상을  1흰색으로 변경 */
+
+    /*dddd */
+}
