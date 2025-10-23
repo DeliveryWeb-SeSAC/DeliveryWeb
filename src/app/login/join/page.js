@@ -11,24 +11,68 @@ export default function Join() {
   });
   const router = useRouter();
 
+  const [isChecking, setIsChecking] = useState(false);
+  const [isEmailAvailable, setIsEmailAvailable] = useState(null);
+
   const onChange = e => setForm(v => ({ ...v, [e.target.name]: e.target.value }));
 
   const onSubmit = async (e) => {
     e.preventDefault();
+
+    // 중복 체크 안 한 경우
+    if (isEmailAvailable !== true) {
+      alert("이메일 중복 확인을 해주세요.");
+      return;
+    }
+
     const res = await fetch("/api/users", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(form)
     });
+
     if (!res.ok) {
       alert(`가입 실패: ${await res.text()}`);
       return;
     }
+
     const user = await res.json();
     alert("회원가입이 완료되었습니다!");
-    router.push(`/login/success?email=${encodeURIComponent(user.email)}`);
+    router.push(`/`);
   };
-  
+
+  const handleCheckDuplication = async () => {
+    if (!form.email.trim()) {
+      alert("이메일을 입력하세요.");
+      return;
+    }
+    setIsChecking(true);
+
+    try {
+      const res = await fetch("/api/users");
+      if (!res.ok) {
+        alert("사용자 목록을 불러올 수 없습니다.");
+        return;
+      }
+
+      const users = await res.json();
+      const duplicate = users.find(u => u.email === form.email.trim());
+
+      if (duplicate) {
+        alert("이미 가입된 이메일입니다.");
+        setIsEmailAvailable(false);
+      } else {
+        alert("사용 가능한 이메일입니다!");
+        setIsEmailAvailable(true);
+      }
+    } catch (err) {
+      console.error("중복 확인 오류:", err);
+      alert("서버 오류가 발생했습니다.");
+    } finally {
+      setIsChecking(false);
+    }
+  };
+
 
   return (
     <div className={style.page}>
@@ -41,7 +85,23 @@ export default function Join() {
             <input id="email" name="email" type="email"
               value={form.email} onChange={onChange}
               placeholder="email" required className={style.input} />
+            <button
+              type="button"
+              onClick={handleCheckDuplication}
+              disabled={isChecking}
+              style={{ flexShrink: 0, padding: "8px 10px", whiteSpace: "nowrap" }}
+            >
+              {isChecking ? "확인중..." : "중복확인"}
+            </button>
           </label>
+
+
+          {isEmailAvailable === true && (
+            <p style={{ color: "green", fontSize: "0.9rem" }}>사용 가능한 이메일입니다.</p>
+          )}
+          {isEmailAvailable === false && (
+            <p style={{ color: "red", fontSize: "0.9rem" }}>이미 가입된 이메일입니다.</p>
+          )}
 
           <label className={style.span2}>
             비밀번호
