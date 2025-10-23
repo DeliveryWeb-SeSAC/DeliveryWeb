@@ -1,11 +1,11 @@
 :root {
   --primary: #ee6a2c;
   /* 오렌지 주색 (로그인  버튼과 일치) */
-  --bg: #ffffff;
+  --bg: #dedede;
   --text: #0f172a;
   --muted: #6b7280;
   --border: #e5e7eb;
-  --input-bg: #f8fafc;
+  --input-bg: #ffffff;
   --radius-xl: 14px;
   --radius-2xl: 18px;
 }

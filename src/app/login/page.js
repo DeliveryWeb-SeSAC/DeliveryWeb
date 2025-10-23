@@ -140,7 +140,7 @@ export default function LoginPage() {
       setUser(null);
       setPassword("");
       setSelectedAddress("");
-      router.replace("");
+      router.replace("/");
     }
   };
 

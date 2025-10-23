@@ -11,7 +11,7 @@ export default function MyPage() {
   const [user, setUser] = useState(null);
   const [orders, setOrders] = useState([]);
   const [saving, setSaving] = useState(false);
-  
+
 
   // 초기 로드
   useEffect(() => {
@@ -22,7 +22,7 @@ export default function MyPage() {
       setUser(await resUser.json());
 
       try {
-        const allOrders = Array.isArray(orderHistory) ? orderHistory : [orderHistory];  
+        const allOrders = Array.isArray(orderHistory) ? orderHistory : [orderHistory];
         const myOrders = allOrders.filter(
           o => (o.userEmail && (o.userEmail === email)) || (o.email && (o.email === email))
         );
@@ -105,8 +105,8 @@ export default function MyPage() {
                 onChange={e => updateField("address3", e.target.value)} />
             </label>
 
-          
-          <div className={style.span2}><hr style={{color: "#6b7280"}}/></div>
+
+            <div className={style.span2}><hr style={{ color: "#6b7280" }} /></div>
 
             <p className={style.meta}><b>내 주문 이력</b></p>
             {orders.length === 0 ? (
@@ -115,7 +115,13 @@ export default function MyPage() {
               <ul className={style.orderList}>
                 {orders.map((order, i) => (
                   <li key={i} className={style.orderItem}>
-                    <p><b>주문일:</b> {order.paymentDate ? new Date(order.paymentDate).toLocaleString() : "날짜 없음"}</p>
+                    <p><b>✅ 주문일:</b> {order.paymentDate ? new Date(order.paymentDate).toLocaleString("ko-KR", {
+                      year: "numeric",
+                      month: "2-digit",
+                      day: "2-digit",
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    }) : "날짜 없음"}</p>
 
                     {Array.isArray(order.restaurants) && order.restaurants.length > 0 ? (
                       <div>
@@ -127,7 +133,7 @@ export default function MyPage() {
                                 <ul>
                                   {r.items.map((it, ii) => (
                                     <li key={ii}>
-                                      {it.foodName} x{it.quantity} — {typeof it.itemPaymentAmount === "number" ? it.itemPaymentAmount.toLocaleString() : it.itemPaymentAmount}원
+                                      🍴{it.foodName} x{it.quantity} — {typeof it.itemPaymentAmount === "number" ? it.itemPaymentAmount.toLocaleString() : it.itemPaymentAmount}원
                                     </li>
                                   ))}
                                 </ul>
