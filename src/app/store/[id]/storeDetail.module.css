@@ -15,10 +15,10 @@
 
 /* 1. 상단 헤더 (가게 이름) */
 .storeName {
-    font-size: 50px; /* h2와 비슷한 크기 */
+    font-size: 30px; /* h2와 비슷한 크기 */
     font-weight: bold;
     text-align: left; /* 가운데 정렬 */
-    margin-top: 16px; /* 이미지와의 간격 */
+    margin-top: 20px; /* 이미지와의 간격 */
     margin-bottom: 15px;
 }
 
@@ -31,32 +31,35 @@
     border: 1px solid white;
     padding: 0px;
     border-radius: 8px;
-    background-color: #fafafa;
+    background-color: white;
     gap: 0px; /* 내부 요소 간 간격 */
 }
 
 /* 2-1. 가게 로고 이미지 */
 .logo {
-    width: 1000px;  /* ⭐️ 이미지 크기 확대 */
-    height: 600px; /* ⭐️ 이미지 크기 확대 */
+    width: 700px;  /* ⭐️ 이미지 크기 확대 */
+    height: 400px; /* ⭐️ 이미지 크기 확대 */
     object-fit: cover;
     border-radius: 50px;
-    margin-bottom: 5px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.514);
 }
 
 /* 2-2. 가게 상세 정보 (주소, 평점, 배달시간) */
 .details {
     display: flex;
-    flex-direction: row; /* ⭐️ 가로 정렬로 변경 */
-    justify-content: center; /* 중앙 정렬 */
-    gap: 100px; /* 항목 간 간격을 넓힘 */
-    padding-left: 30px;
-    padding-right: 30px;;
-    font-size: 20px;
+    flex-direction:row; /* ⭐️ 가로 정렬로 변경 */
+    justify-content: left; /* 중앙 정렬 */
+    gap: 20px; /* 항목 간 간격을 넓힘 */
+    padding-inline: 20px;
+    font-size: 15px;
     font-weight: bold;
-    background-color: #F0804D;
-    border-radius: 50;
-    color: white;
+    background-color: white;
+    border-radius: 10px;
+    color: rgb(0, 0, 0);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.349);
+    margin-bottom: 20px;
+    border: rgb(255, 227, 227) solid 1px;
 }
 
 /* 3. 메뉴 섹션 */
