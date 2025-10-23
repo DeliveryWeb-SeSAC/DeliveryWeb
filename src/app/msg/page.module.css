@@ -1,3 +1,6 @@
+/* msg/page.module.css */
+
+/* Root variables for consistency with login styles */
 :root {
   --primary: #ee6a2c;        /* 오렌지 주색 (버튼/포인트) */
   --bg: #ffffff;
@@ -11,20 +14,23 @@
   --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
+/* Section header similar to title */
 .sectionHeader {
-  margin: 16px 0 8px 0;
-  font-weight: 700;
+  margin: 0 0 12px 0;
+  font-weight: 800;
+  letter-spacing: -0.2px;
   font-size: 16px;
-  line-height: 1.3;
+  line-height: 1.2;
   color: var(--text);
-  padding: 0 8px;
-  border-bottom: 1px solid var(--border);
   text-transform: uppercase;
   letter-spacing: 0.5px;
   font-size: 14px;
   color: var(--muted);
+  padding: 0 8px;
+  border-bottom: 1px solid var(--border);
 }
 
+/* Items container like form fields */
 .sectionItems {
   display: flex;
   flex-direction: column;
@@ -34,27 +40,35 @@
   padding: 0 4px; /* 약간의 내부 여백 */
 }
 
+/* Item styled like input/button hybrid: rounded card */
 .item {
   width: 100%; /* 자동 너비: 부모에 맞춤 */
   min-width: 0; /* 오버플로우 방지 */
-  padding: 12px;
+  padding: 12px 16px; /* input-like padding */
   border: 1px solid var(--border);
-  border-radius: var(--radius-xl);
-  background: var(--bg);
+  border-radius: var(--radius-2xl); /* login input/button radius */
+  background: var(--input-bg); /* subtle bg like input */
   cursor: pointer;
-  transition: all 0.3s ease; /* 부드러운 호버/클릭 */
+  transition: all 0.3s ease; /* 부드러운 호버/클릭, like button */
   box-sizing: border-box; /* 패딩 포함 너비 계산 */
   position: relative; /* statusIndicator 위치 기준 */
+  font-size: 14px;
+  color: var(--text);
+  outline: none;
 }
+
 .item:hover {
-  border-color: color-mix(in srgb, var(--primary) 65%, var(--border));
-  box-shadow: var(--shadow-md);
+  border-color: color-mix(in srgb, var(--primary) 65%, #ffffff); /* focus-like border */
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 14%, transparent), var(--shadow-md); /* focus shadow + lift */
   transform: translateY(-1px); /* 살짝 들림 효과 */
+  background: var(--bg); /* hover bg shift */
 }
+
 .item:active {
   transform: translateY(0);
 }
 
+/* Item info layout like field */
 .itemInfo {
   display: flex;
   justify-content: space-between;
@@ -84,35 +98,41 @@
   flex-shrink: 0; /* 압축 방지 */
 }
 
-/* 서브 멤버 목록 (그룹 펼침) */
+/* Sub members like nested fields */
 .membersSub {
   max-height: 0; /* 기본 숨김 */
   overflow: hidden;
   transition: max-height 0.3s ease, opacity 0.3s ease; /* 부드러운 애니메이션 */
   opacity: 0;
 }
+
 .item.open .membersSub { /* 부모 .item에 open 클래스 추가 필요 (JS에서 동적) */
   max-height: 200px; /* 충분한 높이로 펼침 */
   opacity: 1;
   margin-top: 8px;
   padding-top: 8px;
   border-top: 1px dashed var(--border);
+  background: var(--input-bg); /* subtle bg */
+  border-radius: 0 0 var(--radius-xl) var(--radius-xl); /* bottom rounded if needed */
 }
 
 .memberItem {
-  padding: 4px 0;
+  padding: 4px 8px; /* slight padding like label */
   font-size: 12px;
   color: var(--muted);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   transition: color 0.2s ease;
-}
-.memberItem:hover {
-  color: var(--primary);
+  border-radius: var(--radius-xl); /* subtle rounding */
 }
 
-/* 상태 인디케이터 (온라인/오프라인 원) */
+.memberItem:hover {
+  color: var(--primary);
+  background: color-mix(in srgb, var(--primary) 10%, transparent); /* light hover bg */
+}
+
+/* Status indicator like a small button accent */
 .statusIndicator {
   width: 12px;
   height: 12px;
@@ -123,36 +143,46 @@
   right: 12px;
   top: 50%;
   transform: translateY(-50%);
-  transition: background 0.2s ease;
+  transition: background 0.2s ease, box-shadow 0.2s ease; /* smooth like focus */
+  box-shadow: var(--shadow-sm); /* subtle shadow */
 }
 
 .online {
   background: #10b981; /* 그린 온라인 */
-  box-shadow: 0 0 0 2px var(--bg); /* 테두리 강조 */
+  box-shadow: 0 0 0 2px var(--input-bg); /* 테두리 강조 */
 }
 
 .offline {
   background: #ef4444; /* 레드 오프라인 */
 }
 
-/* 모바일/좁은 화면 조정 (미디어 쿼리) */
+/* Mobile adjustments like login responsive */
 @media (max-width: 767px) {
   .sectionHeader {
     font-size: 16px;
     padding: 0 12px;
   }
+  
   .item {
-    padding: 10px;
+    padding: 10px 12px; /* smaller padding */
+    border-radius: var(--radius-xl); /* slightly smaller radius */
   }
+  
   .itemName,
   .itemStatus {
     font-size: 14px;
   }
+  
   .membersSub {
     max-height: 150px; /* 모바일에서 높이 줄임 */
   }
+  
   .statusIndicator {
     width: 10px;
     height: 10px;
+  }
+  
+  .memberItem {
+    padding: 4px 6px;
   }
 }
