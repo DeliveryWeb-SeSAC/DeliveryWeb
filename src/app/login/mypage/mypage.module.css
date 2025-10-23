@@ -63,6 +63,7 @@
 
 /* 인풋 공통 */
 .input {
+  box-sizing: border-box;
   width: 100%;
   height: 48px;
   padding: 0 14px;
@@ -120,6 +121,116 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 /* 보조 텍스트(에러/알림 등 필요 시) */
 .helper { font-size: 12px; color: var(--muted); }
+
+/* ===== 주문 이력 리스트 전체 ===== */
+.orderList {
+  list-style: none;
+  margin: 12px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* ===== 개별 주문 카드(타임라인 포인트 포함) ===== */
+.orderItem {
+  position: relative;
+  padding: 16px 16px 16px 28px;   /* 타임라인 점 여백 */
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow);
+}
+
+/* 타임라인 점 */
+.orderItem::before {
+  content: "";
+  position: absolute;
+  left: 12px;
+  top: 22px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--primary);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 18%, transparent);
+}
+
+/* 텍스트 기본 */
+.orderItem p {
+  margin: 6px 0;
+  color: var(--text);
+}
+
+/* 주문일(맨 첫 줄) 강조 */
+.orderItem > p:first-of-type {
+  font-weight: 800;
+  letter-spacing: -0.2px;
+}
+
+/* "가게 목록:" 영역 간격 */
+.orderItem > div {
+  margin-top: 6px;
+}
+
+/* 중첩 리스트 기본 리셋 */
+.orderItem ul {
+  list-style: none;
+  margin: 6px 0 0;
+  padding: 0;
+}
+
+/* 1단계: 가게 카드 */
+.orderItem ul > li {
+  background: var(--input-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px;
+  margin-top: 8px;
+}
+
+/* 가게명 */
+.orderItem ul > li > p {
+  margin: 0 0 6px 0;
+  font-weight: 800;
+}
+
+/* 2단계: 아이템 리스트 (작은 점 리스트처럼) */
+.orderItem ul > li > ul {
+  margin-top: 4px;
+  padding-left: 14px;
+}
+
+.orderItem ul > li > ul li {
+  position: relative;
+  padding: 3px 0 3px 0;
+  font-size: 13px;
+  color: var(--text);
+}
+
+/* 총결제금액 강조 + 분리선 */
+.orderItem > p:last-of-type {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--border);
+  font-weight: 900;
+  text-align: right;
+}
+
+/* 살짝 더 컴팩트하게 보이도록 */
+@media (max-width: 767px) {
+  .orderItem {
+    padding: 14px 14px 14px 26px;
+  }
+  .orderItem::before {
+    left: 10px;
+  }
+  .orderItem ul > li {
+    padding: 10px;
+  }
+  .orderItem ul > li > ul li {
+    font-size: 12px;
+  }
+}
 
 /* 큰 화면에서 2열 배치(주소 파트가 길면 유용) */
 @media (min-width: 720px) {
