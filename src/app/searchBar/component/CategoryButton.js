@@ -3,7 +3,7 @@ import categoryButtonStyle from '@/app/searchBar/searchBar.module.css'; //  CSS 
 
 export default function CategoryButton({ onSelectCategory }) {
     
-    const categories = ['all', '치킨', '피자', '한식','카페/디저트'];
+    const categories = ['all', '치킨', '피자', '버거','양식', '중식', '한식','일식','카페/디저트'];
     // 🌟 'all'을 기본 선택 값으로 설정
     const [selectedCategory, setSelectedCategory] = useState('all'); 
     
