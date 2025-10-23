@@ -1,11 +1,13 @@
 "use client";
 import { useState, useEffect } from "react";
 import styles from './login.module.css';
-import successStyles from './success/success.module.css';
-import { useSearchParams } from "next/navigation";
+import successStyles from './success.module.css';
+import { useSearchParams, useRouter } from "next/navigation";
 
 export default function LoginPage() {
   const sp = useSearchParams();
+  const router = useRouter();
+
   const emailFromUrl = sp.get("email");
 
   const [email, setEmail] = useState(emailFromUrl || "");
@@ -14,6 +16,7 @@ export default function LoginPage() {
   const [isSuccess, setIsSuccess] = useState(false);
   const [user, setUser] = useState(null);
   const [selectedAddress, setSelectedAddress] = useState("");
+  const [autoLoginTried, setAutoLoginTried] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -54,34 +57,47 @@ export default function LoginPage() {
   };
 
   useEffect(() => {
-    if (emailFromUrl && !isSuccess && !user) {
-      (async () => {
-        try {
-          const res = await fetch(`/api/users/${encodeURIComponent(emailFromUrl)}`);
-          if (res.ok) {
-            const userData = await res.json();
-            setUser(userData);
+    if (!emailFromUrl || isSuccess || user || autoLoginTried) return;
 
-            // --- [추가된 코드] 자동 로그인 성공 시 로컬스토리지 저장 및 이벤트 발생 ---
-            localStorage.setItem('userEmail', userData.email);
-            window.dispatchEvent(new Event('storage-update'));
-            // --- [추가된 코드 끝] ---
-
-            setSelectedAddress(userData.address1 || "");
-            setIsSuccess(true);
-          } else {
-            setError("사용자 정보를 불러올 수 없습니다.");
-          }
-        } catch (err) {
-          console.error("URL init error:", err);
-          setError("로딩 중 오류가 발생했습니다.");
+    (async () => {
+      try {
+        const res = await fetch(`/api/users/${encodeURIComponent(emailFromUrl)}`);
+        if (res.ok) {
+          const userData = await res.json();
+          setUser(userData);
+          localStorage.setItem('userEmail', userData.email);
+          window.dispatchEvent(new Event('storage-update'));
+          setSelectedAddress(userData.address1 || "");
+          setIsSuccess(true);
+        } else {
+          setError("사용자 정보를 불러올 수 없습니다.");
         }
-      })();
-    }
-  }, [emailFromUrl, isSuccess]);
+      } catch (err) {
+        console.error("URL init error:", err);
+        setError("로딩 중 오류가 발생했습니다.");
+      } finally {
+        setAutoLoginTried(true);
+      }
+    })();
+  }, [emailFromUrl, isSuccess, user, autoLoginTried]);
 
   const onClickHandlerToJoin = () => {
     window.open("/login/join", "_blank");
+  };
+
+  // 변경: 라우팅으로 다른 페이지로 가는 대신 상태 리셋 + 쿼리 제거
+  const handleLogout = () => {
+    try {
+      localStorage.removeItem("userEmail");
+      window.dispatchEvent(new Event("storage-update"));
+      alert("로그아웃 하시겠어요?");
+    } finally {
+      setIsSuccess(false);
+      setUser(null);
+      setPassword("");
+      setSelectedAddress("");
+      router.replace("");
+    }
   };
 
   if (!isSuccess) {
@@ -172,6 +188,9 @@ export default function LoginPage() {
       >
         마이페이지
       </button>
+      <button onClick={handleLogout} className={styles.button}>
+        로그아웃
+      </button>
     </div>
-  ); 
+  );
 }

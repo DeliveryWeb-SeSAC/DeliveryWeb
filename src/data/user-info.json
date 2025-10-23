@@ -95,8 +95,8 @@
     "name": "이소이",
     "birth": "2025-10-14",
     "phone": "010-3157-4456",
-    "address1": "서울시 강서구 마곡대로",
-    "address2": "서울시 강남구 명동",
+    "address1": "서울시 강서구 마곡대로 35",
+    "address2": "서울시 강남구 명동 55",
     "address3": "서울시 종로구"
   },
   {
@@ -124,5 +124,13 @@
     "address1": "서울 서초구",
     "address2": "서울 강남구",
     "address3": "서울 동대구"
+  },
+  {
+    "email": "horoyoii@daum.net555",
+    "password": "asdfadsf",
+    "name": "dddd",
+    "birth": "2025-10-15",
+    "phone": "010-3157-4456",
+    "address1": "서울시 강남구"
   }
 ]
