@@ -57,7 +57,7 @@ export default function MyPage() {
     const updated = await res.json();
     setUser(updated);
     alert("저장되었습니다.");
-    router.push(`/login/success?email=${encodeURIComponent(user.email)}`);
+    router.push(`/`);
   };
 
   return (
