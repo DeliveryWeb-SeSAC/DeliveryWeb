@@ -2,6 +2,7 @@
 import {useEffect, useState, Suspense} from 'react';
 import {useSearchParams} from 'next/navigation';
 import Link from 'next/link';
+import styles from "@/app/cart/cart.module.css";
 
 function PaymentContent() {
     const searchParams = useSearchParams();
@@ -139,9 +140,9 @@ function PaymentContent() {
 
     if (isPaid) {
         return (
-            <div>
+            <div className={styles.restaurantContainer}>
                 <h2 style={{color: 'green'}}>"설정된 카드로 주문 결제가 완료 되었습니다."</h2>
-                <div style={{border: '2px solid #333', padding: '20px', margin: '20px 0', backgroundColor: '#f9f9f9'}}>
+                <div style={{border: '1px solid #333', padding: '20px', margin: '20px 0', backgroundColor: '#f9f9f9', borderRadius: '18px'}}>
                     <h3 style={{textAlign: 'center', marginBottom: '20px'}}>영수증</h3>
                     <p><strong>결제 시간:</strong> {paymentDate.toLocaleString('ko-KR')}</p>
                     <p><strong>주문자:</strong> {user.name}</p>
@@ -168,8 +169,8 @@ function PaymentContent() {
                         <span>{totalPrice.toLocaleString()}원</span>
                     </div>
                 </div>
-                <Link href="/">
-                    <button>새 주문 시작하기</button>
+                <Link href="/" style={{ display: 'block', textAlign: 'right' }}>
+                    <button className={styles.checkoutBtn}>새 주문 시작하기</button>
                 </Link>
             </div>
         );
@@ -187,11 +188,12 @@ function PaymentContent() {
 
     return (
         <div>
-            <h1>{user.name}님의 결제</h1>
-            <h2>주문 요약</h2>
+            <h1 style={{margin: '10px'}}>{user.name}님의 결제</h1>
+            <h2 style={{margin: '30px', marginLeft: '80px'}}>주문 요약</h2>
             {cart.map((restaurant) => (
-                <div key={restaurant.restaurantName}
-                     style={{marginTop: '20px', border: '1px solid #ccc', padding: '10px'}}>
+                // <div key={restaurant.restaurantName}
+                //      style={{marginTop: '20px', border: '1px solid #ccc', padding: '10px'}}>
+                <div key={restaurant.restaurantName} className={styles.restaurantContainer}>
                     <h3>{restaurant.restaurantName}</h3>
                     <ul>
                         {restaurant.items.map((item) => (
@@ -202,8 +204,15 @@ function PaymentContent() {
                     </ul>
                 </div>
             ))}
-            <h2 style={{marginTop: '20px'}}>총 주문 금액: {totalPrice.toLocaleString()}원</h2>
-            <button onClick={handleConfirmPayment}>결제 확인</button>
+            <h2 style={{marginTop: '20px', textAlign:'end', marginRight: '60px'}}>총 주문 금액: {totalPrice.toLocaleString()}원</h2>
+            {/*<button className={styles.checkoutBtn} onClick={handleConfirmPayment}>결제 확인</button>*/}
+            <div style={{textAlign: 'right'}}>
+                <button className={styles.checkoutBtn}
+                    onClick={handleConfirmPayment}
+                    style={{marginRight: '50px'}}>
+                    결제 확인
+                </button>
+            </div>
         </div>
     );
 }
