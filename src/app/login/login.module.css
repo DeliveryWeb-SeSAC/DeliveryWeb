@@ -1,16 +1,31 @@
 :root {
   --primary: #ee6a2c;        /* 로그인 버튼 주색(오렌지) */
-  --bg: #ffffff;
+  --bg: #dedede;
   --text: #0f172a;
   --muted: #6b7280;
   --border: #e5e7eb;
-  --input-bg: #f8fafc;
+  --input-bg: #ffffff;
   --radius-xl: 14px;
   --radius-2xl: 18px;
 }
 
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 12px;
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  box-sizing: border-box;
+  border: 1px solid var(--border);
+  background: var(--input-bg);
+  border-radius: var(--radius-xl);
+}
+
 .title {
-    margin: 0 0 12px 0;
+    margin: 0 0 -8px;
     font-weight: 800;
     letter-spacing: -0.2px;
     font-size: 22px;    

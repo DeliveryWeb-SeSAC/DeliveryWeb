@@ -122,37 +122,32 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 /* 보조 텍스트(에러/알림 등 필요 시) */
 .helper { font-size: 12px; color: var(--muted); }
 
-/* ===== 주문 이력 리스트 전체 ===== */
+/* ===== 주문 이력: 2-컬럼 그리드 ===== */
 .orderList {
   list-style: none;
   margin: 12px 0 0;
   padding: 0;
-  display: flex;
-  flex-direction: column;
+
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr)); /* 두 칼럼 */
   gap: 14px;
 }
 
-/* ===== 개별 주문 카드(타임라인 포인트 포함) ===== */
+/* 모바일(또는 좁은 폭)에서는 한 칼럼 */
+@media (max-width: 1024px) {
+  .orderList {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ===== 개별 주문 카드 ===== */
 .orderItem {
   position: relative;
-  padding: 16px 16px 16px 28px;   /* 타임라인 점 여백 */
+  padding: 16px 16px 20px 16px;
   background: #fff;
   border: 1px solid var(--border);
   border-radius: var(--radius-xl);
   box-shadow: var(--shadow);
-}
-
-/* 타임라인 점 */
-.orderItem::before {
-  content: "";
-  position: absolute;
-  left: 12px;
-  top: 22px;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--primary);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 18%, transparent);
 }
 
 /* 텍스트 기본 */
@@ -160,6 +155,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   margin: 6px 0;
   color: var(--text);
 }
+
+
 
 /* 주문일(맨 첫 줄) 강조 */
 .orderItem > p:first-of-type {
@@ -182,7 +179,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 /* 1단계: 가게 카드 */
 .orderItem ul > li {
   background: var(--input-bg);
-  border: 1px solid var(--border);
+  /* border: 1px solid var(--border); */
   border-radius: 12px;
   padding: 12px;
   margin-top: 8px;
@@ -194,15 +191,15 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   font-weight: 800;
 }
 
-/* 2단계: 아이템 리스트 (작은 점 리스트처럼) */
+/* 2단계: 아이템 리스트 */
 .orderItem ul > li > ul {
   margin-top: 4px;
-  padding-left: 14px;
+  padding-left: 8px;
 }
 
 .orderItem ul > li > ul li {
   position: relative;
-  padding: 3px 0 3px 0;
+  padding: 3px 0;
   font-size: 13px;
   color: var(--text);
 }
@@ -216,13 +213,10 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   text-align: right;
 }
 
-/* 살짝 더 컴팩트하게 보이도록 */
+/* 모바일에서 카드 내부만 살짝 컴팩트 */
 @media (max-width: 767px) {
   .orderItem {
-    padding: 14px 14px 14px 26px;
-  }
-  .orderItem::before {
-    left: 10px;
+    padding: 14px;
   }
   .orderItem ul > li {
     padding: 10px;
@@ -230,21 +224,4 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   .orderItem ul > li > ul li {
     font-size: 12px;
   }
-}
-
-/* 큰 화면에서 2열 배치(주소 파트가 길면 유용) */
-@media (min-width: 720px) {
-  .form {
-    grid-template-columns: 1fr 1fr;
-  }
-  /* 라벨 블록을 2열에서도 자연스럽게 보이게 */
-  .form label {
-    /* 그대로 1칸 차지 */
-  }
-  /* 긴 필드는 2칸 확장하고 싶을 때 이 클래스를 추가해서 사용 */
-  .span2 {
-    grid-column: 1 / -1;
-  }
-  .actions { grid-column: 1 / -1; }
-  .title { font-size: 24px; }
 }
