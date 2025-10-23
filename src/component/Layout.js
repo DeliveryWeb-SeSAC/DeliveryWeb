@@ -11,7 +11,7 @@ export default function Layout({ children }) {
       <Header />
       <div className={styles.container}>
         <div className={styles.leftSidebar}>
-          <div className={styles.sidebarChild}>  {/* 오버플로우 자동 조정 + sticky 상속 */}
+          <div className={styles.sidebarChild} style={{ flex: '0.5' }}>  {/* 오버플로우 자동 조정 + sticky 상속 */}
             <LoginPage />  {/* 내부 CSS 클래스 자동 적용 (로그인 성공 시 success UI 표시) */}
           </div>
           <div className={styles.sidebarChild}>
@@ -22,7 +22,7 @@ export default function Layout({ children }) {
           {children}  {/* 중앙 콘텐츠: 로그인 성공 후에도 유지 (e.g., 대시보드) */}
         </div>
         <div className={styles.rightSidebar}>
-          <div className={styles.sidebarChild}>
+          <div className={styles.sidebarChild} style={{ flex: '0.5' }}>
             <ChatPage />
           </div>
           <div className={styles.sidebarChild}>

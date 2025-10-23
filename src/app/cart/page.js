@@ -180,8 +180,8 @@ function CartContent() {
         return (
             <div>
                 <h1>장바구니</h1>
-                <p>사용자 정보가 올바르지 않습니다. 홈에서 사용자를 다시 선택해주세요.</p>
-                <Link href="/">홈으로 돌아가기</Link>
+                <p>로그인 후 이용해주세요.</p>
+                {/*<Link href="/">홈으로 돌아가기</Link>*/}
             </div>
         );
     }
@@ -195,23 +195,24 @@ function CartContent() {
                 cart.map((restaurant) => (
                     <div key={restaurant.restaurantName}
                          className={styles.cartList}
-                         style={{marginTop: '20px', border: '1px solid #ccc', padding: '10px'}}>
+                         style={{marginTop: '10px', border: '1px solid #ccc', padding: '10px'}}>
                         <h3>{restaurant.restaurantName}</h3>
-                        <ul>
+                        <ul style={{border: '0px solid #ccc', padding: '5px'}}>
                             {restaurant.items.map((item) => (
-                                <li key={item.foodId}  className={styles.cartItem} style={{marginBottom: '10px'}}>
-                                    {item.foodName} -
-                                    <input
-                                        ref={el => inputRefs.current[item.foodId] = el}
-                                        type="number" inputMode="numeric" pattern="[0-9]*"
-                                        value={item.quantity}
-                                        onChange={(e) => handleQuantityChange(restaurant.restaurantName, item.foodId, e.target.value)}
-                                        // style={{width: '50px', margin: '0 10px'}}
-                                        className={styles.quantityInput}
-                                    />
-                                    <span className={styles.cartItemPrice}>x {item.price.toLocaleString()}원</span>
-                                    <button className={styles.cartBtn} onClick={() => handleRemoveItem(restaurant.restaurantName, item.foodId)}
-                                            style={{marginLeft: '10px'}}>x</button>
+                                <li key={item.foodId}  className={styles.cartItem} style={{marginBottom: '5px'}}>
+                                    <span className={styles.foodNameText}>{item.foodName}</span>
+
+                                    <div className={styles.controlsRow}>
+                                        <input
+                                            ref={el => inputRefs.current[item.foodId] = el}
+                                            type="number" inputMode="numeric" pattern="[0-9]*"
+                                            value={item.quantity}
+                                            onChange={(e) => handleQuantityChange(restaurant.restaurantName, item.foodId, e.target.value)}
+                                            className={styles.quantityInput}
+                                        />
+                                        <span className={styles.cartItemPrice}>x {item.price.toLocaleString()}원</span>
+                                        <button className={styles.cartBtn} onClick={() => handleRemoveItem(restaurant.restaurantName, item.foodId)}>x</button>
+                                    </div>
                                 </li>
                             ))}
                         </ul>

@@ -2,7 +2,7 @@
 "use client";
 
 import styles from './page.module.css';
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 
 export default function ChatPage() {
   const [messages, setMessages] = useState([
@@ -10,6 +10,7 @@ export default function ChatPage() {
   ]);
   const [input, setInput] = useState("");
 
+  const chatWindowRef = useRef(null);
   const responses = {
     주문: "주문 내역을 확인하려면 '주문 내역' 메뉴를 클릭하세요. 추가 도움이 필요하세요?",
     배달: "배달 시간은 보통 30-45분 정도 소요됩니다. 현재 위치를 확인해주세요.",
@@ -45,10 +46,16 @@ export default function ChatPage() {
     if (e.key === "Enter") handleSend();
   };
 
+  useEffect(() => {
+    if (chatWindowRef.current) {
+      chatWindowRef.current.scrollTop = chatWindowRef.current.scrollHeight;
+    }
+  }, [messages]);
+
   return (
     <div className={styles.chatSection}>
       <h3>고객 상담</h3>
-      <div className={styles.chatWindow}>
+      <div className={styles.chatWindow} ref={chatWindowRef}>
         {messages.map((msg, index) => (
           <p
             key={index}
@@ -61,14 +68,16 @@ export default function ChatPage() {
         ))}
       </div>
 
-      <input
-        type="text"
-        placeholder="메시지 입력..."
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-        onKeyPress={handleKeyPress}
-      />
-      <button onClick={handleSend}>보내기</button>
+      <div className={styles.inputArea}>
+        <input
+          type="text"
+          placeholder="메시지 입력..."
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          onKeyPress={handleKeyPress}
+        />
+        <button onClick={handleSend}>보내기</button>
+      </div>
     </div>
   );
 }

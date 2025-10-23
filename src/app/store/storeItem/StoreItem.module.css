@@ -107,3 +107,60 @@
 .emptyStar {
     color: #ccc;
 }
+
+/* ////////////////////////////////////////////////////////////////////////// */
+
+
+
+.header {
+  text-align: center;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 2rem;
+  color: #333333;
+}
+
+.storeContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.storeLogo {
+  max-width: 200px;
+  height: auto;
+  border-radius: 8px;
+}
+
+.storeInfo {
+  text-align: center;
+  font-size: 1.1rem;
+  color: #555555;
+}
+
+.storeInfo p {
+  margin: 8px 0;
+}
+
+.menuSection {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.menuSection h2 {
+  font-size: 1.5rem;
+  color: #333333;
+  text-align: center;
+  margin-bottom: 16px;
+}

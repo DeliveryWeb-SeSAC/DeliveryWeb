@@ -3,6 +3,7 @@ import { getStoreById } from "@/app/api/storeAPI/route"
 import Menu from "@/app/menu/page"
 import { useParams } from "next/navigation"
 import { useEffect, useState } from "react"
+import styles from '@/app/store/storeItem/StoreItem.module.css'
 
 export default function StoreDetail(){
 
@@ -17,13 +18,18 @@ export default function StoreDetail(){
     return(
         store && 
         <>
-            <img src={store.logo} style={{maxWidth: 500}}/>
-            <div>{store.name}</div>
-            <div>{store.address}</div>
-            <div>{store.star}</div>
-            <div>{store.delivery}</div>
-            <hr/>
-            <Menu id={store.id} getMenu={store.foods}/>
-        </>  
+            <header>{store.name}</header>    
+            <div className={styles.storeContainer}>                
+                <img src={store.logo} alt={`${store.name} 로고`}/>               
+                <div className={styles.storeInfo}>
+                    {store.address}
+                    {store.star}
+                    {store.delivery}
+                </div>
+                <div>
+                    <Menu id={store.id} getMenu={store.foods}/>
+                </div>
+            </div>
+        </> 
     )
 }
