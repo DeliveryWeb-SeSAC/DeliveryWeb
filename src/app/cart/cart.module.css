@@ -35,18 +35,20 @@
 }
 
 /* Cart item like a rounded card/field */
+/* cart/cart.module.css */
+
 .cartItem {
     width: 100%;
     min-width: 0;
     padding: 16px;
     border: 1px solid var(--border);
-    border-radius: var(--radius-2xl); /* login input/button radius */
-    background: var(--input-bg); /* subtle bg like input */
+    border-radius: var(--radius-2xl);
+    background: var(--input-bg);
     display: grid;
-    grid-template-columns: 60px 1fr auto; /* 이미지 | 세부 | 가격/버튼 */
+    grid-template-columns: 1fr auto auto auto;
     gap: 12px;
     align-items: center;
-    transition: all 0.3s ease; /* smooth like button */
+    transition: all 0.3s ease;
     box-sizing: border-box;
     outline: none;
     font-size: 14px;
