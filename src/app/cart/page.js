@@ -2,6 +2,7 @@
 import {useState, useEffect, useRef, Suspense, useCallback} from 'react';
 import {useRouter, useSearchParams} from 'next/navigation';
 import Link from 'next/link';
+import styles from './cart.module.css';
 
 function CartContent() {
     const router = useRouter();
@@ -187,27 +188,29 @@ function CartContent() {
 
     return (
         <div>
-            <h1>{user.name}님의 장바구니</h1>
+            <h1 className={styles.title}>{user.name}님의 장바구니</h1>
             {cart.length === 0 ? (
                 <p>장바구니가 비어있습니다.</p>
             ) : (
                 cart.map((restaurant) => (
                     <div key={restaurant.restaurantName}
+                         className={styles.cartList}
                          style={{marginTop: '20px', border: '1px solid #ccc', padding: '10px'}}>
                         <h3>{restaurant.restaurantName}</h3>
                         <ul>
                             {restaurant.items.map((item) => (
-                                <li key={item.foodId} style={{marginBottom: '10px'}}>
+                                <li key={item.foodId}  className={styles.cartItem} style={{marginBottom: '10px'}}>
                                     {item.foodName} -
                                     <input
                                         ref={el => inputRefs.current[item.foodId] = el}
                                         type="number" inputMode="numeric" pattern="[0-9]*"
                                         value={item.quantity}
                                         onChange={(e) => handleQuantityChange(restaurant.restaurantName, item.foodId, e.target.value)}
-                                        style={{width: '50px', margin: '0 10px'}}
+                                        // style={{width: '50px', margin: '0 10px'}}
+                                        className={styles.quantityInput}
                                     />
-                                    x {item.price.toLocaleString()}원
-                                    <button onClick={() => handleRemoveItem(restaurant.restaurantName, item.foodId)}
+                                    <span className={styles.cartItemPrice}>x {item.price.toLocaleString()}원</span>
+                                    <button className={styles.cartBtn} onClick={() => handleRemoveItem(restaurant.restaurantName, item.foodId)}
                                             style={{marginLeft: '10px'}}>x</button>
                                 </li>
                             ))}
@@ -215,8 +218,11 @@ function CartContent() {
                     </div>
                 ))
             )}
-            <h2 style={{marginTop: '20px'}}>총 주문 금액: {totalPrice.toLocaleString()}원</h2>
-            <button onClick={handleGoToPayment} disabled={cart.length === 0}>결제하기</button>
+            <div className={styles.totalSection}>
+                {/*<h2 style={{marginTop: '20px'}}>총 주문 금액: {totalPrice.toLocaleString()}원</h2>*/}
+                <span className={styles.totalPrice}>총 주문 금액: {totalPrice.toLocaleString()}원</span>
+                <button className={styles.checkoutBtn} onClick={handleGoToPayment} disabled={cart.length === 0}>결제하기</button>
+            </div>
         </div>
     );
 }
