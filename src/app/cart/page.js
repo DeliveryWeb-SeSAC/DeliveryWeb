@@ -1,8 +1,7 @@
 'use client';
-import {useState, useEffect, useRef, Suspense} from 'react';
+import {useState, useEffect, useRef, Suspense, useCallback} from 'react';
 import {useRouter, useSearchParams} from 'next/navigation';
 import Link from 'next/link';
-import users from '@/data/users.json';
 
 function CartContent() {
     const router = useRouter();
@@ -12,26 +11,75 @@ function CartContent() {
     const [totalPrice, setTotalPrice] = useState(0);
     const inputRefs = useRef({});
 
-    useEffect(() => {
-        let userEmail = searchParams.get('userEmail');
+    // localStorage 변경 이벤트를 감지하고 리렌더링을 트리거하기 위한 상태
+    const [localStorageUpdated, setLocalStorageUpdated] = useState(0);
 
-        // Default user for testing
-        if (userEmail === null || userEmail.trim() === ''){
-            userEmail = users[0].email;
-        }
+    // 사용자 및 장바구니 데이터를 가져오는 함수를 useCallback으로 래핑
+    const fetchUsersAndSetCart = useCallback(async () => {
+        try {
+            const response = await fetch('/api/cartAPI'); // 경로 수정
+            if (!response.ok) {
+                throw new Error('Failed to fetch users');
+            }
+            const users = await response.json();
 
-        if (userEmail) {
-            const foundUser = users.find(u => u.email === userEmail);
-            if (foundUser) {
-                setUser(foundUser);
-                setCart(foundUser.cart || []);
+            let userEmail = searchParams.get('userEmail');
+
+            // searchParams에 userEmail이 없으면 localStorage에서 시도
+            if (!userEmail || userEmail.trim() === '') {
+                userEmail = localStorage.getItem('userEmail');
+            }
+
+            // 테스트를 위한 기본 사용자 (여전히 userEmail이 없는 경우)
+            // if (!userEmail || userEmail.trim() === '') {
+            //     userEmail = users[0]?.email; // 첫 번째 사용자를 기본값으로 사용
+            // }
+
+            if (userEmail) {
+                const foundUser = users.find(u => u.email === userEmail);
+                if (foundUser) {
+                    setUser(foundUser);
+                    setCart(foundUser.cart || []);
+                } else {
+                    // localStorage나 searchParams의 userEmail이 유효하지 않은 경우
+                    console.warn(`User with email ${userEmail} not found. Clearing cart.`);
+                    setUser(null);
+                    setCart([]);
+                    localStorage.removeItem('userEmail'); // 유효하지 않은 이메일 제거
+                }
             } else {
+                // userEmail을 어디에서도 찾을 수 없는 경우
                 setUser(null);
                 setCart([]);
             }
+        } catch (error) {
+            console.error("Error fetching user data:", error);
+            setUser(null);
+            setCart([]);
         }
-    }, [searchParams]);
+    }, [searchParams, localStorageUpdated]); // searchParams 또는 localStorageUpdated가 변경될 때 함수 재생성
 
+    // 초기 로드 및 searchParams 또는 localStorageUpdated 변경 시 데이터 가져오기
+    useEffect(() => {
+        fetchUsersAndSetCart();
+    }, [fetchUsersAndSetCart]); // memoized된 fetchUsersAndSetCart 함수에 의존
+
+    // 'storage-update' 이벤트를 수신하는 useEffect
+    useEffect(() => {
+        const handleStorageUpdate = () => {
+            console.log('storage-update event received in CartContent');
+            // 상태를 업데이트하여 fetchUsersAndSetCart를 다시 실행하도록 트리거
+            setLocalStorageUpdated(prev => prev + 1);
+        };
+
+        window.addEventListener('storage-update', handleStorageUpdate);
+
+        return () => {
+            window.removeEventListener('storage-update', handleStorageUpdate);
+        };
+    }, []); // 컴포넌트 마운트 시 한 번만 실행하여 이벤트 리스너 설정
+
+    // 장바구니 내용 변경 시 총 가격 업데이트
     useEffect(() => {
         const newTotalPrice = cart.reduce((total, restaurant) => {
             const restaurantTotal = restaurant.items.reduce((subTotal, item) => {
@@ -42,6 +90,29 @@ function CartContent() {
         }, 0);
         setTotalPrice(newTotalPrice);
     }, [cart]);
+
+    const updateUserCart = async (cartToUpdate) => {
+        if (!user) return false;
+        try {
+            const response = await fetch('/api/cartAPI', { // 경로 수정
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({userEmail: user.email, cart: cartToUpdate}),
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json().catch(() => ({message: 'Failed to update cart.'}));
+                throw new Error(errorData.message);
+            }
+            return true;
+        } catch (error) {
+            console.error('Error updating cart:', error);
+            alert(`장바구니 업데이트 중 오류가 발생했습니다: ${error.message}`);
+            return false;
+        }
+    };
 
     const handleQuantityChange = (restaurantName, foodId, value) => {
         if (value !== '' && !/^\d+$/.test(value)) {
@@ -57,7 +128,7 @@ function CartContent() {
         setCart(updatedCart);
     };
 
-    const handleRemoveItem = (restaurantName, foodId) => {
+    const handleRemoveItem = async (restaurantName, foodId) => {
         const updatedCart = cart.map(r => {
             if (r.restaurantName === restaurantName) {
                 const updatedItems = r.items.filter(item => item.foodId !== foodId);
@@ -66,14 +137,26 @@ function CartContent() {
             return r;
         }).filter(Boolean);
         setCart(updatedCart);
+
+        if (updatedCart.length === 0) {
+            await updateUserCart(updatedCart);
+        }
     };
 
-    const handleGoToPayment = () => {
+    const handleGoToPayment = async () => {
         let itemWithNoQuantity = null;
         for (const r of cart) {
             itemWithNoQuantity = r.items.find(item => item.quantity === '' || item.quantity === 0);
             if (itemWithNoQuantity) break;
         }
+
+        const proceedToPayment = async (currentCart) => {
+            const success = await updateUserCart(currentCart);
+            if (success) {
+                const cartQuery = encodeURIComponent(JSON.stringify(currentCart));
+                router.push(`/payment?userEmail=${user.email}&cart=${cartQuery}`);
+            }
+        };
 
         if (itemWithNoQuantity) {
             const confirmation = window.confirm(`'${itemWithNoQuantity.foodName}' 상품의 수량이 없습니다. 수량을 수정하시겠습니까?`);
@@ -83,14 +166,12 @@ function CartContent() {
                     items: r.items.filter(i => i.foodId !== itemWithNoQuantity.foodId)
                 })).filter(r => r.items.length > 0);
                 setCart(cartAfterItemRemoval);
-                const cartQuery = encodeURIComponent(JSON.stringify(cartAfterItemRemoval));
-                router.push(`/payment?userEmail=${user.email}&cart=${cartQuery}`);
+                await proceedToPayment(cartAfterItemRemoval);
             } else {
                 inputRefs.current[itemWithNoQuantity.foodId]?.focus();
             }
         } else {
-            const cartQuery = encodeURIComponent(JSON.stringify(cart));
-            router.push(`/payment?userEmail=${user.email}&cart=${cartQuery}`);
+            await proceedToPayment(cart);
         }
     };
 

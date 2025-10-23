@@ -1,69 +1,109 @@
+/* StoreItem.module.css */
+
+/* 1. 전체 카드 컨테이너: 크기 유지 */
 .card {
-    /* 카드 형식 스타일 */
-    background-color: rgb(228, 160, 71);
-    border: 1px solid rgb(206, 231, 65);
+    /* ⭐️ 고정 크기 수정 ⭐️ */
+    width: 230px; 
+    height: 270px; 
+    
+    border: 2px solid #7c4c0596;
     border-radius: 8px;
-    padding: 20px;
-    width: 250px; /* 카드 너비 */
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
-
-    /* 가운데 정렬 스타일 */
-    margin: 20px auto; /* 블록 요소를 가운데 정렬 */
-    text-align: center; /* 텍스트를 가운데 정렬 */
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit; 
+    
+    /* ⭐️ Flex 구조로 세로 배치 */
+    display: flex;
+    flex-direction: column;
 }
 
-.card:hover {
-    background-color: rgb(145, 98, 28);
-}
-
-.logo {
-    /* 로고 이미지 스타일 */
-    max-width: 100px;
-    height: auto;
-}
-
-.divider {
-    /* 구분선 스타일 */
-    margin: 15px 0;
-    border-color: #eee;
-}
-/* ... 기존 스타일 ... */
-
-/* 빈 별 색상으로 배경을 깔아줍니다. (빈 별 기호인 ☆을 사용해도 됩니다) */
-.halfStar {
+/* 2. 이미지 컨테이너 */
+.imageWrapper {
+    width: 100%;
+    /* ⭐️ 새로운 높이 설정: 162px (270px의 60% 비율 유지) ⭐️ */
+    height: 162px; 
     position: relative;
-    color: #ccc; /* 빈 별 색상 (배경) */
+    flex-shrink: 0; /* 크기 고정 */
 }
 
-.halfStar::after {
-    /* 꽉 찬 별을 겹치고 반만 보이도록 클리핑 */
-    content: '★'; 
+.imageWrapper img {
     position: absolute;
     top: 0;
     left: 0;
-    color: #725603; /* 꽉 찬 별 색상 (전경) */
-    width: 50%; /* <<-- 핵심: 너비를 50%로 설정하여 절반만 보이게 함 */
-    overflow: hidden; 
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+}
+
+/* 3. 정보/설명 컨테이너 */
+.infoWrapper {
+    /* ⭐️ flex-grow: 3 (남은 공간 108px 중 약 65px 차지) ⭐️ */
+    flex-grow: 3; /* 24% 비율을 3으로 설정 */
+    height: auto; /* 고정 높이 제거, flex-grow 사용 */
+    width: 100%; 
+    padding: 3px 5px; 
+    background-color: #ffe0b2; 
+    flex-shrink: 0;
+    
+    /* 텍스트 중앙 정렬 */
+    text-align: center; 
+}
+
+.infoWrapper h3 {   
+    margin-top: 0;
+    margin-bottom: 0px;
+    /* ⭐️ 글꼴 크기 재조정: 13px 유지 (필요에 따라 14px로 조정 가능) ⭐️ */
+    font-size: 13px; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.infoWrapper hr {
+    border: none;
+    border-top: 1px solid #ffcc80; 
+    margin: 1px auto; 
+    width: 80%;
+}
+
+.infoWrapper p {
+    /* ⭐️ 글꼴 크기 재조정: 11px 유지 ⭐️ */
+    font-size: 11px; 
+    margin: 1px 0;
+    line-height: 1.2;
+}
+
+/* 4. 평점 컨테이너 */
+.ratingWrapper {
+    /* ⭐️ flex-grow: 2 (남은 공간 108px 중 약 43px 차지) ⭐️ */
+    flex-grow: 2; /* 16% 비율을 2로 설정 (3:2 비율 유지) */
+    height: auto; /* 고정 높이 제거, flex-grow 사용 */
+    padding: 3px 5px; 
+    background-color: #fff3e0; 
+    margin: 0px;
+    
+    flex-shrink: 0;
+    
+    /* Flexbox를 사용하여 내부 요소를 수직/수평 중앙 정렬 */
+    display: flex;
+    align-items: center; 
+    justify-content: center; 
+    /* ⭐️ 평점 텍스트 크기 유지: 11px ⭐️ */
+    font-size: 11px; 
+    text-align: center;
+}
+
+.fullStar, .emptyStar {
+    /* ⭐️ 별 크기 유지: 14px ⭐️ */
+    font-size: 14px; 
+    margin-right: 1px;
 }
 
 .fullStar {
-    color: #725603; 
+    color: gold;
 }
 .emptyStar {
-    color: #ccc; 
-}
-/* 닫기 버튼 */
-.close {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    border: none;
-    background: transparent;
-    cursor: pointer;
-    font-size: 1.5em;
-    color: #444;
-    transition: color 0.2s;
-}
-.close:hover {
-    color: #FF0000;
+    color: #ccc;
 }

@@ -114,5 +114,15 @@
     "birth": "2025-09-30",
     "phone": "010-3333-4444",
     "address1": "경상북도 포항시 북구"
+  },
+  {
+    "email": "admin@admin.com",
+    "password": "admin1234",
+    "name": "admin",
+    "birth": "1990-04-13",
+    "phone": "010000000",
+    "address1": "서울 서초구",
+    "address2": "서울 강남구",
+    "address3": "서울 동대구"
   }
 ]
