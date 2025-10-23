@@ -6,11 +6,12 @@ import { useSearchParams, useRouter } from "next/navigation";
 
 export default function MyPage() {
   const searchParams = useSearchParams();
+  const router = useRouter();
   const email = searchParams.get("email");
   const [user, setUser] = useState(null);
   const [orders, setOrders] = useState([]);
   const [saving, setSaving] = useState(false);
-  const router = useRouter();
+  
 
   // 초기 로드
   useEffect(() => {
@@ -103,6 +104,7 @@ export default function MyPage() {
               <input className={style.input} value={user.address3 || ""}
                 onChange={e => updateField("address3", e.target.value)} />
             </label>
+
 
             <p className={style.meta}><b>내 주문 이력</b></p>
             {orders.length === 0 ? (

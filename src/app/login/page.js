@@ -29,11 +29,11 @@ export default function LoginPage() {
   const didInit = useRef(false);
 
 
-    /* --------------------------------------------
-      2. 로그인 시도 함수 (사용자가 로그인 버튼 클릭 시)
-      - 입력된 이메일/비번 검증 후 API 호출
-      - 성공 시 user 상태 세팅 + localStorage 저장
-  --------------------------------------------- */
+  /* --------------------------------------------
+    2. 로그인 시도 함수 (사용자가 로그인 버튼 클릭 시)
+    - 입력된 이메일/비번 검증 후 API 호출
+    - 성공 시 user 상태 세팅 + localStorage 저장
+--------------------------------------------- */
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
@@ -53,7 +53,7 @@ export default function LoginPage() {
       }
 
       const userData = await res.json();
-      
+
       // 비밀번호 확인 
       if (userData.password !== password) {
         setError("비밀번호가 올바르지 않습니다.");
@@ -64,11 +64,11 @@ export default function LoginPage() {
       setIsSuccess(true);
       setUser(userData);
       setSelectedAddress(userData.address1 || "");
-      
+
       // 로그인 유지용 로컬 저장 및 이벤트 발생 
       localStorage.setItem('userEmail', userData.email);
       window.dispatchEvent(new Event('storage-update'));
-      
+
       alert("로그인이 성공했습니다!");
     } catch (err) {
       console.error("login error:", err);
@@ -76,38 +76,44 @@ export default function LoginPage() {
     }
   };
 
-  
-    /* --------------------------------------------
-      3. 최초 진입 시 자동 로그인 (URL or localStorage)
-      - URL의 ?email 파라미터 → 우선
-      - 없으면 localStorage.userEmail → 로그인 복원
-      - 완료 후 booting 해제
-  --------------------------------------------- */
+
+  /* --------------------------------------------
+    3. 최초 진입 시 자동 로그인 (URL or localStorage)
+    - URL의 ?email 파라미터 → 우선
+    - 없으면 localStorage.userEmail → 로그인 복원
+    - 완료 후 booting 해제
+--------------------------------------------- */
   useEffect(() => {
-    if (didInit.current) return;        
-    
+    // strict mode 중복 실행 방지
+    if (didInit.current) return;
     didInit.current = true;
+
+    // 요청 취소용 컨트롤러 
     const ac = new AbortController();
 
     (async () => {
       try {
+        // 로그인 복원 대상 결정: url -> localStorage 
         const savedEmail = emailFromUrl || localStorage.getItem("userEmail");
-        if (!savedEmail) return; 
+        if (!savedEmail) return;
 
+        // 사용자 정보 요청 
         const res = await fetch(`/api/users/${encodeURIComponent(savedEmail)}`, { signal: ac.signal });
         if (!res.ok) return;
 
+        // 사용자 데이터 복원
         const userData = await res.json();
         setUser(userData);
         setSelectedAddress(userData.address1 || "");
         setIsSuccess(true);
 
+        // 로그인 상태 유지 
         localStorage.setItem("userEmail", userData.email);
         window.dispatchEvent(new Event("storage-update"));
       } catch (e) {
         if (e.name !== "AbortError") console.error("auto login error:", e);
       } finally {
-        setBooting(false); 
+        setBooting(false);
       }
     })();
 
@@ -115,13 +121,16 @@ export default function LoginPage() {
   }, [emailFromUrl]);
 
 
+
+  /* 4. 회원가입 */
   const onClickHandlerToJoin = () => {
     window.open("/login/join", "_blank");
   };
 
 
-  /* 5. 회원가입  */
-  const handleLogout = () => {
+
+  /* 5. 로그아웃  */
+  const onClickHandlerLogout = () => {
     try {
       localStorage.removeItem("userEmail");
       window.dispatchEvent(new Event("storage-update"));
@@ -135,12 +144,19 @@ export default function LoginPage() {
     }
   };
 
-  
+  /* 6. 성공 화면 */
+  const onClickHandlerSuccess = () => {
+    window.open(`/login/mypage?email=${encodeURIComponent(user.email)}`, "_blank")
+  };
+
+
+  /// 부팅 화면 
   if (booting) {
     // return <div><img src={loadingImage.src} alt="" width={50} height={50} /></div>; 
-    return <div></div>; 
+    return <div></div>;
   }
 
+  /// 기본 화면 
   if (!isSuccess) {
     return (
       <div className={styles.sidebar}>
@@ -190,6 +206,7 @@ export default function LoginPage() {
   const addresses = [user.address1, user.address2, user.address3].filter(Boolean);
   const extraAddresses = addresses.slice(1);
 
+  /// 로그인 성공시 
   return (
     <div className={successStyles.sidebar}>
       <p className={successStyles.user}>
@@ -218,20 +235,15 @@ export default function LoginPage() {
           </select>
         )}
       </div>
-      <button
-        onClick={() =>
-          window.open(
-            `/login/mypage?email=${encodeURIComponent(user.email)}`,
-            "_blank"
-          )
-        }
-        className={successStyles.button}
-      >
-        마이페이지
-      </button>
-      <button onClick={handleLogout} className={styles.button}>
-        로그아웃
-      </button>
+      
+        <button onClick={onClickHandlerSuccess} className={successStyles.button}>
+          마이페이지로 이동
+        </button>
+        <div className={successStyles.buttonRow}>
+        <button onClick={onClickHandlerLogout} className={successStyles.logoutBtn}>
+          로그아웃
+        </button>
+        </div>
     </div>
   );
 }
