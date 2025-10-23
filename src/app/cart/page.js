@@ -180,8 +180,8 @@ function CartContent() {
         return (
             <div>
                 <h1>장바구니</h1>
-                <p>사용자 정보가 올바르지 않습니다. 홈에서 사용자를 다시 선택해주세요.</p>
-                <Link href="/">홈으로 돌아가기</Link>
+                <p>로그인 후 이용해주세요.</p>
+                {/*<Link href="/">홈으로 돌아가기</Link>*/}
             </div>
         );
     }
