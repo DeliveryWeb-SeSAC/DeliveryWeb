@@ -1,24 +1,30 @@
 import { readUsers, writeUsers } from "../../../lib/users";
-function decodeEmail(params) {
-  return decodeURIComponent(params.email);
+
+function decodeEmail(email) {
+  return decodeURIComponent(email);
 }
 
-export async function GET(_req, { params }) {
-  const email = decodeEmail(params);
+// GET
+export async function GET(_req, context) {
+  const { email } = await context.params; // ✅ 반드시 await
+  const decoded = decodeEmail(email);
+
   const users = await readUsers();
-  const user = users.find(u => u.email === email);
+  const user = users.find(u => u.email === decoded);
   if (!user) return new Response("not found", { status: 404 });
   return Response.json(user);
 }
 
-export async function PATCH(req, { params }) {
-  const email = decodeEmail(params);
-  const patch = await req.json(); // 변경할 필드만 보내기
+// PATCH
+export async function PATCH(req, context) {
+  const { email } = await context.params; // ✅ 반드시 await
+  const decoded = decodeEmail(email);
+
+  const patch = await req.json();
   const users = await readUsers();
-  const idx = users.findIndex(u => u.email === email);
+  const idx = users.findIndex(u => u.email === decoded);
   if (idx === -1) return new Response("not found", { status: 404 });
 
-  // 허용 필드만 머지
   const allowed = ["password", "name", "birth", "phone", "address1", "address2", "address3"];
   for (const k of Object.keys(patch)) {
     if (allowed.includes(k)) users[idx][k] = patch[k];
@@ -28,11 +34,15 @@ export async function PATCH(req, { params }) {
   return Response.json(users[idx]);
 }
 
-export async function DELETE(_req, { params }) {
-  const email = decodeEmail(params);
+// DELETE
+export async function DELETE(_req, context) {
+  const { email } = await context.params; // ✅ 반드시 await
+  const decoded = decodeEmail(email);
+
   const users = await readUsers();
-  const next = users.filter(u => u.email !== email);
+  const next = users.filter(u => u.email !== decoded);
   if (next.length === users.length) return new Response("not found", { status: 404 });
+
   await writeUsers(next);
   return new Response(null, { status: 204 });
 }
