@@ -1,5 +1,6 @@
 'use client'
 import { getFood } from "@/app/api/menuAPI/menu"
+import { getStoreName } from '@/app/api/storeAPI/route'
 import { useParams } from "next/navigation"
 import { useEffect, useState } from "react"
 
@@ -39,6 +40,7 @@ export default function MenuDetail(){
                 .then(data => {
                     if (data.message === 'Cart updated successfully.') {
                         alert('장바구니에 메뉴를 담았습니다.');
+                        window.location.reload()
                     } else {
                         alert('장바구니에 메뉴를 담는데 실패했습니다.');
                     }

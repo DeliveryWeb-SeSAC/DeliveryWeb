@@ -27,6 +27,7 @@ export default function MenuItem({id,menu}) {
             .then(data => {
                 if (data.message === 'Cart updated successfully.') {
                     alert('장바구니에 메뉴를 담았습니다.');
+                    window.location.reload()
                 } else {
                     alert('장바구니에 메뉴를 담는데 실패했습니다.');
                 }
