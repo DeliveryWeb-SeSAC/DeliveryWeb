@@ -1,0 +1,7 @@
+.storeContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* 아이템 사이의 간격 */
+    justify-content: center; /* 아이템을 가운데 정렬 */
+    padding: 20px;
+}
