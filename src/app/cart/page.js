@@ -187,7 +187,7 @@ function CartContent() {
     }
 
     return (
-        <div>
+        <div style={{border: '3px solid #e5e7eb', backgroundColor: '#ffffff', borderRadius: '18px', padding: '5px'}}>
             <h1 className={styles.title}>{user.name}님의 장바구니</h1>
             {cart.length === 0 ? (
                 <p>장바구니가 비어있습니다.</p>
