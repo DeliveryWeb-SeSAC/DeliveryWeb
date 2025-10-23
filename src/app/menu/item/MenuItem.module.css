@@ -1,11 +1,47 @@
-.MenuItem {
-    width: 300px;
-    background-color: antiquewhite;
-    cursor: pointer;
-    color: blueviolet;
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  max-width: 300px;
+  margin: 0 auto;
 }
 
-.MenuItem:hover {
-    background-color: burlywood;
-    color: black;
+.menuItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background-color: #ffffff;
+  transition: box-shadow 0.2s ease-in-out;
+  width: 100%;
+  text-decoration: none;
+}
+
+.menuItem:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.menuItem h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: #333333;
+  text-align: center;
+}
+
+.cartButton {
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.cartButton:hover {
+  background-color: #0056b3;
 }

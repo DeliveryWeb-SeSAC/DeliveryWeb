@@ -9,9 +9,7 @@ export default function MenuItem({id,menu}) {
                     <h3>메뉴명 : {menu.name}</h3>
                 </div>
             </Link>
-            <div>
-                <button>장바구니 담기</button>
-            </div>
+            <button>장바구니 담기</button>
         </>
     )
 }
