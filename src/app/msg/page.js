@@ -2,9 +2,10 @@
 "use client";
 
 import styles from './page.module.css';
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function SNSListPage() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [friends] = useState([
     { name: "김철수", status: "온라인", online: true },
     { name: "이영희", status: "오프라인", online: false },
@@ -21,6 +22,23 @@ export default function SNSListPage() {
     { name: "여행 그룹", members: ["여행자A", "여행자B"], status: "비활성", open: false },
   ]);
 
+  useEffect(() => {
+    const checkLoginStatus = () => {
+      const userEmail = localStorage.getItem('userEmail');
+      setIsLoggedIn(!!userEmail);
+    };
+
+    // 컴포넌트 마운트 시 로그인 상태 확인
+    checkLoginStatus();
+
+    // 다른 컴포넌트에서 로그인이 발생했을 때 상태 업데이트
+    window.addEventListener('storage-update', checkLoginStatus);
+
+    return () => {
+      window.removeEventListener('storage-update', checkLoginStatus);
+    };
+  }, []);
+
   const toggleGroup = (index) => {
     setGroups((prev) =>
       prev.map((g, i) => (i === index ? { ...g, open: !g.open } : g))
@@ -30,6 +48,17 @@ export default function SNSListPage() {
   const handleFriendClick = (name) => {
     alert(`"${name}" 친구 채팅을 시작합니다!`);
   };
+
+  if (!isLoggedIn) {
+    return (
+      <div>
+        <div className={styles.sectionHeader}>SNS 목록</div>
+        <div style={{ padding: '20px', textAlign: 'center', color: 'var(--muted)' }}>
+          로그인 후 이용하세요
+        </div>
+      </div>
+    );
+  }
 
   return (
     // <div className={styles.listContainer}>
