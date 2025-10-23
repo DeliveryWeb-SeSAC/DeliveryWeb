@@ -6,11 +6,12 @@ import { useSearchParams, useRouter } from "next/navigation";
 
 export default function MyPage() {
   const searchParams = useSearchParams();
+  const router = useRouter();
   const email = searchParams.get("email");
   const [user, setUser] = useState(null);
   const [orders, setOrders] = useState([]);
   const [saving, setSaving] = useState(false);
-  const router = useRouter();
+  
 
   // 초기 로드
   useEffect(() => {
@@ -104,6 +105,9 @@ export default function MyPage() {
                 onChange={e => updateField("address3", e.target.value)} />
             </label>
 
+          
+          <div className={style.span2}><hr style={{color: "#6b7280"}}/></div>
+
             <p className={style.meta}><b>내 주문 이력</b></p>
             {orders.length === 0 ? (
               <p>주문 이력이 없습니다.</p>
@@ -115,7 +119,6 @@ export default function MyPage() {
 
                     {Array.isArray(order.restaurants) && order.restaurants.length > 0 ? (
                       <div>
-                        <p><b>가게 목록:</b></p>
                         <ul>
                           {order.restaurants.map((r, ri) => (
                             <li key={ri}>

@@ -56,6 +56,17 @@
             "quantity": 3
           }
         ]
+      },
+      {
+        "restaurantName": "크리스피치킨락 치킨맛집1",
+        "items": [
+          {
+            "foodId": "food-000",
+            "foodName": "크리스피치킨",
+            "price": 9000,
+            "quantity": 1
+          }
+        ]
       }
     ]
   },
