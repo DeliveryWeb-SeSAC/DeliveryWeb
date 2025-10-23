@@ -30,6 +30,7 @@ export default function StoreItem({store, onClick}){
         <Link 
             href={`/store/${store.id}`} 
             className={style.card}
+            onClick={onClick}
         >               
             <div className={style.imageWrapper}>
                 <img src={store.logo} alt={store.name + " 로고"}/>
