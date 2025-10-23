@@ -1,10 +1,10 @@
 'use client'
-import style from './store.module.css'
 import { getStoreList } from "../api/storeAPI/route";
 import { useEffect, useState } from "react";
 import StoreItem from '@/app/store/storeItem/StoreItem';
 import SearchBar from '../searchBar/page';
 import { useRouter } from 'next/navigation';
+import styles from '@/app/store/store.module.css'; // CSS 모듈 import
 
 export default function Store() {
   const [stores, setStores] = useState([]);
@@ -55,7 +55,8 @@ export default function Store() {
   return (
     <>
       <SearchBar onSearch={handleSearch} onFilter={handleFilter} />
-      <div className={style.store}>
+      {/* storeContainer 클래스를 적용합니다. */}
+      <div className={styles.storeContainer}> 
         {newList.length > 0 ? (
           newList.map((store) => (
             <StoreItem key={store.id} store={store} onClick={()=>goDetailPage(store.id)}/>

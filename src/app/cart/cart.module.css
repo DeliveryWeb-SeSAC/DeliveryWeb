@@ -1,159 +1,253 @@
+/* cart/cart.module.css */
+
+/* Root variables for consistency with login styles */
 :root {
-  --primary: #ee6a2c;        /* 오렌지 주색 */
-  --bg: #ffffff;
-  --text: #0f172a;
-  --muted: #6b7280;
-  --border: #e5e7eb;
-  --input-bg: #f8fafc;
-  --radius-xl: 14px;
-  --radius-2xl: 18px;
+    --primary: #ee6a2c;        /* 오렌지 주색 (버튼/포인트) */
+    --bg: #ffffff;
+    --text: #0f172a;
+    --muted: #6b7280;
+    --border: #e5e7eb;
+    --input-bg: #f8fafc;
+    --radius-xl: 14px;
+    --radius-2xl: 18px;
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
+/* Title like login title */
 .title {
-  margin: 0 0 12px 0;
-  font-weight: 800;
-  letter-spacing: -0.2px;
-  font-size: 22px;    
-  line-height: 1.2;
-  color: var(--text);
+    margin: 0 0 12px 0;
+    font-weight: 800;
+    letter-spacing: -0.2px;
+    font-size: 22px;
+    line-height: 1.2;
+    color: var(--text);
 }
 
-/* 장바구니 컨테이너 */
+/* Cart list like a form container */
 .cartList {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  max-height: 100%;
-  overflow: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-height: 100%;
+    overflow: auto;
+    padding: 0 4px; /* subtle padding like fields */
 }
 
-/* 장바구니 아이템 카드 */
+/* Cart item like a rounded card/field */
 .cartItem {
-  width: 100%;
-  min-width: 0;
-  padding: 16px;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-xl);
-  background: var(--bg);
-  display: grid;
-  grid-template-columns: 60px 1fr auto; /* 이미지 | 세부 | 가격/버튼 */
-  gap: 12px;
-  align-items: center;
-  transition: all 0.3s ease;
-  box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+    padding: 16px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-2xl); /* login input/button radius */
+    background: var(--input-bg); /* subtle bg like input */
+    display: grid;
+    grid-template-columns: 60px 1fr auto; /* 이미지 | 세부 | 가격/버튼 */
+    gap: 12px;
+    align-items: center;
+    transition: all 0.3s ease; /* smooth like button */
+    box-sizing: border-box;
+    outline: none;
+    font-size: 14px;
+    color: var(--text);
 }
+
 .cartItem:hover {
-  border-color: color-mix(in srgb, var(--primary) 65%, var(--border));
-  box-shadow: 0 2px 8px color-mix(in srgb, var(--primary) 10%, transparent);
+    border-color: color-mix(in srgb, var(--primary) 65%, #ffffff); /* focus-like border */
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 14%, transparent), var(--shadow-md); /* focus glow + shadow */
+    transform: translateY(-1px); /* subtle lift */
+    background: var(--bg); /* bg shift on hover */
 }
+
 .cartItemImage {
-  width: 60px;
-  height: 60px;
-  border-radius: var(--radius-xl);
-  object-fit: cover;
-  background: var(--input-bg);
+    width: 60px;
+    height: 60px;
+    border-radius: var(--radius-xl);
+    object-fit: cover;
+    background: var(--input-bg);
+    box-shadow: var(--shadow-sm); /* subtle shadow like elements */
 }
+
+/* Details like nested field */
 .cartItemDetails {
-  flex: 1;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
 }
+
 .cartItemName {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--text);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 0;
 }
+
 .cartItemDesc {
-  font-size: 12px;
-  color: var(--muted);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+    font-size: 12px;
+    color: var(--muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 0;
 }
 
-/* 수량 입력 */
+/* Quantity input like login input */
 .quantityInput {
-  width: 80px;
-  height: 36px;
-  padding: 0 8px;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-xl);
-  background: var(--input-bg);
-  font-size: 14px;
-  text-align: center;
-  outline: none;
-  transition: border-color 0.2s ease;
-  min-width: 0;
+    width: 80px;
+    height: 44px; /* match login input height */
+    padding: 0 12px;
+    box-sizing: border-box;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-2xl);
+    background: var(--input-bg);
+    font-size: 14px;
+    text-align: center;
+    color: var(--text);
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease; /* smooth focus */
+    min-width: 0;
 }
+
+.quantityInput::placeholder {
+    color: #9aa3af;
+}
+
 .quantityInput:focus {
-  border-color: var(--primary);
+    border-color: color-mix(in srgb, var(--primary) 65%, #ffffff);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 14%, transparent);
+    background: var(--bg); /* bg shift on focus */
 }
 
-/* 가격/버튼 */
+/* Price like bold text */
 .cartItemPrice {
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--primary);
-  white-space: nowrap;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--primary);
+    white-space: nowrap;
+    margin: 0;
 }
+
+/* Cart button like secondary button */
 .cartBtn {
-  height: 36px;
-  padding: 0 12px;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-xl);
-  background: var(--bg);
-  color: var(--primary);
-  font-size: 12px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+    height: 44px; /* match input/button height */
+    padding: 0 12px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-2xl);
+    background: var(--bg);
+    color: var(--primary);
+    font-weight: 700;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease; /* smooth like primary button */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
+
 .cartBtn:hover {
-  background: var(--primary);
-  color: #fff;
+    background: var(--primary);
+    color: #fff;
+    border-color: var(--primary);
+    box-shadow: var(--shadow-sm);
 }
 
-/* 총합 섹션 */
+.cartBtn:active {
+    transform: translateY(1px);
+}
+
+/* Total section like a form summary */
 .totalSection {
-  margin-top: 16px;
-  padding: 16px;
-  border-top: 2px solid var(--border);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 18px;
-  font-weight: 700;
+    margin-top: 16px;
+    padding: 16px;
+    border-top: 2px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 18px;
+    font-weight: 700;
+    background: var(--input-bg); /* subtle bg */
+    border-radius: 0 0 var(--radius-xl) var(--radius-xl); /* bottom rounded */
 }
-.totalPrice { color: var(--primary); }
-.checkoutBtn {
-  width: auto;
-  height: 44px;
-  padding: 0 20px;
-  border: 0;
-  border-radius: 9999px;
-  background: var(--primary);
-  color: #fff;
-  font-weight: 700;
-  font-size: 16px;
-  cursor: pointer;
-  transition: filter 0.2s ease;
-}
-.checkoutBtn:hover { filter: brightness(1.02); }
 
-/* 에러 */
+.totalPrice {
+    color: var(--primary);
+    margin: 0;
+}
+
+/* Checkout button like primary button */
+.checkoutBtn {
+    width: auto;
+    height: 46px; /* match login button */
+    padding: 0 20px;
+    border: 0;
+    border-radius: 9999px;
+    background: var(--primary);
+    color: #fff;
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: 0.2px;
+    cursor: pointer;
+    transition: filter 0.2s ease, transform 0.1s ease; /* smooth hover */
+    box-shadow: var(--shadow-md);
+}
+
+.checkoutBtn:hover {
+    filter: brightness(1.02);
+}
+
+.checkoutBtn:active {
+    transform: translateY(1px);
+}
+
+/* Error like login error */
 .error {
-  margin-top: 8px; 
-  color: #b91c1c; 
-  font-size: 12px; 
-  padding: 6px;
-  background: #fef2f2;
-  border-radius: var(--radius-xl);
-  border-left: 3px solid #b91c1c;
+    margin-top: 8px;
+    color: #b91c1c;
+    font-size: 14px; /* match login error size */
+    padding: 8px 12px;
+    background: #fef2f2;
+    border-radius: var(--radius-xl);
+    border-left: 3px solid #b91c1c;
+    border: 1px solid #fecaca; /* subtle border */
+}
+
+/* Mobile adjustments like login responsive */
+@media (max-width: 600px) {
+    .cartItem {
+        grid-template-columns: 50px 1fr auto;
+        padding: 12px;
+        gap: 8px;
+    }
+
+    .cartItemImage {
+        width: 50px;
+        height: 50px;
+    }
+
+    .quantityInput,
+    .cartBtn {
+        height: 40px; /* smaller on mobile */
+        font-size: 12px;
+    }
+
+    .totalSection {
+        padding: 12px;
+        font-size: 16px;
+    }
+
+    .checkoutBtn {
+        height: 40px;
+        font-size: 14px;
+        padding: 0 16px;
+    }
 }
