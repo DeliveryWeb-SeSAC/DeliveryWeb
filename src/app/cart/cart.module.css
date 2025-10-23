@@ -28,15 +28,13 @@
 .cartList {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 1px;
     max-height: 100%;
     overflow: auto;
     padding: 0 4px; /* subtle padding like fields */
 }
 
-/* Cart item like a rounded card/field */
-/* cart/cart.module.css */
-
+/* cartItem 스타일을 수정하여 자식 요소들을 세로로 배치합니다. */
 .cartItem {
     width: 100%;
     min-width: 0;
@@ -44,10 +42,10 @@
     border: 1px solid var(--border);
     border-radius: var(--radius-2xl);
     background: var(--input-bg);
-    display: grid;
-    grid-template-columns: 1fr auto auto auto;
-    gap: 12px;
-    align-items: center;
+    display: flex;
+    flex-direction: column; /* 자식 요소(메뉴명, 컨트롤 행)를 세로로 쌓습니다. */
+    align-items: flex-start; /* 모든 자식 요소를 왼쪽부터 시작하도록 정렬합니다. */
+    gap: 8px; /* 메뉴명과 컨트롤 행 사이의 수직 간격을 줍니다. */
     transition: all 0.3s ease;
     box-sizing: border-box;
     outline: none;
@@ -60,6 +58,19 @@
     box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 14%, transparent), var(--shadow-md); /* focus glow + shadow */
     transform: translateY(-1px); /* subtle lift */
     background: var(--bg); /* bg shift on hover */
+}
+
+/* 메뉴명 텍스트를 위한 새로운 스타일 */
+.foodNameText {
+    font-weight: 600;
+    font-size: 16px; /* 메뉴명 폰트를 약간 키웁니다. */
+}
+
+/* 수량, 가격, 버튼을 담는 행을 위한 새로운 스타일 */
+.controlsRow {
+    display: flex;
+    align-items: center; /* 내부 요소들을 세로 중앙에 정렬합니다. */
+    width: 100%; /* 행의 너비를 100%로 설정합니다. */
 }
 
 .cartItemImage {
@@ -101,11 +112,11 @@
 
 /* Quantity input like login input */
 .quantityInput {
-    width: 80px;
-    height: 44px; /* match login input height */
+    width: 80px; /* 적절한 너비로 조정 */
+    height: 30px; /* match login input height */
     padding: 0 12px;
     box-sizing: border-box;
-    border: 1px solid var(--border);
+    border: 1px solid var(--primary);
     border-radius: var(--radius-2xl);
     background: var(--input-bg);
     font-size: 14px;
@@ -114,6 +125,7 @@
     outline: none;
     transition: border-color 0.2s ease, box-shadow 0.2s ease; /* smooth focus */
     min-width: 0;
+    accent-color: #ee6a2c;
 }
 
 .quantityInput::placeholder {
@@ -126,18 +138,19 @@
     background: var(--bg); /* bg shift on focus */
 }
 
-/* Price like bold text */
+/* 가격 텍스트에 왼쪽 여백을 추가하여 수량 입력창과 간격을 줍니다. */
 .cartItemPrice {
     font-size: 16px;
     font-weight: 700;
     color: var(--primary);
     white-space: nowrap;
     margin: 0;
+    margin-left: 12px; /* 수량 입력창과의 간격 */
 }
 
-/* Cart button like secondary button */
+/* 삭제 버튼 스타일을 수정하여 오른쪽 끝으로 보냅니다. */
 .cartBtn {
-    height: 44px; /* match input/button height */
+    height: 34px; /* match input/button height */
     padding: 0 12px;
     border: 1px solid var(--border);
     border-radius: var(--radius-2xl);
@@ -154,6 +167,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-left: auto; /* 이 속성이 버튼을 오른쪽 끝으로 밀어냅니다. */
 }
 
 .cartBtn:hover {
@@ -201,6 +215,7 @@
     cursor: pointer;
     transition: filter 0.2s ease, transform 0.1s ease; /* smooth hover */
     box-shadow: var(--shadow-md);
+    white-space: nowrap;
 }
 
 .checkoutBtn:hover {
@@ -226,7 +241,6 @@
 /* Mobile adjustments like login responsive */
 @media (max-width: 600px) {
     .cartItem {
-        grid-template-columns: 50px 1fr auto;
         padding: 12px;
         gap: 8px;
     }
@@ -252,4 +266,11 @@
         font-size: 14px;
         padding: 0 16px;
     }
+}
+
+/* Always show number input arrows and set their color */
+.quantityInput::-webkit-outer-spin-button,
+.quantityInput::-webkit-inner-spin-button {
+    opacity: 1;
+    color: var(--primary);
 }

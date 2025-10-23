@@ -1,5 +1,6 @@
 :root {
-  --primary: #ee6a2c;        /* 오렌지 주색 (로그인  버튼과 일치) */
+  --primary: #ee6a2c;
+  /* 오렌지 주색 (로그인  버튼과 일치) */
   --bg: #ffffff;
   --text: #0f172a;
   --muted: #6b7280;
@@ -15,23 +16,23 @@
   gap: 16px;
   padding: 12px;
   width: 100%;
-  min-width: 0; /* 오버플로우 방지: 사이드바(15%) 너비 자동 조정 */
+  min-width: 0;
   overflow: hidden;
   box-sizing: border-box;
+  border: 1px solid var(--border);
+  background: var(--input-bg);
+  border-radius: var(--radius-xl);
 }
 
 .user {
   font-size: 14px;
   color: var(--text);
   margin: 0;
-  white-space: nowrap; /* 한 줄 유지 */
+  white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis; /* 긴 이름 ellipsis (e.g., "김철수 님...") */
-  text-align: center;
+  text-overflow: ellipsis;
+  text-align: left;
   padding: 8px;
-  background: var(--input-bg);
-  border-radius: var(--radius-xl);
-  border: 1px solid var(--border);
 }
 
 .addressContainer {
@@ -60,7 +61,7 @@
   margin: 0;
   white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis; /* 긴 주소 ellipsis */
+  text-overflow: ellipsis;
   cursor: default;
 }
 
@@ -73,9 +74,10 @@
   font-size: 14px;
   color: var(--text);
   outline: none;
-  min-width: 0; /* 드롭다운 자동 너비 조정 */
+  min-width: 0;
   transition: border-color 0.2s ease;
 }
+
 .dropdown:focus {
   border-color: var(--primary);
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 14%, transparent);
@@ -84,7 +86,7 @@
 .button {
   height: 44px;
   border: 0;
-  border-radius: 9999px; /* 둥근 버튼 (로그인 버튼과 일치) */
+  border-radius: 9999px;
   background: var(--primary);
   color: #fff;
   font-weight: 700;
@@ -93,16 +95,45 @@
   transition: filter 0.2s ease, transform 0.1s ease;
   white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis; /* 긴 텍스트 ellipsis */
+  text-overflow: ellipsis;
+  margin-bottom: 0;
 }
+
 .button:hover {
   filter: brightness(1.02);
 }
+
 .button:active {
   transform: translateY(1px);
 }
 
-/* 로딩/에러 (기존 login.module.css와 유사) */
+.buttonRow {
+  display: flex;
+  justify-content: flex-end;
+  align-items: right;
+  width: 100%;
+}
+
+.logoutBtn {
+  background: transparent;
+  border: none;
+  color: var(--primary);
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+  padding: 4px 8px; /* 글자 주변만 클릭 영역 */
+  border-radius: 6px;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+  margin-top: -10px;
+}
+
+/* ✅ hover 시 “글자 뒤”만 살짝 배경 생김 (회원가입 버튼 느낌) */
+.logoutBtn:hover {
+  background: #fff0e9;
+  box-shadow: 0 1px 2px rgba(180, 180, 180, 0.4);
+}
+
+
 .loading,
 .error {
   text-align: center;
@@ -118,9 +149,17 @@
     padding: 8px;
     gap: 12px;
   }
+
   .user,
   .selected,
   .dropdown {
     font-size: 12px;
+  }
+
+  .user {
+    white-space: normal;
+    word-break: break-word;
+    overflow: visible;
+    text-overflow: unset;
   }
 }

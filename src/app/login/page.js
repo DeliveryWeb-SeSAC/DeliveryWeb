@@ -1,54 +1,74 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
 import styles from './login.module.css';
 import successStyles from './success.module.css';
-import { useSearchParams, useRouter } from "next/navigation";
+import loadingImage from '@/data/image/loading.png';
+
 
 export default function LoginPage() {
+
+  // 변수 관리 
+  // 1. 라우터 및 url 파라미터 관련 
   const sp = useSearchParams();
   const router = useRouter();
-
   const emailFromUrl = sp.get("email");
 
+  // 2. 로그인 폼 입력값 상태 
   const [email, setEmail] = useState(emailFromUrl || "");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+
+  // 3. 로그인 결과 및 사용자 정보
   const [isSuccess, setIsSuccess] = useState(false);
   const [user, setUser] = useState(null);
   const [selectedAddress, setSelectedAddress] = useState("");
-  const [autoLoginTried, setAutoLoginTried] = useState(false);
 
+  // 4. 초기 부팅 및 렌더링 제어 
+  const [booting, setBooting] = useState(true);
+  const didInit = useRef(false);
+
+
+  /* --------------------------------------------
+    2. 로그인 시도 함수 (사용자가 로그인 버튼 클릭 시)
+    - 입력된 이메일/비번 검증 후 API 호출
+    - 성공 시 user 상태 세팅 + localStorage 저장
+--------------------------------------------- */
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
 
+    // 입력 검증 
     if (!email.trim()) {
       setError("이메일을 입력하세요.");
       return;
     }
 
     try {
+      // 사용자 데이터 요청 
       const res = await fetch(`/api/users/${encodeURIComponent(email.trim())}`);
       if (!res.ok) {
         setError("이메일을 찾을 수 없습니다.");
         return;
       }
+
       const userData = await res.json();
 
+      // 비밀번호 확인 
       if (userData.password !== password) {
         setError("비밀번호가 올바르지 않습니다.");
         return;
       }
 
+      // 로그인 성공 
       setIsSuccess(true);
       setUser(userData);
+      setSelectedAddress(userData.address1 || "");
 
-      // --- [추가된 코드] 로그인 성공 시 로컬스토리지 저장 및 이벤트 발생 ---
+      // 로그인 유지용 로컬 저장 및 이벤트 발생 
       localStorage.setItem('userEmail', userData.email);
       window.dispatchEvent(new Event('storage-update'));
-      // --- [추가된 코드 끝] ---
 
-      setSelectedAddress(userData.address1 || "");
       alert("로그인이 성공했습니다!");
     } catch (err) {
       console.error("login error:", err);
@@ -56,37 +76,61 @@ export default function LoginPage() {
     }
   };
 
+
+  /* --------------------------------------------
+    3. 최초 진입 시 자동 로그인 (URL or localStorage)
+    - URL의 ?email 파라미터 → 우선
+    - 없으면 localStorage.userEmail → 로그인 복원
+    - 완료 후 booting 해제
+--------------------------------------------- */
   useEffect(() => {
-    if (!emailFromUrl || isSuccess || user || autoLoginTried) return;
+    // strict mode 중복 실행 방지
+    if (didInit.current) return;
+    didInit.current = true;
+
+    // 요청 취소용 컨트롤러 
+    const ac = new AbortController();
 
     (async () => {
       try {
-        const res = await fetch(`/api/users/${encodeURIComponent(emailFromUrl)}`);
-        if (res.ok) {
-          const userData = await res.json();
-          setUser(userData);
-          localStorage.setItem('userEmail', userData.email);
-          window.dispatchEvent(new Event('storage-update'));
-          setSelectedAddress(userData.address1 || "");
-          setIsSuccess(true);
-        } else {
-          setError("사용자 정보를 불러올 수 없습니다.");
-        }
-      } catch (err) {
-        console.error("URL init error:", err);
-        setError("로딩 중 오류가 발생했습니다.");
+        // 로그인 복원 대상 결정: url -> localStorage 
+        const savedEmail = emailFromUrl || localStorage.getItem("userEmail");
+        if (!savedEmail) return;
+
+        // 사용자 정보 요청 
+        const res = await fetch(`/api/users/${encodeURIComponent(savedEmail)}`, { signal: ac.signal });
+        if (!res.ok) return;
+
+        // 사용자 데이터 복원
+        const userData = await res.json();
+        setUser(userData);
+        setSelectedAddress(userData.address1 || "");
+        setIsSuccess(true);
+
+        // 로그인 상태 유지 
+        localStorage.setItem("userEmail", userData.email);
+        window.dispatchEvent(new Event("storage-update"));
+      } catch (e) {
+        if (e.name !== "AbortError") console.error("auto login error:", e);
       } finally {
-        setAutoLoginTried(true);
+        setBooting(false);
       }
     })();
-  }, [emailFromUrl, isSuccess, user, autoLoginTried]);
 
+    return () => ac.abort();
+  }, [emailFromUrl]);
+
+
+
+  /* 4. 회원가입 */
   const onClickHandlerToJoin = () => {
     window.open("/login/join", "_blank");
   };
 
-  // 변경: 라우팅으로 다른 페이지로 가는 대신 상태 리셋 + 쿼리 제거
-  const handleLogout = () => {
+
+
+  /* 5. 로그아웃  */
+  const onClickHandlerLogout = () => {
     try {
       localStorage.removeItem("userEmail");
       window.dispatchEvent(new Event("storage-update"));
@@ -100,6 +144,19 @@ export default function LoginPage() {
     }
   };
 
+  /* 6. 성공 화면 */
+  const onClickHandlerSuccess = () => {
+    window.open(`/login/mypage?email=${encodeURIComponent(user.email)}`, "_blank")
+  };
+
+
+  /// 부팅 화면 
+  if (booting) {
+    // return <div><img src={loadingImage.src} alt="" width={50} height={50} /></div>; 
+    return <div></div>;
+  }
+
+  /// 기본 화면 
   if (!isSuccess) {
     return (
       <div className={styles.sidebar}>
@@ -149,6 +206,7 @@ export default function LoginPage() {
   const addresses = [user.address1, user.address2, user.address3].filter(Boolean);
   const extraAddresses = addresses.slice(1);
 
+  /// 로그인 성공시 
   return (
     <div className={successStyles.sidebar}>
       <p className={successStyles.user}>
@@ -177,20 +235,15 @@ export default function LoginPage() {
           </select>
         )}
       </div>
-      <button
-        onClick={() =>
-          window.open(
-            `/login/mypage?email=${encodeURIComponent(user.email)}`,
-            "_blank"
-          )
-        }
-        className={successStyles.button}
-      >
-        마이페이지
-      </button>
-      <button onClick={handleLogout} className={styles.button}>
-        로그아웃
-      </button>
+      
+        <button onClick={onClickHandlerSuccess} className={successStyles.button}>
+          마이페이지로 이동
+        </button>
+        <div className={successStyles.buttonRow}>
+        <button onClick={onClickHandlerLogout} className={successStyles.logoutBtn}>
+          로그아웃
+        </button>
+        </div>
     </div>
   );
 }
