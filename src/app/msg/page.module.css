@@ -18,10 +18,7 @@
 .sectionHeader {
   margin: 0 0 12px 0;
   font-weight: 800;
-  letter-spacing: -0.2px;
-  font-size: 16px;
   line-height: 1.2;
-  color: var(--text);
   text-transform: uppercase;
   letter-spacing: 0.5px;
   font-size: 14px;
@@ -51,7 +48,6 @@
   cursor: pointer;
   transition: all 0.3s ease; /* 부드러운 호버/클릭, like button */
   box-sizing: border-box; /* 패딩 포함 너비 계산 */
-  position: relative; /* statusIndicator 위치 기준 */
   font-size: 14px;
   color: var(--text);
   outline: none;
@@ -74,7 +70,12 @@
   justify-content: space-between;
   align-items: center;
   gap: 8px;
-  margin-bottom: 4px; /* 서브 목록과의 여백 */
+  margin-bottom: 4px; /* 기본 여백 */
+}
+
+/* 아이템이 열려 있을 때 하단 여백을 제거합니다. */
+.item.open .itemInfo {
+  margin-bottom: 0;
 }
 
 .itemName {
@@ -96,6 +97,13 @@
   text-overflow: ellipsis;
   margin: 0;
   flex-shrink: 0; /* 압축 방지 */
+}
+
+/* status text와 indicator를 묶는 wrapper */
+.statusWrapper {
+  display: flex;
+  align-items: center;
+  gap: 6px; /* 텍스트와 도형 사이 간격 */
 }
 
 /* Sub members like nested fields */
@@ -139,10 +147,6 @@
   border-radius: 50%;
   background: var(--muted);
   flex-shrink: 0; /* 크기 고정 */
-  position: absolute;
-  right: 12px;
-  top: 50%;
-  transform: translateY(-50%);
   transition: background 0.2s ease, box-shadow 0.2s ease; /* smooth like focus */
   box-shadow: var(--shadow-sm); /* subtle shadow */
 }

@@ -132,5 +132,13 @@
     "birth": "2025-10-15",
     "phone": "010-3157-4456",
     "address1": "서울시 강남구"
+  },
+  {
+    "email": "kimminsu@example.com1",
+    "password": "1234",
+    "name": "김민수",
+    "birth": "2025-10-03",
+    "phone": "0100000000",
+    "address1": "서울 강남"
   }
 ]
