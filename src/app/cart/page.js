@@ -198,7 +198,7 @@ function CartContent() {
                          style={{marginTop: '20px', border: '1px solid #ccc', padding: '10px'}}>
                         <h3>{restaurant.restaurantName}</h3>
                         <ul>
-                            {restaurant.items.map((item) => (
+                            {restaurant.items.map((item) => ( 
                                 <li key={item.foodId}  className={styles.cartItem} style={{marginBottom: '10px'}}>
                                     {item.foodName} -
                                     <input
