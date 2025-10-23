@@ -310,5 +310,23 @@
       }
     ],
     "totalPaymentAmount": 11000
+  },
+  {
+    "userEmail": "kimminsu@example.com",
+    "userName": "김민수",
+    "paymentDate": "2025-10-23T01:04:50.787Z",
+    "restaurants": [
+      {
+        "restaurantName": "서브웨이",
+        "items": [
+          {
+            "foodName": "쿠키",
+            "quantity": 3,
+            "itemPaymentAmount": 4500
+          }
+        ]
+      }
+    ],
+    "totalPaymentAmount": 4500
   }
 ]

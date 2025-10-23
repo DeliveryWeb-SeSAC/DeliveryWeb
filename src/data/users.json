@@ -45,7 +45,25 @@
     "id": 3,
     "name": "최준호",
     "email": "choijunho@example.com",
-    "cart": []
+    "cart": [
+      {
+        "restaurantName": "서브웨이",
+        "items": [
+          {
+            "foodId": "food-005",
+            "foodName": "이탈리안 비엠티",
+            "price": 6500,
+            "quantity": 1
+          },
+          {
+            "foodId": "food-006",
+            "foodName": "쿠키",
+            "price": 1500,
+            "quantity": 3
+          }
+        ]
+      }
+    ]
   },
   {
     "id": 4,
