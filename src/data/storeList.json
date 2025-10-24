@@ -1,51 +1,51 @@
 [
   {
     "id": 1,
-    "name": "크리스피치킨락 치킨맛집1",
+    "name": "교촌치킨",
     "category": "치킨",
     "address": "서울특별시 강남구 XX길 1",
     "star": 4.0,
     "delivery": "20~30분",
-    "logo": "https://naverbooking-phinf.pstatic.net/20250320_277/17424742253403M0t0_JPEG/%C4%C9%C0%CF%2C%C6%C4%C0%CE.jpg?type=f459_345_60_sharpen",
+    "logo": "https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20221130_290%2F1669782289053g3gih_JPEG%2F%25B1%25B3%25C3%25CC%25C4%25A1%25C5%25B2_%25BD%25C5%25B1%25D4_BI_%25BE%25C6%25C0%25CC%25C4%25DC%2528%25C4%25AB%25C4%25AB%25BF%25C0%2529.jpg",
     "foods": [
       {
-        "name": "크리스피치킨",
-        "price": 9000,
+        "name": "허니콤보",
+        "price": 23000,
         "kcal": 450,
-        "desc": "크리스피치킨락 치킨맛집1의 인기 메뉴 크리스피치킨. 신선한 재료와 특제 소스로 만든 크리스피치킨.",
-        "image": "https://images.unsplash.com/photo-1504674900247-0877df9cc836"
+        "desc": "달콤한 허니소스와 바삭한 날개, 봉, 다리가 만나 촉촉함과 달콤함을 더욱 느낄 수 있는 부위별 치킨",
+        "image": "https://naverbooking-phinf.pstatic.net/20250724_253/1753317018675HNiSN_PNG/image.png?type=f459_345_60_sharpen"
       },
       {
-        "name": "양념치킨",
-        "price": 10150,
-        "kcal": 570,
-        "desc": "크리스피치킨락 치킨맛집1의 인기 메뉴 양념치킨. 신선한 재료와 특제 소스로 만든 양념치킨.",
-        "image": "https://images.unsplash.com/photo-1467003909585-2f8a72700288"
+        "name": "레드콤보",
+        "price": 23000,
+        "kcal": 305,
+        "desc": "국내산 청양 홍고추의 매콤한 맛에 날개와 다리를 함께 즐길 수 있는 메뉴 / 원육 수급이 원활하지 않아 한시적으로 콤보 스틱(다리) 개수가 기존 4개에서 3개로 변경되었으며, 윙/봉(날개)를 추가 보완하여 조리 전 총중량은 기존과 동일하게 제공됩니다.",
+        "image": "https://naverbooking-phinf.pstatic.net/20250724_182/1753317020505LHhxP_PNG/image.png?type=f459_345_60_sharpen"
       },
       {
-        "name": "갈릭치킨",
-        "price": 11300,
-        "kcal": 690,
-        "desc": "크리스피치킨락 치킨맛집1의 인기 메뉴 갈릭치킨. 신선한 재료와 특제 소스로 만든 갈릭치킨.",
-        "image": "https://images.unsplash.com/photo-1519864600265-abb23847ef2c"
+        "name": "간장콤보",
+        "price": 22000,
+        "kcal": 320,
+        "desc": "마늘과 간장 소스의 풍부한 맛에 가장 인기있는 부위인 날개와 다리를 함께 즐길 수 있는 메뉴 / 원육 수급이 원활하지 않아 한시적으로 콤보 스틱(다리) 개수가 기존 4개에서 3개로 변경되었으며, 윙/봉(날개)를 추가 보완하여 조리 전 총중량은 기존과 동일하게 제공됩니다.",
+        "image": "https://naverbooking-phinf.pstatic.net/20250724_58/1753317015994xNPpe_PNG/image.png?type=f459_345_60_sharpen"
       },
       {
-        "name": "허니치킨",
-        "price": 12450,
-        "kcal": 810,
-        "desc": "크리스피치킨락 치킨맛집1의 인기 메뉴 허니치킨. 신선한 재료와 특제 소스로 만든 허니치킨.",
-        "image": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c"
+        "name": "반반콤보",
+        "price": 23000,
+        "kcal": 315,
+        "desc": "마늘 간장 맛과 매콤한 맛이 밴 날개와 다리의 행복한 만남 / 원육 수급이 원활하지 않아 한시적으로 콤보 스틱(다리) 개수가 기존 4개에서 3개로 변경되었으며, 윙/봉(날개)를 추가 보완하여 조리 전 총중량은 기존과 동일하게 제공됩니다.",
+        "image": "https://naverbooking-phinf.pstatic.net/20250724_232/1753317019634YPXlE_PNG/image.png?type=f459_345_60_sharpen"
       }
     ]
   },
   {
     "id": 2,
-    "name": "콤비네이션피자락",
+    "name": "파파존스",
     "category": "피자",
     "address": "서울특별시 종로구 XX길 2",
     "star": 4.1,
     "delivery": "21~31분",
-    "logo": "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4",
+    "logo": "/image/03_.jpg",
     "foods": [
       {
         "name": "콤비네이션피자",
@@ -79,12 +79,12 @@
   },
   {
     "id": 3,
-    "name": "비빔밥락",
-    "category": "한식",
+    "name": "상무초밥",
+    "category": "일식",
     "address": "서울특별시 서초구 XX길 3",
     "star": 4.2,
     "delivery": "22~32분",
-    "logo": "https://images.unsplash.com/photo-1546069901-5ec6a79120b0",
+    "logo": "/image/IMG_2201.JPG",
     "foods": [
       {
         "name": "비빔밥",
@@ -118,12 +118,12 @@
   },
   {
     "id": 4,
-    "name": "연어초밥락",
+    "name": "샤오당쟈",
     "category": "일식",
     "address": "서울특별시 성동구 XX길 4",
     "star": 4.3,
     "delivery": "23~33분",
-    "logo": "https://images.unsplash.com/photo-1502741338009-cac2772e18bc",
+    "logo": "image/1.gif",
     "foods": [
       {
         "name": "연어초밥",
@@ -157,12 +157,12 @@
   },
   {
     "id": 5,
-    "name": "짜장면락 ",
+    "name": "홍콩반점",
     "category": "중식",
     "address": "서울특별시 용산구 XX길 5",
     "star": 4.4,
     "delivery": "24~34분",
-    "logo": "https://images.unsplash.com/photo-1481931098730-318b6f776db0",
+    "logo": "https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20241204_78%2F1733291690710YBoFm_PNG%2FKakaoTalk_20241204_143552883.png",
     "foods": [
       {
         "name": "짜장면",

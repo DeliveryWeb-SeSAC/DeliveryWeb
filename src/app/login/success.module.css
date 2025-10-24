@@ -20,7 +20,7 @@
   overflow: hidden;
   box-sizing: border-box;
   border: 1px solid var(--border);
-  background: var(--input-bg);
+  background: var(--bg);
   border-radius: var(--radius-xl);
 }
 
