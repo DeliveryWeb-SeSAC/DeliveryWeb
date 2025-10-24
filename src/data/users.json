@@ -3,7 +3,19 @@
     "id": 1,
     "name": "김민수",
     "email": "kimminsu@example.com",
-    "cart": []
+    "cart": [
+      {
+        "restaurantName": "파파존스",
+        "items": [
+          {
+            "foodId": "food-000",
+            "foodName": "페퍼로니피자",
+            "price": 11205,
+            "quantity": 1
+          }
+        ]
+      }
+    ]
   },
   {
     "id": 2,
