@@ -14,6 +14,12 @@
     --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
+.container {
+    background-color: #f6f5f5;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+}
+
 .restaurantContainer {
     width: 80%;
     margin: 20px auto 0;
@@ -24,12 +30,21 @@
 
 /* Title like login title */
 .title {
-    margin: 0 0 12px 0;
+    margin: 12px;
     font-weight: 800;
     letter-spacing: -0.2px;
     font-size: 22px;
     line-height: 1.2;
     color: var(--text);
+}
+
+.cart {
+    margin: 12px;
+    background-color: #ffffff;
+    padding: 30px 0;
+    text-align: center;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
 }
 
 /* Cart list like a form container */

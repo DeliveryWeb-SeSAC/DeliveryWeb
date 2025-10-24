@@ -5,13 +5,13 @@
     "email": "kimminsu@example.com",
     "cart": [
       {
-        "restaurantName": "크리스피치킨락 치킨맛집1",
+        "restaurantName": "파파존스",
         "items": [
           {
             "foodId": "food-000",
-            "foodName": "크리스피치킨",
-            "price": 9000,
-            "quantity": 2
+            "foodName": "페퍼로니피자",
+            "price": 11205,
+            "quantity": 1
           }
         ]
       }
@@ -41,29 +41,12 @@
     "email": "choijunho@example.com",
     "cart": [
       {
-        "restaurantName": "서브웨이",
-        "items": [
-          {
-            "foodId": "food-005",
-            "foodName": "이탈리안 비엠티",
-            "price": 6500,
-            "quantity": 1
-          },
-          {
-            "foodId": "food-006",
-            "foodName": "쿠키",
-            "price": 1500,
-            "quantity": 3
-          }
-        ]
-      },
-      {
-        "restaurantName": "크리스피치킨락 치킨맛집1",
+        "restaurantName": "교촌치킨",
         "items": [
           {
             "foodId": "food-000",
-            "foodName": "크리스피치킨",
-            "price": 9000,
+            "foodName": "허니콤보",
+            "price": 23000,
             "quantity": 1
           }
         ]

@@ -1,51 +1,51 @@
 [
   {
     "id": 1,
-    "name": "크리스피치킨락 치킨맛집1",
+    "name": "교촌치킨",
     "category": "치킨",
     "address": "서울특별시 강남구 XX길 1",
     "star": 4.0,
     "delivery": "20~30분",
-    "logo": "https://naverbooking-phinf.pstatic.net/20250320_277/17424742253403M0t0_JPEG/%C4%C9%C0%CF%2C%C6%C4%C0%CE.jpg?type=f459_345_60_sharpen",
+    "logo": "https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20221130_290%2F1669782289053g3gih_JPEG%2F%25B1%25B3%25C3%25CC%25C4%25A1%25C5%25B2_%25BD%25C5%25B1%25D4_BI_%25BE%25C6%25C0%25CC%25C4%25DC%2528%25C4%25AB%25C4%25AB%25BF%25C0%2529.jpg",
     "foods": [
       {
-        "name": "크리스피치킨",
-        "price": 9000,
+        "name": "허니콤보",
+        "price": 23000,
         "kcal": 450,
-        "desc": "크리스피치킨락 치킨맛집1의 인기 메뉴 크리스피치킨. 신선한 재료와 특제 소스로 만든 크리스피치킨.",
-        "image": "https://images.unsplash.com/photo-1504674900247-0877df9cc836"
+        "desc": "달콤한 허니소스와 바삭한 날개, 봉, 다리가 만나 촉촉함과 달콤함을 더욱 느낄 수 있는 부위별 치킨",
+        "image": "https://naverbooking-phinf.pstatic.net/20250724_253/1753317018675HNiSN_PNG/image.png?type=f459_345_60_sharpen"
       },
       {
-        "name": "양념치킨",
-        "price": 10150,
-        "kcal": 570,
-        "desc": "크리스피치킨락 치킨맛집1의 인기 메뉴 양념치킨. 신선한 재료와 특제 소스로 만든 양념치킨.",
-        "image": "https://images.unsplash.com/photo-1467003909585-2f8a72700288"
+        "name": "레드콤보",
+        "price": 23000,
+        "kcal": 305,
+        "desc": "국내산 청양 홍고추의 매콤한 맛에 날개와 다리를 함께 즐길 수 있는 메뉴 / 원육 수급이 원활하지 않아 한시적으로 콤보 스틱(다리) 개수가 기존 4개에서 3개로 변경되었으며, 윙/봉(날개)를 추가 보완하여 조리 전 총중량은 기존과 동일하게 제공됩니다.",
+        "image": "https://naverbooking-phinf.pstatic.net/20250724_182/1753317020505LHhxP_PNG/image.png?type=f459_345_60_sharpen"
       },
       {
-        "name": "갈릭치킨",
-        "price": 11300,
-        "kcal": 690,
-        "desc": "크리스피치킨락 치킨맛집1의 인기 메뉴 갈릭치킨. 신선한 재료와 특제 소스로 만든 갈릭치킨.",
-        "image": "https://images.unsplash.com/photo-1519864600265-abb23847ef2c"
+        "name": "간장콤보",
+        "price": 22000,
+        "kcal": 320,
+        "desc": "마늘과 간장 소스의 풍부한 맛에 가장 인기있는 부위인 날개와 다리를 함께 즐길 수 있는 메뉴 / 원육 수급이 원활하지 않아 한시적으로 콤보 스틱(다리) 개수가 기존 4개에서 3개로 변경되었으며, 윙/봉(날개)를 추가 보완하여 조리 전 총중량은 기존과 동일하게 제공됩니다.",
+        "image": "https://naverbooking-phinf.pstatic.net/20250724_58/1753317015994xNPpe_PNG/image.png?type=f459_345_60_sharpen"
       },
       {
-        "name": "허니치킨",
-        "price": 12450,
-        "kcal": 810,
-        "desc": "크리스피치킨락 치킨맛집1의 인기 메뉴 허니치킨. 신선한 재료와 특제 소스로 만든 허니치킨.",
-        "image": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c"
+        "name": "반반콤보",
+        "price": 23000,
+        "kcal": 315,
+        "desc": "마늘 간장 맛과 매콤한 맛이 밴 날개와 다리의 행복한 만남 / 원육 수급이 원활하지 않아 한시적으로 콤보 스틱(다리) 개수가 기존 4개에서 3개로 변경되었으며, 윙/봉(날개)를 추가 보완하여 조리 전 총중량은 기존과 동일하게 제공됩니다.",
+        "image": "https://naverbooking-phinf.pstatic.net/20250724_232/1753317019634YPXlE_PNG/image.png?type=f459_345_60_sharpen"
       }
     ]
   },
   {
     "id": 2,
-    "name": "콤비네이션피자락",
+    "name": "파파존스",
     "category": "피자",
     "address": "서울특별시 종로구 XX길 2",
     "star": 4.1,
     "delivery": "21~31분",
-    "logo": "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4",
+    "logo": "/image/03_.jpg",
     "foods": [
       {
         "name": "콤비네이션피자",
@@ -79,12 +79,12 @@
   },
   {
     "id": 3,
-    "name": "비빔밥락",
-    "category": "한식",
+    "name": "상무초밥",
+    "category": "일식",
     "address": "서울특별시 서초구 XX길 3",
     "star": 4.2,
     "delivery": "22~32분",
-    "logo": "https://images.unsplash.com/photo-1546069901-5ec6a79120b0",
+    "logo": "/image/IMG_2201.JPG",
     "foods": [
       {
         "name": "비빔밥",
@@ -118,12 +118,12 @@
   },
   {
     "id": 4,
-    "name": "연어초밥락",
+    "name": "샤오당쟈",
     "category": "일식",
     "address": "서울특별시 성동구 XX길 4",
     "star": 4.3,
     "delivery": "23~33분",
-    "logo": "https://images.unsplash.com/photo-1502741338009-cac2772e18bc",
+    "logo": "image/1.gif",
     "foods": [
       {
         "name": "연어초밥",
@@ -157,12 +157,12 @@
   },
   {
     "id": 5,
-    "name": "짜장면락 ",
+    "name": "홍콩반점",
     "category": "중식",
     "address": "서울특별시 용산구 XX길 5",
     "star": 4.4,
     "delivery": "24~34분",
-    "logo": "https://images.unsplash.com/photo-1481931098730-318b6f776db0",
+    "logo": "https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20241204_78%2F1733291690710YBoFm_PNG%2FKakaoTalk_20241204_143552883.png",
     "foods": [
       {
         "name": "짜장면",
@@ -191,6 +191,162 @@
         "kcal": 842,
         "desc": "짜장면락 중식맛집5의 인기 메뉴 팔보채. 신선한 재료와 특제 소스로 만든 팔보채.",
         "image": "https://images.unsplash.com/photo-1516684732162-798a0062be99"
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "name": "뉴욕 러브 베이글",
+    "category": "카페/디저트",
+    "address": "서울특별시 용산구 XX길 5",
+    "star": 4.4,
+    "delivery": "24~34분",
+    "logo": "image/2de64d86a44b439a.png",
+    "foods": [
+      {
+        "name": "아메리카노",
+        "price": 9220,
+        "kcal": 482,
+        "desc": "짜장면락 중식맛집5의 인기 메뉴 짜장면. 신선한 재료와 특제 소스로 만든 짜장면.",
+        "image": "https://images.unsplash.com/photo-1569718212165-3a8278d5f624"
+      },
+      {
+        "name": "베이글",
+        "price": 14370,
+        "kcal": 602,
+        "desc": "짜장면락 중식맛집5의 인기 메뉴 짬뽕. 신선한 재료와 특제 소스로 만든 짬뽕.",
+        "image": "https://images.unsplash.com/photo-1552611052-33e04de081de"
+      },
+      {
+        "name": "카페라떼",
+        "price": 19520,
+        "kcal": 722,
+        "desc": "짜장면락 중식맛집5의 인기 메뉴 탕수육. 신선한 재료와 특제 소스로 만든 탕수육.",
+        "image": "https://images.unsplash.com/photo-1541014741259-de529411b96a"
+      },
+      {
+        "name": "팔보채",
+        "price": 24670,
+        "kcal": 842,
+        "desc": "짜장면락 중식맛집5의 인기 메뉴 팔보채. 신선한 재료와 특제 소스로 만든 팔보채.",
+        "image": "https://images.unsplash.com/photo-1516684732162-798a0062be99"
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "name": "차백도 강남역점",
+    "category": "카페/디저트",
+    "address": "서울 강남구 강남대로106길 7",
+    "star": "4.5",
+    "delivery": "30~35분",
+    "logo": "https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20250728_109%2F17536924536759lOmh_PNG%2F%25DF%25E4.png",
+    "foods": [
+      {
+        "name": "우롱 라떼",
+        "price": 5900,
+        "kcal": 130,
+        "desc": "산뜻한 서울 우유와 신선한 중국 푸젠산 우롱차로 완성한 저칼로리 음료, 가볍게 부담 없이 즐기세요",
+        "image": "https://naverbooking-phinf.pstatic.net/20250324_202/1742813640678tRM1o_JPEG/image.JPEG?type=f459_345_60_sharpen"
+      },
+      {
+        "name": "타로볼 밀크티",
+        "price": 5400,
+        "kcal": 300,
+        "desc": "고급 품질의 신선한 토란으로 만든 작은 타로볼을 직접 끓여, 신선한 고급 홍차와 함께 부드럽고 쫄깃한 맛을 즐기세요!",
+        "image": "https://naverbooking-phinf.pstatic.net/20250729_4/1753751733571KPlfe_JPEG/%C5%B8%B7%CE%BA%BC_%B9%D0%C5%A9%C6%BC.jpg?type=f459_345_60_sharpen"
+      },
+      {
+        "name": "자스민 밀크티",
+        "price": 5200,
+        "kcal": 145,
+        "desc": "신선한 자스민 티와 진한 밀크가 어우러져 상쾌하고 부드러운 맛을 느낄 수 있어요!",
+        "image": "https://naverbooking-phinf.pstatic.net/20250729_239/1753751799617vU40s_JPEG/%C0%DA%BD%BA%B9%CE_%B9%D0%C5%A9%C6%BC.jpg?type=f459_345_60_sharpen"
+      },
+      {
+        "name": "망고 포멜로 사고",
+        "price": 6900,
+        "kcal": 200,
+        "desc": "신선한 망고와 자몽, 30분 동안 정성 들여 끓인 사고를 넣고, 수입 코코넛 밀크로 새콤달콤한 새로운 음료를 즐기세요!",
+        "image": "https://naverbooking-phinf.pstatic.net/20250729_33/1753751824947la2Lg_JPEG/%B8%C1%B0%ED_%BB%E7%B0%ED_%C6%F7%B8%E1%B7%CE.jpg?type=f459_345_60_sharpen"
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "name": "버거킹",
+    "category": "버거",
+    "address": "서울특별시 용산구 XX길 5",
+    "star": 4.4,
+    "delivery": "24~34분",
+    "logo": "image/burgerKing.jpg",
+    "foods": [
+      {
+        "name": "짜장면",
+        "price": 9220,
+        "kcal": 482,
+        "desc": "짜장면락 중식맛집5의 인기 메뉴 짜장면. 신선한 재료와 특제 소스로 만든 짜장면.",
+        "image": "https://images.unsplash.com/photo-1569718212165-3a8278d5f624"
+      },
+      {
+        "name": "짬뽕",
+        "price": 14370,
+        "kcal": 602,
+        "desc": "짜장면락 중식맛집5의 인기 메뉴 짬뽕. 신선한 재료와 특제 소스로 만든 짬뽕.",
+        "image": "https://images.unsplash.com/photo-1552611052-33e04de081de"
+      },
+      {
+        "name": "탕수육",
+        "price": 19520,
+        "kcal": 722,
+        "desc": "짜장면락 중식맛집5의 인기 메뉴 탕수육. 신선한 재료와 특제 소스로 만든 탕수육.",
+        "image": "https://images.unsplash.com/photo-1541014741259-de529411b96a"
+      },
+      {
+        "name": "팔보채",
+        "price": 24670,
+        "kcal": 842,
+        "desc": "짜장면락 중식맛집5의 인기 메뉴 팔보채. 신선한 재료와 특제 소스로 만든 팔보채.",
+        "image": "https://images.unsplash.com/photo-1516684732162-798a0062be99"
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "name": "순대실록",
+    "category": "한식",
+    "address": "서울특별시 동대문구 XX길 24",
+    "star": 5,
+    "delivery": "24~34분",
+    "logo": "https://search.pstatic.net/sunny/?src=https%3A%2F%2Fimage.idus.com%2Fimage%2Ffiles%2Fd280af3221064f27a927cff708f96be7.png&type=sc960_832",
+    "foods": [
+      {
+        "name": "전통 순댓국",
+        "price": 10000,
+        "kcal": 482,
+        "desc": "국내산 사골로 우려낸 깊은 국물에 전통 순대와 머릿고기를 넣어 맛이 일품",
+        "image": "https://ldb-phinf.pstatic.net/20241113_240/1731467294359EX4N8_JPEG/10_%C0%FC%C5%EB_%BC%F8%B4%F1%B1%B9.jpg"
+      },
+      {
+        "name": "뼈해장국",
+        "price": 11000,
+        "kcal": 602,
+        "desc": "제대로 우려낸 국물과 최상급 통뼈가 어우러진 뼈해장국",
+        "image": "https://ldb-phinf.pstatic.net/20241113_225/17314671877559xLY2_JPEG/3_%BB%C0%C7%D8%C0%E5%B1%B9.JPG"
+      },
+      {
+        "name": "수육",
+        "price": 35000,
+        "kcal": 722,
+        "desc": "신선한 돼지 머릿고기와 부속 고기로 다양한 식감을 즐길 수 있는 수육",
+        "image": "https://ldb-phinf.pstatic.net/20241113_77/1731466961896AaBGe_JPEG/6_%BC%F6%C0%B0.JPG"
+      },
+      {
+        "name": "순대곱창볶음",
+        "price": 32000,
+        "kcal": 842,
+        "desc": "순대실록 비법 양념장으로 볶아낸 중독성 강한 인기 메뉴",
+        "image": "https://ldb-phinf.pstatic.net/20241113_152/1731466947565zQ6LA_JPEG/5_%BC%F8%B4%EB%B0%F6%C3%A2%BA%BA%C0%BD.jpg"
       }
     ]
   }

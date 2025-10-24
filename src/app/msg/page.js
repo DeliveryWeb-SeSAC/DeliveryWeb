@@ -114,7 +114,9 @@ export default function SNSListPage() {
         ))}
       </div>
 
-      <div className={styles.sectionHeader}>친구 목록</div>
+      <div className={styles.sectionHeader} style={{ marginTop: "40px" }}>
+        친구 목록
+      </div>
       <div className={styles.sectionItems}>
         {friends.map((friend, i) => (
           <div

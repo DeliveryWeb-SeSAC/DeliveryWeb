@@ -3,7 +3,7 @@
 /* Root variables for consistency with login styles */
 :root {
   --primary: #ee6a2c;        /* 오렌지 주색 (버튼/포인트) */
-  --bg: #ffffff;
+  --bg: #f6f5f5;
   --text: #0f172a;
   --muted: #6b7280;
   --border: #e5e7eb;
@@ -14,16 +14,28 @@
   --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
+/* 전체 컨테이너를 login.module.css의 sidebar와 유사하게 만듭니다. */
+.listContainer {
+  box-sizing: border-box;
+  border: 1px solid var(--border);
+  background: #f6f5f5;
+  border-radius: var(--radius-xl);
+  padding: 10px;
+
+  display: flex;
+  flex-direction: column;
+}
+
 /* Section header similar to title */
 .sectionHeader {
-  margin: 0 0 12px 0;
+  margin: 0 0 20px 0;
   font-weight: 800;
   line-height: 1.2;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   font-size: 14px;
   color: var(--muted);
-  padding: 0 8px;
+  padding: 0 4px;
   border-bottom: 1px solid var(--border);
 }
 
@@ -34,14 +46,14 @@
   gap: 8px;
   max-height: 100%; /* 부모 높이 초과 방지 */
   overflow: auto; /* 세로 스크롤 허용 */
-  padding: 0 4px; /* 약간의 내부 여백 */
+  padding: 0 1px; /* 약간의 내부 여백 */
 }
 
 /* Item styled like input/button hybrid: rounded card */
 .item {
   width: 100%; /* 자동 너비: 부모에 맞춤 */
   min-width: 0; /* 오버플로우 방지 */
-  padding: 12px 16px; /* input-like padding */
+  padding: 10px; /* input-like padding */
   border: 1px solid var(--border);
   border-radius: var(--radius-2xl); /* login input/button radius */
   background: var(--input-bg); /* subtle bg like input */
@@ -117,15 +129,15 @@
 .item.open .membersSub { /* 부모 .item에 open 클래스 추가 필요 (JS에서 동적) */
   max-height: 200px; /* 충분한 높이로 펼침 */
   opacity: 1;
-  margin-top: 8px;
-  padding-top: 8px;
+  margin-top: 12px;
+  padding-top: 20px;
   border-top: 1px dashed var(--border);
   background: var(--input-bg); /* subtle bg */
   border-radius: 0 0 var(--radius-xl) var(--radius-xl); /* bottom rounded if needed */
 }
 
 .memberItem {
-  padding: 4px 8px; /* slight padding like label */
+  padding: 4px 20px; /* slight padding like label */
   font-size: 12px;
   color: var(--muted);
   white-space: nowrap;

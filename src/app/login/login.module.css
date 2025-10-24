@@ -45,7 +45,7 @@
   box-sizing: border-box;
   border: 1px solid var(--border);
   border-radius: var(--radius-2xl);
-  background: var(--input-bg);
+  background: var(--bg);
   font-size: 14px;
   color: var(--text);
   outline: none;
