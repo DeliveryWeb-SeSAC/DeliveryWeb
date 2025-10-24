@@ -3,7 +3,7 @@
 /* Root variables for consistency with login styles */
 :root {
   --primary: #ee6a2c;        /* 오렌지 주색 (버튼/포인트) */
-  --bg: color hex #dedede
+  --bg: #f6f5f5;
   --text: #0f172a;
   --muted: #6b7280;
   --border: #e5e7eb;
@@ -18,7 +18,7 @@
 .listContainer {
   box-sizing: border-box;
   border: 1px solid var(--border);
-  background: var(--input-bg);
+  background: #f6f5f5;
   border-radius: var(--radius-xl);
   padding: 10px;
 
