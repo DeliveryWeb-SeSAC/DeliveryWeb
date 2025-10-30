@@ -6,11 +6,11 @@ import { useEffect, useState } from "react"
 import styles from '@/app/menu/item/MenuItem.module.css'
 
 export default function MenuDetail(){
-
-    const {id, name} = useParams()  // pathVariable 값을 가져올 수 있다 /meun/[id]
+    const params = useParams()  
+    const slug = params.slig || []
+    const [id, name] = slug
     const decode_name = decodeURIComponent(name)
     const [menu,setMenu] = useState()
-
 
     useEffect(() => {
         console.log(`MenuDetail: ${id} ${decode_name}`)
@@ -40,7 +40,7 @@ export default function MenuDetail(){
                 .then(data => {
                     if (data.message === 'Cart updated successfully.') {
                         alert('장바구니에 메뉴를 담았습니다.');
-                        window.location.reload()
+                        window.dispatchEvent(new Event("storage-update"));
                     } else {
                         alert('장바구니에 메뉴를 담는데 실패했습니다.');
                     }
