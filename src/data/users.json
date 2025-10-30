@@ -14,6 +14,17 @@
             "quantity": 1
           }
         ]
+      },
+      {
+        "restaurantName": "교촌치킨",
+        "items": [
+          {
+            "foodId": "food-000",
+            "foodName": "허니콤보",
+            "price": 23000,
+            "quantity": 3
+          }
+        ]
       }
     ]
   },

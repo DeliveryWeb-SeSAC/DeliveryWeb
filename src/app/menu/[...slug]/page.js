@@ -7,7 +7,7 @@ import styles from '@/app/menu/item/MenuItem.module.css'
 
 export default function MenuDetail(){
     const params = useParams()  
-    const slug = params.slig || []
+    const slug = params.slug || []
     const [id, name] = slug
     const decode_name = decodeURIComponent(name)
     const [menu,setMenu] = useState()
